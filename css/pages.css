@@ -1,0 +1,1031 @@
+/* Page Header */
+.page-header {
+    position: relative;
+    height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    margin-top: 80px;
+}
+
+.page-header-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.9)),
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400"><rect fill="%23000000"/><path d="M0 300 Q200 250 400 300 T800 300 T1200 300 L1200 400 L0 400 Z" fill="%230a0503"/></svg>');
+    background-size: cover;
+    background-position: center;
+}
+
+.page-header-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse at center, transparent 0%, rgba(0, 0, 0, 0.8) 100%);
+}
+
+.page-header-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+}
+
+.page-title {
+    font-family: 'Cinzel', serif;
+    font-size: 3.5rem;
+    color: #d4af37;
+    letter-spacing: 0.25em;
+    margin-bottom: 0.8rem;
+    text-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+}
+
+.page-subtitle {
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    color: #d4c4b0;
+    letter-spacing: 0.4em;
+    margin-bottom: 2rem;
+    opacity: 0.7;
+}
+
+.breadcrumb {
+    font-family: 'Cinzel', serif;
+    font-size: 0.7rem;
+    color: #b8a99a;
+    letter-spacing: 0.2em;
+    opacity: 0.6;
+}
+
+.breadcrumb a {
+    color: #d4af37;
+    text-decoration: none;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+}
+
+.breadcrumb a:hover {
+    opacity: 1;
+}
+
+/* Movies Section */
+.movies-section {
+    padding: 80px 0;
+    background: linear-gradient(to bottom, #000 0%, #0a0503 50%, #000 100%);
+}
+
+.section-intro {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 4rem;
+}
+
+.intro-text {
+    font-size: 1.1rem;
+    color: #d4c4b0;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+}
+
+.spoiler-warning {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.8rem 1.5rem;
+    border: 1px solid rgba(139, 0, 0, 0.5);
+    background: rgba(139, 0, 0, 0.1);
+    color: #ff6b6b;
+    font-family: 'Cinzel', serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+}
+
+.warning-icon-small {
+    font-size: 1rem;
+}
+
+.movie-series {
+    margin-bottom: 5rem;
+}
+
+.series-title {
+    font-family: 'Cinzel', serif;
+    font-size: 2rem;
+    color: #d4af37;
+    letter-spacing: 0.2em;
+    text-align: center;
+    margin-bottom: 3rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+}
+
+.movies-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.movie-card {
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    background: linear-gradient(to bottom, rgba(26, 15, 10, 0.3) 0%, rgba(0, 0, 0, 0.8) 100%);
+    padding: 2.5rem;
+    position: relative;
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 2rem;
+}
+
+.movie-number {
+    font-family: 'Cinzel', serif;
+    font-size: 3rem;
+    color: #d4af37;
+    opacity: 0.3;
+    font-weight: 700;
+}
+
+.movie-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.movie-title {
+    font-family: 'Cinzel', serif;
+    font-size: 1.8rem;
+    color: #d4af37;
+    letter-spacing: 0.15em;
+}
+
+.movie-year {
+    font-family: 'Cinzel', serif;
+    font-size: 0.8rem;
+    color: #d4c4b0;
+    letter-spacing: 0.2em;
+    opacity: 0.7;
+}
+
+.movie-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.4);
+    border-left: 2px solid #d4af37;
+}
+
+.movie-details p {
+    font-size: 0.9rem;
+    color: #b8a99a;
+}
+
+.movie-details strong {
+    color: #d4c4b0;
+    font-family: 'Cinzel', serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+}
+
+.movie-story h4,
+.movie-connections h4 {
+    font-family: 'Cinzel', serif;
+    font-size: 0.9rem;
+    color: #d4af37;
+    letter-spacing: 0.2em;
+    margin-bottom: 0.8rem;
+    opacity: 0.9;
+}
+
+.movie-story p,
+.movie-connections p {
+    color: #d4c4b0;
+    line-height: 1.8;
+    margin-bottom: 1rem;
+}
+
+.movie-story p:last-child,
+.movie-connections p:last-child {
+    margin-bottom: 0;
+}
+
+/* Content Sections */
+.content-section {
+    padding: 80px 0;
+    background: linear-gradient(to bottom, #000 0%, #0a0503 50%, #000 100%);
+}
+
+.subsection-title {
+    font-family: 'Cinzel', serif;
+    font-size: 1.8rem;
+    color: #d4af37;
+    letter-spacing: 0.2em;
+    text-align: center;
+    margin: 3rem 0 2rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+}
+
+/* Characters */
+.characters-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.character-card {
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    background: linear-gradient(to bottom, rgba(26, 15, 10, 0.3) 0%, rgba(0, 0, 0, 0.8) 100%);
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.character-card:hover {
+    border-color: rgba(212, 175, 55, 0.6);
+}
+
+.character-card.entity {
+    border-color: rgba(139, 0, 0, 0.4);
+}
+
+.character-card.entity:hover {
+    border-color: rgba(139, 0, 0, 0.7);
+}
+
+.character-image {
+    height: 200px;
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6));
+}
+
+.warren-ed { background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 200"><rect fill="%230a0503"/><circle cx="150" cy="80" r="40" fill="%232a1810"/><rect x="120" y="120" width="60" height="60" fill="%232a1810"/></svg>'); background-size: cover; }
+.warren-lorraine { background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 200"><rect fill="%230a0503"/><circle cx="150" cy="80" r="40" fill="%233a2015"/><rect x="120" y="120" width="60" height="60" fill="%233a2015"/></svg>'); background-size: cover; }
+.warren-judy { background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 200"><rect fill="%230a0503"/><circle cx="150" cy="80" r="35" fill="%232a1810"/><rect x="125" y="115" width="50" height="55" fill="%232a1810"/></svg>'); background-size: cover; }
+.annabelle-entity { background: linear-gradient(rgba(139, 0, 0, 0.3), rgba(0, 0, 0, 0.6)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 200"><rect fill="%23000000"/><ellipse cx="150" cy="120" rx="40" ry="60" fill="%232a1810"/><circle cx="150" cy="95" r="30" fill="%233a2015"/></svg>'); background-size: cover; }
+.valak { background: linear-gradient(rgba(139, 0, 0, 0.3), rgba(0, 0, 0, 0.6)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 200"><rect fill="%23000000"/><ellipse cx="150" cy="100" rx="35" ry="70" fill="%230a0a0a"/><rect x="135" y="60" width="30" height="40" fill="%231a0a0a"/></svg>'); background-size: cover; }
+.bathsheba { background: linear-gradient(rgba(139, 0, 0, 0.3), rgba(0, 0, 0, 0.6)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 200"><rect fill="%23000000"/><circle cx="150" cy="90" r="35" fill="%232a1810"/><rect x="125" y="125" width="50" height="50" fill="%232a1810"/></svg>'); background-size: cover; }
+
+.character-info {
+    padding: 1.5rem;
+}
+
+.character-name {
+    font-family: 'Cinzel', serif;
+    font-size: 1.3rem;
+    color: #d4af37;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.3rem;
+}
+
+.character-role {
+    font-family: 'Cinzel', serif;
+    font-size: 0.75rem;
+    color: #d4c4b0;
+    letter-spacing: 0.15em;
+    margin-bottom: 0.8rem;
+    opacity: 0.8;
+}
+
+.character-bio {
+    color: #b8a99a;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 0.8rem;
+}
+
+.character-movies {
+    font-size: 0.8rem;
+    color: #d4c4b0;
+}
+
+/* Locations */
+.locations-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+}
+
+.location-card {
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    background: linear-gradient(to bottom, rgba(26, 15, 10, 0.3) 0%, rgba(0, 0, 0, 0.8) 100%);
+    overflow: hidden;
+}
+
+.location-image {
+    height: 180px;
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6));
+}
+
+.perron-house { background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 180"><rect fill="%230a0503"/><path d="M100 100 L150 60 L250 60 L300 100 L300 150 L100 150 Z" fill="%230f0805"/><polygon points="150,60 200,30 250,60" fill="%23050302"/></svg>'); background-size: cover; }
+.enfield-house { background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 180"><rect fill="%23000000"/><rect x="100" y="80" width="200" height="100" fill="%230a0503"/><rect x="130" y="100" width="50" height="60" fill="%231a0f0a"/></svg>'); background-size: cover; }
+.carta-monastery { background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 180"><rect fill="%23000000"/><rect x="120" y="60" width="160" height="120" fill="%230a0a0a"/><rect x="170" y="90" width="60" height="80" fill="%231a0a0a"/></svg>'); background-size: cover; }
+.museum-location { background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 180"><rect fill="%23000000"/><rect x="80" y="70" width="240" height="110" fill="%230a0503"/><rect x="120" y="90" width="40" height="40" fill="%231a0f0a"/><rect x="180" y="90" width="40" height="40" fill="%231a0f0a"/><rect x="240" y="90" width="40" height="40" fill="%231a0f0a"/></svg>'); background-size: cover; }
+
+.location-info {
+    padding: 1.5rem;
+}
+
+.location-name {
+    font-family: 'Cinzel', serif;
+    font-size: 1.3rem;
+    color: #d4af37;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.8rem;
+}
+
+.location-details {
+    font-size: 0.85rem;
+    color: #b8a99a;
+    margin-bottom: 0.3rem;
+}
+
+.location-details strong {
+    color: #d4c4b0;
+    font-family: 'Cinzel', serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+}
+
+.location-description {
+    color: #d4c4b0;
+    margin: 0.8rem 0;
+    line-height: 1.6;
+}
+
+.location-status {
+    font-family: 'Cinzel', serif;
+    font-size: 0.7rem;
+    color: #ffd700;
+    letter-spacing: 0.15em;
+    opacity: 0.8;
+}
+
+.location-link {
+    font-family: 'Cinzel', serif;
+    font-size: 0.75rem;
+    color: #d4af37;
+    text-decoration: none;
+    letter-spacing: 0.15em;
+    display: inline-block;
+    margin-top: 0.5rem;
+    transition: opacity 0.3s ease;
+}
+
+.location-link:hover {
+    opacity: 0.7;
+}
+
+/* Museum */
+.museum-warning {
+    text-align: center;
+    margin: 2rem 0;
+    padding: 1.5rem;
+    border: 1px solid rgba(139, 0, 0, 0.5);
+    background: rgba(139, 0, 0, 0.1);
+}
+
+.museum-warning p {
+    color: #ff6b6b;
+    margin-bottom: 0.5rem;
+}
+
+.museum-quote {
+    font-style: italic;
+    color: #d4af37 !important;
+}
+
+.artifacts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.artifact-card {
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    background: linear-gradient(to bottom, rgba(26, 15, 10, 0.3) 0%, rgba(0, 0, 0, 0.8) 100%);
+    overflow: hidden;
+}
+
+.artifact-image {
+    height: 150px;
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6));
+}
+
+.annabelle-case { background: linear-gradient(rgba(139, 0, 0, 0.3), rgba(0, 0, 0, 0.6)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 150"><rect fill="%23000000"/><rect x="110" y="40" width="80" height="70" fill="%232a1810"/><circle cx="150" cy="75" r="25" fill="%233a2015"/></svg>'); background-size: cover; }
+.shadow-box { background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 150"><rect fill="%23000000"/><rect x="100" y="50" width="100" height="60" fill="%230a0503"/></svg>'); background-size: cover; }
+.cursed-painting { background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 150"><rect fill="%23000000"/><rect x="90" y="40" width="120" height="80" fill="%231a0f0a"/></svg>'); background-size: cover; }
+
+.artifact-info {
+    padding: 1.5rem;
+}
+
+.artifact-info h3 {
+    font-family: 'Cinzel', serif;
+    color: #d4af37;
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.1em;
+}
+
+.artifact-info p {
+    color: #b8a99a;
+    margin-bottom: 0.8rem;
+    line-height: 1.6;
+}
+
+.artifact-link {
+    font-family: 'Cinzel', serif;
+    font-size: 0.75rem;
+    color: #d4af37;
+    text-decoration: none;
+    letter-spacing: 0.15em;
+}
+
+.experience-box {
+    text-align: center;
+    padding: 2rem;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    background: linear-gradient(to bottom, rgba(26, 15, 10, 0.3) 0%, rgba(0, 0, 0, 0.8) 100%);
+}
+
+.experience-text {
+    font-family: 'Cinzel', serif;
+    font-size: 1.2rem;
+    color: #d4af37;
+    margin-bottom: 0.8rem;
+    letter-spacing: 0.15em;
+}
+
+.experience-details {
+    color: #d4c4b0;
+    margin-bottom: 1.5rem;
+}
+
+.experience-features {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 0.8rem;
+    text-align: left;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.experience-features li {
+    color: #b8a99a;
+    padding: 0.5rem;
+    border-left: 2px solid #d4af37;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+/* Annabelle Page */
+.annabelle-header { background: linear-gradient(rgba(139, 0, 0, 0.4), rgba(0, 0, 0, 0.8)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400"><rect fill="%23000000"/><ellipse cx="600" cy="200" rx="80" ry="120" fill="%232a1810"/><circle cx="600" cy="160" r="50" fill="%233a2015"/></svg>'); background-size: cover; }
+
+.annabelle-main {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 3rem;
+    margin-top: 2rem;
+}
+
+.annabelle-display {
+    text-align: center;
+}
+
+.doll-image {
+    width: 250px;
+    height: 350px;
+    margin: 0 auto 1rem;
+    background: linear-gradient(rgba(139, 0, 0, 0.3), rgba(0, 0, 0, 0.6)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 350"><rect fill="%23000000"/><ellipse cx="125" cy="200" rx="60" ry="90" fill="%232a1810"/><circle cx="125" cy="150" r="40" fill="%233a2015"/><rect x="95" y="240" width="60" height="80" fill="%232a1810"/></svg>');
+    background-size: cover;
+    border: 2px solid #8b0000;
+}
+
+.display-label {
+    font-family: 'Cinzel', serif;
+    color: #8b0000;
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+}
+
+.annabelle-info .subsection-title {
+    text-align: left;
+    font-size: 1.4rem;
+}
+
+.info-block p {
+    color: #d4c4b0;
+    margin-bottom: 0.6rem;
+    line-height: 1.7;
+}
+
+.info-block strong {
+    color: #d4af37;
+    font-family: 'Cinzel', serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+}
+
+.movie-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    margin-bottom: 2rem;
+}
+
+.movie-item {
+    padding: 0.8rem;
+    background: rgba(0, 0, 0, 0.4);
+    border-left: 2px solid #d4af37;
+    color: #d4c4b0;
+}
+
+.warning-box-small {
+    padding: 1.5rem;
+    border: 1px solid rgba(139, 0, 0, 0.5);
+    background: rgba(139, 0, 0, 0.1);
+}
+
+.warning-box-small h3 {
+    font-family: 'Cinzel', serif;
+    color: #8b0000;
+    margin-bottom: 0.8rem;
+    letter-spacing: 0.2em;
+}
+
+.warning-box-small p {
+    color: #ff6b6b;
+    line-height: 1.6;
+}
+
+/* Nun Page */
+.nun-header { background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.9)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400"><rect fill="%23000000"/><rect x="500" y="100" width="200" height="200" fill="%230a0a0a"/><rect x="550" y="150" width="100" height="120" fill="%231a0a0a"/></svg>'); background-size: cover; }
+
+.nun-story .subsection-title {
+    text-align: left;
+    font-size: 1.4rem;
+}
+
+.story-block h3 {
+    font-family: 'Cinzel', serif;
+    color: #d4af37;
+    margin: 1.5rem 0 0.8rem;
+    letter-spacing: 0.1em;
+}
+
+.story-block h3:first-of-type {
+    margin-top: 0;
+}
+
+.story-block p {
+    color: #d4c4b0;
+    line-height: 1.7;
+    margin-bottom: 1rem;
+}
+
+.entity-info {
+    padding: 1.5rem;
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    margin-bottom: 2rem;
+}
+
+.entity-info p {
+    color: #d4c4b0;
+    margin-bottom: 0.5rem;
+}
+
+.entity-info strong {
+    color: #d4af37;
+    font-family: 'Cinzel', serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+}
+
+.location-info-box {
+    padding: 1.5rem;
+    background: rgba(26, 15, 10, 0.3);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+}
+
+.location-info-box h3 {
+    font-family: 'Cinzel', serif;
+    color: #d4af37;
+    margin-bottom: 0.8rem;
+    letter-spacing: 0.1em;
+}
+
+.location-info-box p {
+    color: #d4c4b0;
+    margin-bottom: 0.4rem;
+}
+
+.location-info-box strong {
+    color: #d4c4b0;
+    font-family: 'Cinzel', serif;
+    font-size: 0.8rem;
+}
+
+.status {
+    display: inline-block;
+    margin-top: 0.8rem;
+    font-family: 'Cinzel', serif;
+    font-size: 0.7rem;
+    color: #ffd700;
+    letter-spacing: 0.15em;
+}
+
+/* Timeline */
+.timeline-header { background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.9)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400"><rect fill="%23000000"/><line x1="100" y1="200" x2="1100" y2="200" stroke="%23d4af37" stroke-width="2" opacity="0.3"/></svg>'); background-size: cover; }
+
+.timeline-container {
+    position: relative;
+    max-width: 800px;
+    margin: 3rem auto;
+    padding: 2rem 0;
+}
+
+.timeline-line {
+    position: absolute;
+    left: 30px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, #d4af37, rgba(212, 175, 55, 0.3));
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 3rem;
+    padding-left: 80px;
+}
+
+.timeline-marker {
+    position: absolute;
+    left: 21px;
+    width: 18px;
+    height: 18px;
+    background: #d4af37;
+    border-radius: 50%;
+    border: 4px solid #000;
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.6);
+}
+
+.timeline-content {
+    background: linear-gradient(to bottom, rgba(26, 15, 10, 0.3) 0%, rgba(0, 0, 0, 0.8) 100%);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    padding: 1.5rem;
+}
+
+.timeline-date {
+    font-family: 'Cinzel', serif;
+    font-size: 1.5rem;
+    color: #d4af37;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.timeline-title {
+    font-family: 'Cinzel', serif;
+    font-size: 1.2rem;
+    color: #d4c4b0;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.3rem;
+}
+
+.timeline-movie {
+    font-family: 'Cinzel', serif;
+    font-size: 0.75rem;
+    color: #d4af37;
+    letter-spacing: 0.15em;
+    margin-bottom: 0.8rem;
+    opacity: 0.8;
+}
+
+.timeline-description {
+    color: #b8a99a;
+    line-height: 1.6;
+}
+
+/* Warren Files */
+.files-header { background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400"><rect fill="%23000000"/><rect x="200" y="100" width="800" height="200" fill="none" stroke="%23d4af37" stroke-width="2" opacity="0.3"/></svg>'); background-size: cover; }
+
+.files-warning {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.8rem 1.5rem;
+    border: 1px solid rgba(139, 0, 0, 0.5);
+    background: rgba(139, 0, 0, 0.1);
+    color: #ff6b6b;
+    font-family: 'Cinzel', serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    margin: 1rem 0;
+}
+
+.case-files-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
+}
+
+.case-file-card {
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    background: linear-gradient(to bottom, rgba(26, 15, 10, 0.3) 0%, rgba(0, 0, 0, 0.8) 100%);
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.case-file-card:hover {
+    border-color: rgba(212, 175, 55, 0.6);
+}
+
+.case-file-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.case-number {
+    font-family: 'Cinzel', serif;
+    color: #d4af37;
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+}
+
+.case-status {
+    font-family: 'Cinzel', serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    padding: 0.3rem 0.6rem;
+    border: 1px solid;
+}
+
+.case-status.classified {
+    color: #ff6b6b;
+    border-color: rgba(139, 0, 0, 0.5);
+}
+
+.case-status.restricted {
+    color: #ffa500;
+    border-color: rgba(255, 165, 0, 0.5);
+}
+
+.case-title {
+    font-family: 'Cinzel', serif;
+    color: #d4c4b0;
+    font-size: 1.2rem;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.8rem;
+    line-height: 1.4;
+}
+
+.case-details {
+    margin-bottom: 0.8rem;
+}
+
+.case-details p {
+    color: #b8a99a;
+    font-size: 0.85rem;
+    margin-bottom: 0.3rem;
+}
+
+.case-details strong {
+    color: #d4c4b0;
+    font-family: 'Cinzel', serif;
+    font-size: 0.75rem;
+}
+
+.case-summary {
+    color: #d4c4b0;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+    font-size: 0.9rem;
+}
+
+.case-link {
+    font-family: 'Cinzel', serif;
+    font-size: 0.75rem;
+    color: #d4af37;
+    text-decoration: none;
+    letter-spacing: 0.15em;
+}
+
+/* Investigations */
+.investigations-header { background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400"><rect fill="%23000000"/><circle cx="600" cy="200" r="80" fill="none" stroke="%23d4af37" stroke-width="2" opacity="0.3"/></svg>'); background-size: cover; }
+
+.equipment-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+    margin-bottom: 3rem;
+}
+
+.equipment-item {
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+.equipment-item h3 {
+    font-family: 'Cinzel', serif;
+    color: #d4af37;
+    font-size: 0.9rem;
+    margin-bottom: 0.4rem;
+    letter-spacing: 0.1em;
+}
+
+.equipment-item p {
+    color: #b8a99a;
+    font-size: 0.85rem;
+}
+
+.modes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.mode-card {
+    padding: 1.2rem;
+    background: linear-gradient(to bottom, rgba(26, 15, 10, 0.3) 0%, rgba(0, 0, 0, 0.8) 100%);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    text-align: center;
+}
+
+.mode-card h3 {
+    font-family: 'Cinzel', serif;
+    color: #d4af37;
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.1em;
+}
+
+.mode-card p {
+    color: #b8a99a;
+}
+
+.coming-soon-box {
+    text-align: center;
+    padding: 2rem;
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    background: linear-gradient(to bottom, rgba(26, 15, 10, 0.4) 0%, rgba(0, 0, 0, 0.9) 100%);
+}
+
+.coming-soon-box h3 {
+    font-family: 'Cinzel', serif;
+    color: #d4af37;
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.15em;
+}
+
+.coming-soon-box p {
+    color: #b8a99a;
+}
+
+/* Archives */
+.archives-header { background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400"><rect fill="%23000000"/><rect x="150" y="80" width="900" height="240" fill="none" stroke="%23d4af37" stroke-width="2" opacity="0.3" stroke-dasharray="10,5"/></svg>'); background-size: cover; }
+
+.archives-warning {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.8rem 1.5rem;
+    border: 1px solid rgba(139, 0, 0, 0.5);
+    background: rgba(139, 0, 0, 0.1);
+    color: #8b0000;
+    font-family: 'Cinzel', serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    margin: 1rem 0;
+}
+
+.archives-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.2rem;
+    margin-bottom: 3rem;
+}
+
+.archive-card {
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    background: linear-gradient(to bottom, rgba(26, 15, 10, 0.3) 0%, rgba(0, 0, 0, 0.8) 100%);
+    padding: 1.3rem;
+    opacity: 0.7;
+}
+
+.archive-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.6rem;
+}
+
+.archive-header h3 {
+    font-family: 'Cinzel', serif;
+    color: #d4c4b0;
+    font-size: 0.9rem;
+    letter-spacing: 0.1em;
+}
+
+.archive-count {
+    font-family: 'Cinzel', serif;
+    color: #d4af37;
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.archive-description {
+    color: #b8a99a;
+    font-size: 0.85rem;
+    margin-bottom: 0.8rem;
+    line-height: 1.5;
+}
+
+.archive-status {
+    font-family: 'Cinzel', serif;
+    font-size: 0.65rem;
+    color: #8b0000;
+    letter-spacing: 0.15em;
+}
+
+.classified-box {
+    text-align: center;
+    padding: 2rem;
+    border: 1px solid rgba(139, 0, 0, 0.5);
+    background: rgba(139, 0, 0, 0.1);
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.classified-box h3 {
+    font-family: 'Cinzel', serif;
+    color: #8b0000;
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.2em;
+}
+
+.classified-box p {
+    color: #ff6b6b;
+    line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+    .page-title {
+        font-size: 2rem;
+        letter-spacing: 0.12em;
+    }
+    .page-subtitle {
+        font-size: 0.75rem;
+    }
+    .movie-card {
+        grid-template-columns: 1fr;
+        padding: 1.3rem;
+    }
+    .movie-number {
+        font-size: 1.8rem;
+    }
+    .movie-title {
+        font-size: 1.2rem;
+    }
+    .series-title {
+        font-size: 1.3rem;
+    }
+    .annabelle-main {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    .doll-image {
+        width: 200px;
+        height: 280px;
+    }
+    .timeline-item {
+        padding-left: 60px;
+    }
+    .timeline-line {
+        left: 20px;
+    }
+    .timeline-marker {
+        left: 11px;
+    }
+    .nav-container {
+        padding: 0.7rem 1rem;
+    }
+    .characters-grid,
+    .locations-grid,
+    .artifacts-grid,
+    .case-files-grid,
+    .archives-grid {
+        grid-template-columns: 1fr;
+    }
+    .equipment-grid,
+    .modes-grid {
+        grid-template-columns: 1fr;
+    }
+}

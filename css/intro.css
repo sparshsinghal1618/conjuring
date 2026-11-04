@@ -1,0 +1,920 @@
+/* Custom Cursor */
+.custom-cursor {
+    width: 20px;
+    height: 20px;
+    border: 1px solid rgba(212, 175, 55, 0.8);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 10000;
+    transition: all 0.1s ease;
+    transform: translate(-50%, -50%);
+}
+
+.custom-cursor::after {
+    content: '';
+    width: 4px;
+    height: 4px;
+    background: #d4af37;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Loading Screen */
+.loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: #000;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 1s ease, visibility 1s ease;
+}
+
+.loading-screen.fade-out {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.loading-content {
+    text-align: center;
+}
+
+.loading-logo {
+    font-family: 'Cinzel', serif;
+    font-size: 2rem;
+    color: #d4af37;
+    letter-spacing: 0.5em;
+    margin-bottom: 2rem;
+    text-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+}
+
+.loading-bar {
+    width: 300px;
+    height: 2px;
+    background: rgba(212, 175, 55, 0.2);
+    margin: 0 auto 1rem;
+    overflow: hidden;
+}
+
+.loading-progress {
+    height: 100%;
+    background: linear-gradient(90deg, #d4af37, #b8860b);
+    width: 0;
+    animation: loadingProgress 3s ease-in-out forwards;
+}
+
+@keyframes loadingProgress {
+    to { width: 100%; }
+}
+
+.loading-text {
+    font-family: 'Cinzel', serif;
+    font-size: 0.7rem;
+    color: #d4c4b0;
+    letter-spacing: 0.3em;
+    opacity: 0.6;
+}
+
+/* Skip Intro Button */
+.skip-intro-btn {
+    position: fixed;
+    top: 30px;
+    right: 30px;
+    z-index: 1001;
+    background: transparent;
+    color: #d4af37;
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    padding: 10px 30px;
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: none;
+    opacity: 0.7;
+}
+
+.skip-intro-btn.visible {
+    display: block;
+}
+
+.skip-intro-btn:hover {
+    opacity: 1;
+    background: rgba(212, 175, 55, 0.1);
+    border-color: #d4af37;
+}
+
+/* Intro Sequence */
+.intro-sequence {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 100;
+    background: #000;
+}
+
+.intro-stage {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    opacity: 0;
+}
+
+.intro-stage.active {
+    display: block;
+    animation: stageFadeIn 2s ease forwards;
+}
+
+@keyframes stageFadeIn {
+    to { opacity: 1; }
+}
+
+/* Stage 0: Black Screen */
+.black-screen {
+    width: 100%;
+    height: 100%;
+    background: #000;
+}
+
+/* Stage 1: Thunderstorm */
+.thunderstorm-scene {
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse at bottom, #0a0a15 0%, #000 70%);
+    position: relative;
+    overflow: hidden;
+}
+
+.lightning-flash {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(200, 220, 255, 0);
+    animation: lightning 8s infinite;
+}
+
+@keyframes lightning {
+    0%, 94%, 96%, 98%, 100% { background: rgba(200, 220, 255, 0); }
+    95% { background: rgba(200, 220, 255, 0.4); }
+    97% { background: rgba(255, 255, 255, 0.6); }
+}
+
+.rain-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.rain-drop {
+    position: absolute;
+    width: 1px;
+    height: 60px;
+    background: linear-gradient(to bottom, transparent, rgba(174, 194, 224, 0.6));
+    animation: rainFall linear infinite;
+}
+
+@keyframes rainFall {
+    to {
+        transform: translateY(100vh);
+    }
+}
+
+.storm-message {
+    position: absolute;
+    bottom: 120px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #d4af37;
+    font-family: 'Cinzel', serif;
+    font-size: 13px;
+    letter-spacing: 8px;
+    opacity: 0.7;
+    text-align: center;
+    white-space: nowrap;
+}
+
+/* Stage 2: Farmhouse Reveal */
+.farmhouse-reveal-scene {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, #000011 0%, #000 65%);
+    position: relative;
+    overflow: hidden;
+}
+
+.fog-layer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 120%;
+    height: 50%;
+    background: linear-gradient(to top, rgba(40, 40, 60, 0.7) 0%, transparent 100%);
+    animation: fogDrift 25s ease-in-out infinite;
+}
+
+@keyframes fogDrift {
+    0%, 100% { transform: translateX(-10%); }
+    50% { transform: translateX(10%); }
+}
+
+.trees-bg {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 60%;
+    background-image: 
+        radial-gradient(ellipse 80px 200px at 10% 100%, #050505 50%, transparent 50%),
+        radial-gradient(ellipse 70px 180px at 25% 100%, #060606 50%, transparent 50%),
+        radial-gradient(ellipse 90px 220px at 80% 100%, #050505 50%, transparent 50%),
+        radial-gradient(ellipse 75px 190px at 90% 100%, #060606 50%, transparent 50%);
+}
+
+.farmhouse-silhouette {
+    position: absolute;
+    bottom: 20%;
+    right: 25%;
+    width: 350px;
+    height: 250px;
+    animation: farmhouseAppear 4s ease-out forwards;
+    opacity: 0;
+}
+
+@keyframes farmhouseAppear {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 0.8;
+        transform: scale(1);
+    }
+}
+
+.house-body {
+    position: absolute;
+    bottom: 0;
+    left: 60px;
+    width: 230px;
+    height: 140px;
+    background: #0a0503;
+    border: 2px solid #1a0f0a;
+}
+
+.house-roof {
+    position: absolute;
+    bottom: 140px;
+    left: 35px;
+    width: 0;
+    height: 0;
+    border-left: 140px solid transparent;
+    border-right: 140px solid transparent;
+    border-bottom: 95px solid #050302;
+}
+
+.window-upstairs {
+    position: absolute;
+    bottom: 95px;
+    right: 85px;
+    width: 20px;
+    height: 35px;
+    background: rgba(212, 175, 55, 0.4);
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
+}
+
+.flicker-window {
+    animation: windowFlicker 5s infinite;
+}
+
+@keyframes windowFlicker {
+    0%, 100% { opacity: 0.4; }
+    48% { opacity: 0.4; }
+    49% { opacity: 0.1; }
+    50% { opacity: 0.4; }
+    52% { opacity: 0.6; }
+    53% { opacity: 0.4; }
+}
+
+.chimney {
+    position: absolute;
+    bottom: 140px;
+    left: 90px;
+    width: 25px;
+    height: 40px;
+    background: #0a0503;
+}
+
+.reveal-message {
+    position: absolute;
+    bottom: 70px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #d4af37;
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 7px;
+    opacity: 0.6;
+    text-align: center;
+    white-space: nowrap;
+    animation: messageFade 2s ease-in 2s forwards;
+    opacity: 0;
+}
+
+@keyframes messageFade {
+    to { opacity: 0.6; }
+}
+
+/* Stage 3: Approaching */
+.approach-scene {
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse at center, #0a0a0a 0%, #000 85%);
+    position: relative;
+    overflow: hidden;
+}
+
+.camera-approach {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 100%;
+    animation: cameraZoom 4s ease-out forwards;
+}
+
+@keyframes cameraZoom {
+    from {
+        transform: translateX(-50%) scale(0.8);
+    }
+    to {
+        transform: translateX(-50%) scale(1.1);
+    }
+}
+
+.farmhouse-detailed {
+    position: absolute;
+    bottom: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 450px;
+    height: 350px;
+}
+
+.house-body-large {
+    position: absolute;
+    bottom: 0;
+    left: 95px;
+    width: 260px;
+    height: 170px;
+    background: linear-gradient(to bottom, #0f0805 0%, #050302 100%);
+    border: 3px solid #15100a;
+}
+
+.house-roof-large {
+    position: absolute;
+    bottom: 170px;
+    left: 60px;
+    width: 0;
+    height: 0;
+    border-left: 165px solid transparent;
+    border-right: 165px solid transparent;
+    border-bottom: 115px solid #050302;
+}
+
+.porch {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90px;
+    height: 20px;
+    background: #0f0805;
+}
+
+.front-door-swing {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 45px;
+    height: 90px;
+    background: linear-gradient(to right, #2a1810 0%, #1a0f0a 40%, #2a1810 100%);
+    border: 2px solid #3a2015;
+    transform-origin: left center;
+    animation: doorOpen 3s ease-out 1s forwards;
+}
+
+@keyframes doorOpen {
+    from {
+        transform: translateX(-50%) rotateY(0deg);
+    }
+    to {
+        transform: translateX(-50%) rotateY(-70deg);
+    }
+}
+
+.door-knob {
+    position: absolute;
+    bottom: 60px;
+    left: 55%;
+    width: 4px;
+    height: 4px;
+    background: #b8860b;
+    border-radius: 50%;
+}
+
+.bell-message {
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #d4af37;
+    font-family: 'Cinzel', serif;
+    font-size: 12px;
+    letter-spacing: 7px;
+    opacity: 0;
+    animation: bellRing 2s ease-in-out 0.5s forwards;
+}
+
+@keyframes bellRing {
+    0%, 100% { opacity: 0; }
+    50% { opacity: 0.8; }
+}
+
+/* Stage 4: Entering House */
+.entering-scene {
+    width: 100%;
+    height: 100%;
+    background: #000;
+    position: relative;
+    overflow: hidden;
+}
+
+.hallway-perspective {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 1000px;
+    height: 500px;
+    perspective: 800px;
+    animation: hallwayMove 3s ease-out forwards;
+}
+
+@keyframes hallwayMove {
+    from {
+        transform: translate(-50%, -50%) scale(0.6);
+    }
+    to {
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+.hallway-wall-left {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 250px;
+    height: 100%;
+    background: linear-gradient(to right, #1a0f0a 0%, #0a0503 100%);
+    transform: rotateY(40deg);
+    transform-origin: left center;
+    border-right: 2px solid #2a1810;
+}
+
+.hallway-wall-right {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 250px;
+    height: 100%;
+    background: linear-gradient(to left, #1a0f0a 0%, #0a0503 100%);
+    transform: rotateY(-40deg);
+    transform-origin: right center;
+    border-left: 2px solid #2a1810;
+}
+
+.hallway-floor {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%) rotateX(75deg);
+    width: 700px;
+    height: 250px;
+    background: repeating-linear-gradient(
+        90deg,
+        #1a0f0a 0px,
+        #1a0f0a 50px,
+        #120b07 50px,
+        #120b07 100px
+    );
+    border: 2px solid #2a1810;
+}
+
+.hallway-ceiling {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%) rotateX(-75deg);
+    width: 700px;
+    height: 250px;
+    background: linear-gradient(to bottom, #0a0503 0%, #050302 100%);
+    border: 2px solid #1a0f0a;
+}
+
+.wall-candle {
+    position: absolute;
+    left: 300px;
+    top: 180px;
+    width: 4px;
+    height: 45px;
+    background: linear-gradient(to top, #8b4513 0%, #d2691e 40%, #ffd700 100%);
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.7);
+    transform: rotateY(40deg);
+}
+
+.wall-candle2 {
+    position: absolute;
+    right: 300px;
+    top: 220px;
+    width: 3px;
+    height: 40px;
+    background: linear-gradient(to top, #8b4513 0%, #d2691e 40%, #ffd700 100%);
+    box-shadow: 0 0 18px rgba(255, 215, 0, 0.6);
+    transform: rotateY(-40deg);
+}
+
+.flicker-candle {
+    animation: candleFlicker 3s infinite;
+}
+
+@keyframes candleFlicker {
+    0%, 100% { opacity: 1; }
+    33% { opacity: 0.9; }
+    34% { opacity: 1; }
+    66% { opacity: 0.8; }
+    67% { opacity: 1; }
+}
+
+.doorframe {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 150px;
+    border: 3px solid #2a1810;
+    border-bottom: none;
+}
+
+.creak-message {
+    position: absolute;
+    bottom: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #d4af37;
+    font-family: 'Cinzel', serif;
+    font-size: 12px;
+    letter-spacing: 7px;
+    opacity: 0;
+    animation: appearText 2s ease-in 1s forwards;
+}
+
+.whisper-message {
+    position: absolute;
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #ffffff;
+    font-family: 'Crimson Text', serif;
+    font-size: 18px;
+    font-style: italic;
+    opacity: 0;
+    animation: appearText 2s ease-in 2.5s forwards;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+@keyframes appearText {
+    to { opacity: 0.7; }
+}
+
+/* Stage 5: Title Screen */
+.title-screen-scene {
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse at center, #0a0503 0%, #000 100%);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.film-grain {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noise)" opacity="0.04"/></svg>');
+    pointer-events: none;
+    animation: grainMove 8s steps(10) infinite;
+}
+
+@keyframes grainMove {
+    0%, 100% { transform: translate(0, 0); }
+    10% { transform: translate(-5%, -5%); }
+    20% { transform: translate(-10%, 5%); }
+    30% { transform: translate(5%, -10%); }
+    40% { transform: translate(-5%, 10%); }
+    50% { transform: translate(-10%, 5%); }
+    60% { transform: translate(10%, 0%); }
+    70% { transform: translate(0%, 10%); }
+    80% { transform: translate(5%, 15%); }
+    90% { transform: translate(-10%, 5%); }
+}
+
+.vignette {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse at center, transparent 0%, transparent 60%, rgba(0, 0, 0, 0.8) 100%);
+    pointer-events: none;
+}
+
+.title-content {
+    text-align: center;
+    z-index: 2;
+    animation: titleAppear 3s ease-out forwards;
+    opacity: 0;
+}
+
+@keyframes titleAppear {
+    to { opacity: 1; }
+}
+
+.main-title {
+    font-family: 'Cinzel', serif;
+    font-size: 5.5rem;
+    font-weight: 900;
+    color: #d4af37;
+    letter-spacing: 0.35em;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 0 30px rgba(212, 175, 55, 0.6), 0 0 60px rgba(212, 175, 55, 0.3);
+}
+
+.flicker-text {
+    animation: textFlicker 4s infinite;
+}
+
+@keyframes textFlicker {
+    0%, 100% { opacity: 1; }
+    92% { opacity: 1; }
+    93% { opacity: 0.7; }
+    94% { opacity: 1; }
+    96% { opacity: 0.8; }
+    97% { opacity: 1; }
+}
+
+.universe-title {
+    font-family: 'Cinzel', serif;
+    font-size: 3.2rem;
+    font-weight: 600;
+    color: #d4af37;
+    letter-spacing: 0.25em;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+.divider {
+    width: 200px;
+    height: 1px;
+    background: linear-gradient(to right, transparent, #d4af37, transparent);
+    margin: 0 auto 2rem;
+    opacity: 0.5;
+}
+
+.tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    color: #d4c4b0;
+    letter-spacing: 0.25em;
+    margin-bottom: 4rem;
+    opacity: 0.8;
+}
+
+.menu-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    align-items: center;
+}
+
+.enter-btn {
+    background: transparent;
+    color: #d4af37;
+    border: 1px solid rgba(212, 175, 55, 0.5);
+    padding: 16px 70px;
+    font-family: 'Cinzel', serif;
+    font-size: 13px;
+    letter-spacing: 0.45em;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.5s ease;
+    margin-bottom: 1rem;
+}
+
+.btn-text {
+    position: relative;
+    z-index: 2;
+    transition: color 0.5s ease;
+}
+
+.btn-border {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: #d4af37;
+    transition: left 0.5s ease;
+    z-index: 1;
+}
+
+.enter-btn:hover .btn-text {
+    color: #000;
+}
+
+.enter-btn:hover .btn-border {
+    left: 0;
+}
+
+.menu-option {
+    background: transparent;
+    color: #d4c4b0;
+    border: none;
+    padding: 8px 40px;
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 0.35em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    opacity: 0.5;
+}
+
+.menu-option:hover {
+    color: #d4af37;
+    opacity: 1;
+}
+
+.bottom-quote {
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #d4c4b0;
+    font-family: 'Crimson Text', serif;
+    font-size: 12px;
+    font-style: italic;
+    opacity: 0.3;
+    letter-spacing: 0.15em;
+    white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+    html {
+        font-size: 14px;
+    }
+    
+    .main-title {
+        font-size: 2.3rem;
+        letter-spacing: 0.16em;
+        padding: 0 1rem;
+        line-height: 1.3;
+    }
+    .universe-title {
+        font-size: 1.7rem;
+        letter-spacing: 0.14em;
+    }
+    .tagline {
+        font-size: 0.85rem;
+        letter-spacing: 0.12em;
+        padding: 0 1rem;
+        margin-bottom: 3rem;
+    }
+    .enter-btn {
+        padding: 14px 35px;
+        font-size: 11px;
+        letter-spacing: 0.35em;
+        min-height: 48px;
+    }
+    .menu-option {
+        font-size: 9px;
+        letter-spacing: 0.25em;
+        padding: 10px 20px;
+        min-height: 44px;
+    }
+    .bottom-quote {
+        font-size: 8px;
+        letter-spacing: 0.08em;
+        padding: 0 1rem;
+        text-align: center;
+        bottom: 25px;
+        white-space: normal;
+        width: 90%;
+    }
+    .storm-message, .reveal-message, .bell-message {
+        font-size: 8px;
+        letter-spacing: 2.5px;
+        padding: 0 1rem;
+        white-space: normal;
+        text-align: center;
+        bottom: 80px;
+    }
+    .skip-intro-btn {
+        top: 12px;
+        right: 12px;
+        padding: 8px 16px;
+        font-size: 9px;
+        letter-spacing: 2px;
+        min-height: 40px;
+    }
+    .loading-logo {
+        font-size: 1.3rem;
+        letter-spacing: 0.25em;
+    }
+    .loading-bar {
+        width: 220px;
+    }
+    .loading-text {
+        font-size: 0.6rem;
+    }
+    
+    /* Scale down 3D elements for mobile */
+    .farmhouse-silhouette {
+        right: 10%;
+        transform: scale(0.6);
+    }
+    .farmhouse-detailed {
+        transform: translateX(-50%) scale(0.6);
+        bottom: 0%;
+    }
+    .hallway-perspective {
+        transform: translate(-50%, -50%) scale(0.4);
+    }
+}
+
+@media (max-width: 480px) {
+    .main-title {
+        font-size: 1.8rem;
+        letter-spacing: 0.13em;
+    }
+    .universe-title {
+        font-size: 1.4rem;
+        letter-spacing: 0.12em;
+    }
+    .tagline {
+        font-size: 0.75rem;
+    }
+    .enter-btn {
+        padding: 12px 28px;
+        font-size: 10px;
+    }
+    .farmhouse-silhouette {
+        transform: scale(0.5);
+        right: 5%;
+    }
+    .farmhouse-detailed {
+        transform: translateX(-50%) scale(0.5);
+    }
+    .hallway-perspective {
+        transform: translate(-50%, -50%) scale(0.35);
+    }
+    .creak-message, .whisper-message {
+        font-size: 9px;
+        padding: 0 0.5rem;
+    }
+    .whisper-message {
+        font-size: 14px;
+    }
+}

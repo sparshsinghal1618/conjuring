@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE CONJURING UNIVERSE | THE WARREN FILES</title>
+    <meta name="description" content="Enter the unknown. Behind every haunting is a story.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Cormorant+Garamond:wght@300;400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/intro.css">
+</head>
+<body>
+    <!-- Custom Cursor -->
+    <div class="custom-cursor"></div>
+    
+    <!-- Loading Screen -->
+    <div id="loadingScreen" class="loading-screen">
+        <div class="loading-content">
+            <div class="loading-logo">THE WARREN FILES</div>
+            <div class="loading-bar">
+                <div class="loading-progress"></div>
+            </div>
+            <div class="loading-text">ENTERING THE UNKNOWN...</div>
+        </div>
+    </div>
+    
+    <!-- Skip Button -->
+    <button id="skipIntroBtn" class="skip-intro-btn">SKIP INTRO</button>
+    
+    <!-- Cinematic Intro Sequence -->
+    <div id="introSequence" class="intro-sequence">
+        <!-- Stage 0: Black Screen -->
+        <div class="intro-stage active" data-stage="0">
+            <div class="black-screen"></div>
+        </div>
+        
+        <!-- Stage 1: Thunderstorm -->
+        <div class="intro-stage" data-stage="1">
+            <div class="thunderstorm-scene">
+                <div class="lightning-flash"></div>
+                <div class="rain-container" id="rainContainer"></div>
+                <div class="storm-message">A DISTANT THUNDERSTORM BEGINS...</div>
+            </div>
+        </div>
+        
+        <!-- Stage 2: Farmhouse Reveal -->
+        <div class="intro-stage" data-stage="2">
+            <div class="farmhouse-reveal-scene">
+                <div class="fog-layer"></div>
+                <div class="trees-bg"></div>
+                <div class="farmhouse-silhouette">
+                    <div class="house-body"></div>
+                    <div class="house-roof"></div>
+                    <div class="window-upstairs flicker-window"></div>
+                    <div class="chimney"></div>
+                </div>
+                <div class="reveal-message">AN ENORMOUS ISOLATED VICTORIAN FARMHOUSE SURROUNDED BY DARK TREES...</div>
+            </div>
+        </div>
+        
+        <!-- Stage 3: Approaching -->
+        <div class="intro-stage" data-stage="3">
+            <div class="approach-scene">
+                <div class="camera-approach">
+                    <div class="farmhouse-detailed">
+                        <div class="house-body-large"></div>
+                        <div class="house-roof-large"></div>
+                        <div class="porch"></div>
+                        <div class="front-door-swing"></div>
+                        <div class="door-knob"></div>
+                    </div>
+                </div>
+                <div class="bell-message">A DISTANT BELL RINGS...</div>
+            </div>
+        </div>
+        
+        <!-- Stage 4: Entering House -->
+        <div class="intro-stage" data-stage="4">
+            <div class="entering-scene">
+                <div class="hallway-perspective">
+                    <div class="hallway-wall-left"></div>
+                    <div class="hallway-wall-right"></div>
+                    <div class="hallway-floor"></div>
+                    <div class="hallway-ceiling"></div>
+                    <div class="wall-candle flicker-candle"></div>
+                    <div class="wall-candle2 flicker-candle"></div>
+                    <div class="doorframe"></div>
+                </div>
+                <div class="creak-message">A FLOORBOARD CREAKS...</div>
+                <div class="whisper-message">"Come back..."</div>
+            </div>
+        </div>
+        
+        <!-- Stage 5: Title Screen -->
+        <div class="intro-stage" data-stage="5">
+            <div class="title-screen-scene">
+                <div class="film-grain"></div>
+                <div class="vignette"></div>
+                <div class="title-content">
+                    <h1 class="main-title flicker-text">THE CONJURING</h1>
+                    <h2 class="universe-title">UNIVERSE</h2>
+                    <div class="divider"></div>
+                    <p class="tagline">BEHIND EVERY HAUNTING IS A STORY.</p>
+                    <div class="menu-section">
+                        <button class="enter-btn" onclick="enterMainSite()">
+                            <span class="btn-text">ENTER THE UNKNOWN</span>
+                            <span class="btn-border"></span>
+                        </button>
+                        <button class="menu-option" onclick="enterMainSite()">BEGIN YOUR INVESTIGATION</button>
+                        <button class="menu-option" onclick="enterMainSite()">EXPLORE THE FILES</button>
+                    </div>
+                </div>
+                <div class="bottom-quote">"THE DOOR IS OPEN. YOU SHOULD NOT HAVE ENTERED."</div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="js/intro.js"></script>
+</body>
+</html>
