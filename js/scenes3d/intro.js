@@ -151,14 +151,18 @@ export function createIntroScene({ THREE, state, playTone, noiseBurst, scareHit,
       // Phase 3: face horror hold (eyes wide, mouth open, twitch)
       else if (phase === 3) {
         const jit = state.reducedMotion ? 0 : 1;
-        headGroup.rotation.z = (Math.random()-0.5) * 0.18 * jit;
-        headGroup.rotation.y = (Math.random()-0.5) * 0.22 * jit;
-        headGroup.position.z = 0.02 + Math.random()*0.03 * jit;
-        doll.position.z = 3.55 + Math.sin(t*40)*0.015 * jit;
-        eyeWhiteMat.emissive.setHex(t % 0.12 < 0.06 ? 0x221111 : 0x050505);
-        if (t < 0.05) { scareHit(0.6); }
-        if (t > 0.22 && t < 0.24) { flashScreen(state.lowIntensity ? 0.15 : 0.35, 90, '#ffffff'); shake = Math.max(shake, state.lowIntensity ? 0.015 : 0.06); }
-        if (t > 0.72) { phase = 4; t = 0; }
+        headGroup.rotation.z = (Math.random()-0.5) * 0.26 * jit;
+        headGroup.rotation.y = (Math.random()-0.5) * 0.32 * jit;
+        headGroup.rotation.x = -0.12 + (Math.random()-0.5) * 0.12 * jit;
+        headGroup.position.z = 0.03 + Math.random()*0.045 * jit;
+        doll.position.z = 3.62 + Math.sin(t*55)*0.02 * jit;
+        state.camera.fov = 40 + (Math.random()-0.5) * (state.reducedMotion ? 0 : 1.5);
+        state.camera.updateProjectionMatrix();
+        eyeWhiteMat.emissive.setHex(t % 0.1 < 0.05 ? 0x330808 : 0x110404);
+        if (t < 0.05) { scareHit(0.85); }
+        if (t > 0.12 && t < 0.14) { flashScreen(state.lowIntensity ? 0.12 : 0.28, 70, '#ffeded'); shake = Math.max(shake, state.lowIntensity ? 0.02 : 0.09); }
+        if (t > 0.28 && t < 0.30) { scareHit(0.45); flashScreen(state.lowIntensity ? 0.08 : 0.22, 110, '#5a0000'); }
+        if (t > 0.62) { phase = 4; t = 0; state.camera.fov = 42; state.camera.updateProjectionMatrix(); }
       }
       // Phase 4: stutter vanish
       else if (phase === 4) {

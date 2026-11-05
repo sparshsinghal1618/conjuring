@@ -26,12 +26,16 @@ function makeStylizedCharacter(THREE, opts = {}) {
 
 export function createCharacterHall({ THREE, state, showMessage }) {
   const scene = state.scene;
-  scene.background = new THREE.Color(0x050304);
-  state.player.pos.set(0,1.7,8); state.input.yaw = Math.PI; state.input.pitch = 0;
-  scene.add(new THREE.AmbientLight(0x4a3828, 0.32));
-  const spot = new THREE.SpotLight(0xffddb0, 2.2, 25, Math.PI/5, 0.45, 1); spot.position.set(0,5,4); spot.castShadow = state.quality!=='LOW'; scene.add(spot); scene.add(spot.target);
-  const floor = new THREE.Mesh(new THREE.PlaneGeometry(30,30), new THREE.MeshStandardMaterial({ color: 0x120c09, roughness: 0.95 })); floor.rotation.x=-Math.PI/2; floor.receiveShadow=true; scene.add(floor);
-  const wallMat = new THREE.MeshStandardMaterial({ color: 0x15100c, roughness: 1 });
+  scene.background = new THREE.Color(0x1a1410);
+  scene.fog = new THREE.FogExp2(0x221a14, 0.012);
+  if (state.renderer) state.renderer.toneMappingExposure = 1.3;
+  state.player.pos.set(0,1.7,8); state.input.yaw = 0; state.input.pitch = 0;
+  scene.add(new THREE.AmbientLight(0xffe8d2, 0.65));
+  scene.add(new THREE.HemisphereLight(0xffe0bf, 0x3a2818, 0.55));
+  const spot = new THREE.SpotLight(0xffe6c2, 3.2, 35, Math.PI/4.5, 0.4, 1); spot.position.set(0,6,5); spot.castShadow = state.quality!=='LOW'; scene.add(spot); scene.add(spot.target);
+  const fill = new THREE.DirectionalLight(0xffd9a8, 0.5); fill.position.set(-4,4,6); scene.add(fill);
+  const floor = new THREE.Mesh(new THREE.PlaneGeometry(30,30), new THREE.MeshStandardMaterial({ color: 0x4a3522, roughness: 0.92 })); floor.rotation.x=-Math.PI/2; floor.receiveShadow=true; scene.add(floor);
+  const wallMat = new THREE.MeshStandardMaterial({ color: 0x3f3024, roughness: 0.96 });
   const back = new THREE.Mesh(new THREE.PlaneGeometry(30,8), wallMat); back.position.set(0,4,-8); scene.add(back);
 
   const roster = [

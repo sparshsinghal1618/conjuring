@@ -19,11 +19,15 @@ function makeMonastery(THREE, x, z) {
 
 export function createMovieHub({ THREE, state, showMessage }) {
   const scene = state.scene;
-  scene.background = new THREE.Color(0x040203);
-  state.player.pos.set(0,1.7,9); state.input.yaw = Math.PI; state.input.pitch = 0;
-  scene.add(new THREE.AmbientLight(0x3c2b1f, 0.3));
-  const key = new THREE.DirectionalLight(0xffe0b2, 0.7); key.position.set(3,6,4); key.castShadow = state.quality!=='LOW'; scene.add(key);
-  const floor = new THREE.Mesh(new THREE.PlaneGeometry(40,40), new THREE.MeshStandardMaterial({ color: 0x100b08, roughness: 0.98 })); floor.rotation.x=-Math.PI/2; floor.receiveShadow=true; scene.add(floor);
+  scene.background = new THREE.Color(0x18120d);
+  scene.fog = new THREE.FogExp2(0x201811, 0.01);
+  if (state.renderer) state.renderer.toneMappingExposure = 1.3;
+  state.player.pos.set(0,1.7,9); state.input.yaw = 0; state.input.pitch = 0;
+  scene.add(new THREE.AmbientLight(0xffe8d2, 0.6));
+  scene.add(new THREE.HemisphereLight(0xffdfbf, 0x3a2818, 0.5));
+  const key = new THREE.DirectionalLight(0xffe6c2, 1.1); key.position.set(4,7,5); key.castShadow = state.quality!=='LOW'; scene.add(key);
+  const fill = new THREE.PointLight(0xffd8a8, 1.2, 30, 1.5); fill.position.set(-4,3,6); scene.add(fill);
+  const floor = new THREE.Mesh(new THREE.PlaneGeometry(40,40), new THREE.MeshStandardMaterial({ color: 0x463220, roughness: 0.94 })); floor.rotation.x=-Math.PI/2; floor.receiveShadow=true; scene.add(floor);
 
   const worlds = [
     { name: 'The Conjuring — Perron Farmhouse', obj: makeHouse(THREE,-7,-4,0x2a1a12), info: 'A stylized 3D vignette representing the Perron farmhouse setting.' },

@@ -40,10 +40,13 @@
     #message h2 { font-family: 'Cinzel', serif; color: var(--gold); font-size: clamp(1.1rem, 4.5vw, 2.2rem); margin: 0 0 .65rem; letter-spacing: .12em; }
     #crosshair { position: fixed; left: 50%; top: 50%; width: 12px; height: 12px; margin: -6px 0 0 -6px; border: 1px solid rgba(212,175,55,.6); border-radius: 50%; z-index: 15; display: none; opacity: .75; box-shadow: 0 0 8px rgba(212,175,55,.15); }
     #crosshair::after { content:''; position:absolute; left:50%; top:50%; width:2px; height:2px; margin:-1px; background: rgba(212,175,55,.8); border-radius:50%; }
-    #vignette { position: fixed; inset: 0; pointer-events: none; z-index: 12; background: radial-gradient(ellipse at center, rgba(0,0,0,0) 28%, rgba(0,0,0,.62) 100%); mix-blend-mode: multiply; }
+    #vignette { position: fixed; inset: 0; pointer-events: none; z-index: 12; background: radial-gradient(ellipse at center, rgba(0,0,0,0) 42%, rgba(0,0,0,.28) 100%); }
     #flash { position: fixed; inset: 0; pointer-events: none; z-index: 26; background: #fff; opacity: 0; }
     #skipScare { position: fixed; top: 12px; right: 12px; z-index: 27; display: none; }
     #skipScare .btn { font-size: .68rem; padding: .5rem .65rem; min-height: 38px; }
+    #topbar { position: fixed; top: 0; left: 0; right: 0; z-index: 18; display: none; padding: 10px 14px calc(10px); background: linear-gradient(180deg, rgba(0,0,0,.72), rgba(0,0,0,0)); align-items: center; justify-content: space-between; gap: 10px; }
+    #topbar .brand { font-family: Cinzel, serif; color: var(--gold); font-size: .78rem; letter-spacing: .14em; }
+    #topbar .sub { font-size: .72rem; color: #cbb89a; }
     @media (max-width: 520px) { .row .btn { flex-basis: 100%; } #hud .btn { font-size: .62rem; padding: .5rem .55rem; } }
     @media (prefers-reduced-motion: reduce) { .btn { transition: none; } }
   </style>
@@ -81,6 +84,10 @@
   </div>
 
   <div id="skipScare" class="overlay"><button class="btn secondary" id="skipScareBtn">Skip Intro</button></div>
+
+  <div id="topbar" class="overlay">
+    <div><div class="brand">THE WARREN FILES</div><div class="sub" id="sceneLabel">3D Experience</div></div>
+  </div>
 
   <div id="hud" class="overlay">
     <button class="btn" id="hudMuseum">Museum</button>

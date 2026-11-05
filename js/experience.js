@@ -19,6 +19,8 @@ const messageBody = document.getElementById('messageBody');
 const messageClose = document.getElementById('messageClose');
 const skipScare = document.getElementById('skipScare');
 const skipScareBtn = document.getElementById('skipScareBtn');
+const topbar = document.getElementById('topbar');
+const sceneLabel = document.getElementById('sceneLabel');
 
 const state = {
   renderer: null, scene: null, camera: null, clock: new THREE.Clock(),
@@ -46,7 +48,7 @@ function initRenderer() {
   renderer.shadowMap.enabled = state.quality !== 'LOW';
   renderer.shadowMap.type = THREE.PCFSoftShadowMap;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 0.9;
+  renderer.toneMappingExposure = 1.25;
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   app.appendChild(renderer.domElement);
   state.renderer = renderer;
@@ -124,19 +126,23 @@ messageClose.addEventListener('click', () => message.style.display = 'none');
 function setScene(factory, opts = {}) {
   if (state.active?.dispose) state.active.dispose();
   const scene = new THREE.Scene();
-  scene.fog = new THREE.FogExp2(0x050203, opts.fog ?? 0.045);
+  scene.background = new THREE.Color(opts.bg ?? 0x0a0705);
+  scene.fog = new THREE.FogExp2(opts.fogColor ?? 0x120c09, opts.fog ?? 0.045);
   const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 200);
   camera.position.copy(opts.cameraPos || new THREE.Vector3(0, 1.7, 6));
   state.scene = scene; state.camera = camera;
+  if (state.renderer && opts.exposure != null) state.renderer.toneMappingExposure = opts.exposure;
   state.active = factory({ THREE, state, playTone, noiseBurst, scareHit, flashScreen, showMessage, setScene, goMuseum, goCharacters, goMovies });
   hud.style.display = opts.hud ? 'flex' : 'none';
   crosshair.style.display = opts.crosshair ? 'block' : 'none';
   skipScare.style.display = opts.skipScare ? 'block' : 'none';
+  topbar.style.display = opts.hud ? 'flex' : 'none';
+  if (opts.label) sceneLabel.textContent = opts.label;
 }
 
-function goMuseum() { setScene(createMuseumScene, { hud: true, crosshair: true, fog: 0.035, cameraPos: new THREE.Vector3(0,1.7,7) }); }
-function goCharacters() { setScene(createCharacterHall, { hud: true, fog: 0.03, cameraPos: new THREE.Vector3(0,1.7,8) }); }
-function goMovies() { setScene(createMovieHub, { hud: true, fog: 0.03, cameraPos: new THREE.Vector3(0,1.7,9) }); }
+function goMuseum() { setScene(createMuseumScene, { hud: true, crosshair: true, label: 'Warren Occult Museum — WASD + Mouse', fog: 0.018, fogColor: 0x1a120d, cameraPos: new THREE.Vector3(0,1.7,6.5) }); }
+function goCharacters() { setScene(createCharacterHall, { hud: true, label: 'Character Hall', fog: 0.014, fogColor: 0x120c09, cameraPos: new THREE.Vector3(0,1.7,8) }); }
+function goMovies() { setScene(createMovieHub, { hud: true, label: 'Movie Worlds', fog: 0.014, fogColor: 0x120c09, cameraPos: new THREE.Vector3(0,1.7,9) }); }
 
 function startExperience(skipIntro = false) {
   ensureAudio();

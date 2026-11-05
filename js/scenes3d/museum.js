@@ -1,28 +1,33 @@
 export function createMuseumScene({ THREE, state, playTone, showMessage }) {
   const scene = state.scene;
-  scene.background = new THREE.Color(0x070404);
-  state.player.pos.set(0, 1.7, 7);
-  state.input.yaw = Math.PI; state.input.pitch = 0;
+  scene.background = new THREE.Color(0x1a1410);
+  scene.fog = new THREE.FogExp2(0x241a14, 0.012);
+  if (state.renderer) state.renderer.toneMappingExposure = 1.35;
+  state.player.pos.set(0, 1.7, 5.5);
+  state.input.yaw = 0; state.input.pitch = -0.05; // face into the room (-Z)
 
-  const amb = new THREE.AmbientLight(0x3b2a1f, 0.28);
-  scene.add(amb);
+  scene.add(new THREE.AmbientLight(0xffe8cc, 0.55));
+  scene.add(new THREE.HemisphereLight(0xffddaa, 0x2a1a10, 0.5));
+  const fill = new THREE.DirectionalLight(0xffe0b8, 0.65);
+  fill.position.set(2, 5, 3); scene.add(fill);
 
-  function addLamp(x, y, z, intensity = 1.1) {
-    const p = new THREE.PointLight(0xffc98a, intensity, 10, 2);
+  function addLamp(x, y, z, intensity = 2.0, dist = 18) {
+    const p = new THREE.PointLight(0xffd49a, intensity, dist, 1.2);
     p.position.set(x, y, z);
     p.castShadow = state.quality !== 'LOW';
+    if (p.castShadow) { p.shadow.mapSize.set(512,512); p.shadow.bias = -0.0005; }
     scene.add(p);
-    const bulb = new THREE.Mesh(new THREE.SphereGeometry(0.06, 10, 8), new THREE.MeshBasicMaterial({ color: 0xffe2b8 }));
+    const bulb = new THREE.Mesh(new THREE.SphereGeometry(0.07, 12, 10), new THREE.MeshBasicMaterial({ color: 0xfff1cf }));
     bulb.position.copy(p.position);
     scene.add(bulb);
     return p;
   }
-  const lamps = [addLamp(-4, 2.6, -3), addLamp(4, 2.6, -3), addLamp(-4, 2.6, 3), addLamp(4, 2.6, 3), addLamp(0, 2.8, 0, 0.9)];
+  const lamps = [addLamp(-4, 2.7, -3, 2.1), addLamp(4, 2.7, -3, 2.1), addLamp(-4, 2.7, 3, 1.8), addLamp(4, 2.7, 3, 1.8), addLamp(0, 2.8, 0, 1.9), addLamp(0, 2.6, -6.2, 2.4, 12)];
 
-  // Room shell
-  const wallMat = new THREE.MeshStandardMaterial({ color: 0x1a120d, roughness: 0.95 });
-  const floorMat = new THREE.MeshStandardMaterial({ color: 0x2b1b12, roughness: 0.9 });
-  const ceilMat = new THREE.MeshStandardMaterial({ color: 0x120c09, roughness: 1 });
+  // Room shell (brighter, readable materials)
+  const wallMat = new THREE.MeshStandardMaterial({ color: 0x4a3728, roughness: 0.92 });
+  const floorMat = new THREE.MeshStandardMaterial({ color: 0x5a4028, roughness: 0.88 });
+  const ceilMat = new THREE.MeshStandardMaterial({ color: 0x3a2a1d, roughness: 1 });
   const floor = new THREE.Mesh(new THREE.PlaneGeometry(20, 20), floorMat); floor.rotation.x = -Math.PI/2; floor.receiveShadow = true; scene.add(floor);
   const ceil = new THREE.Mesh(new THREE.PlaneGeometry(20, 20), ceilMat); ceil.rotation.x = Math.PI/2; ceil.position.y = 3.2; scene.add(ceil);
   const makeWall = (w,h,x,y,z,ry=0) => { const m = new THREE.Mesh(new THREE.PlaneGeometry(w,h), wallMat); m.position.set(x,y,z); m.rotation.y=ry; m.receiveShadow=true; scene.add(m); };
@@ -30,8 +35,8 @@ export function createMuseumScene({ THREE, state, playTone, showMessage }) {
   makeWall(20,3.2,-10,1.6,0,Math.PI/2); makeWall(20,3.2,10,1.6,0,-Math.PI/2);
 
   // Display cases & artifacts
-  const glass = new THREE.MeshPhysicalMaterial({ color: 0xaed4ff, transparent: true, opacity: 0.18, roughness: 0.05, metalness: 0, transmission: 0.2 });
-  const wood = new THREE.MeshStandardMaterial({ color: 0x3a2314, roughness: 0.85 });
+  const glass = new THREE.MeshPhysicalMaterial({ color: 0xcfe8ff, transparent: true, opacity: 0.22, roughness: 0.04, metalness: 0, transmission: 0.15 });
+  const wood = new THREE.MeshStandardMaterial({ color: 0x6b4423, roughness: 0.82 });
   function caseBox(x,z,label) {
     const g = new THREE.Group(); g.position.set(x,0,z);
     const base = new THREE.Mesh(new THREE.BoxGeometry(1.3,0.7,0.9), wood); base.position.y=0.35; base.castShadow=true; base.receiveShadow=true; g.add(base);
@@ -65,7 +70,7 @@ export function createMuseumScene({ THREE, state, playTone, showMessage }) {
   const eyeMat = new THREE.MeshBasicMaterial({ color: 0x1b2a3a });
   const e1 = new THREE.Mesh(new THREE.CircleGeometry(0.018,10), eyeMat); e1.position.set(-0.045,0.02,0.145); headG.add(e1);
   const e2 = e1.clone(); e2.position.x=0.045; headG.add(e2);
-  const cLight = new THREE.PointLight(0xffe6c7, 1.2, 4, 2); cLight.position.set(0,2.15,-6.2); scene.add(cLight);
+  const cLight = new THREE.PointLight(0xffe6c7, 2.2, 7, 1.5); cLight.position.set(0,2.2,-6.2); scene.add(cLight);
 
   // Floating dust (simple points)
   const dustCount = state.quality === 'LOW' ? 120 : 260;
@@ -88,10 +93,10 @@ export function createMuseumScene({ THREE, state, playTone, showMessage }) {
     firstPerson: true,
     update(dt) {
       t += dt;
-      // lamp flicker
-      if (!state.reducedMotion && Math.random() < 0.01) flicker = 0.25;
-      if (flicker > 0) { flicker -= dt; lamps[4].intensity = 0.2 + Math.random()*0.6; cLight.intensity = 0.4 + Math.random()*1.2; }
-      else { lamps[4].intensity = 0.9 + Math.sin(t*1.7)*0.05; cLight.intensity = 1.1 + Math.sin(t*2.1)*0.08; }
+      // subtle lamp flicker (kept readable)
+      if (!state.reducedMotion && Math.random() < 0.008) flicker = 0.22;
+      if (flicker > 0) { flicker -= dt; lamps[4].intensity = 0.9 + Math.random()*0.8; cLight.intensity = 1.2 + Math.random()*1.0; }
+      else { lamps[4].intensity = 1.85 + Math.sin(t*1.7)*0.06; cLight.intensity = 2.15 + Math.sin(t*2.1)*0.1; }
       // Annabelle idle animation
       headG.rotation.y = Math.sin(t * 0.35) * 0.18;
       headG.rotation.x = Math.sin(t * 0.7) * 0.03;
