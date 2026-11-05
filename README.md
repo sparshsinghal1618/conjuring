@@ -1,37 +1,33 @@
-# The Conjuring Universe - The Warren Files
+# The Warren Files — Conjuring Universe 3D Experience
 
-An immersive, cinematic horror website dedicated to The Conjuring Universe. Explore haunted locations, investigate cursed objects, and uncover the dark stories behind Ed and Lorraine Warren's most famous cases.
+A real-time, browser-based **3D horror experience** (Three.js, no build step required) inspired by *The Conjuring Universe*. It includes a cinematic Annabelle intro jump scare, an explorable first-person Warren Occult Museum, a 3D character hall, and a movie-world hub.
 
-## Features
+## What’s implemented
+- **Intro jump scare (real 3D):** black-screen lead-in, synthesized breathing/sting audio (after user interaction), a procedural animated 3D Annabelle-style doll that lunges toward the camera, eye-open/head-snap animation, screen flash/shake (respects reduced-motion/low-intensity), “SHE WAS WAITING FOR YOU” reveal, and museum transition. Plays once per session by default; **Skip Intro**, **Replay Intro**, and **Low-Intensity Mode** included.
+- **Warren Occult Museum (first-person 3D):** explorable room (WASD + mouse look), lighting/fog/dust particles, display cases, and an animated Annabelle cabinet centerpiece with scripted idle/flicker events.
+- **3D Character Hall:** real-time 3D stylized character presentations (Annabelle, Ed/Lorraine/Judy Warren, Valak-inspired figure) with idle animation and camera choreography.
+- **3D Movie Worlds hub:** stylized 3D vignettes/portals for major film settings (Perron farmhouse, Enfield, investigations, Annabelle trilogy, monastery).
+- **Performance/safety controls:** quality detection hooks, low-intensity mode, reduced-motion/flash support, audio gated behind interaction.
 
-- **Cinematic Opening Sequence** - Atmospheric intro with thunderstorm, farmhouse, and hallway
-- **Complete Movie Universe** - Detailed stories for all Conjuring, Annabelle, and The Nun films
-- **Warren Occult Museum** - Explore cursed artifacts including Annabelle
-- **Character Database** - All major characters and supernatural entities
-- **Haunted Locations** - Interactive exploration of iconic locations
-- **Investigation Mode** - Paranormal investigation tools and case files
-- **Timeline** - Chronological events across the universe
-- **Secret Archives** - Classified materials and evidence
+## Running
+Open `index.html` via a local web server (ES modules require HTTP). Example:
+```bash
+# Python
+python -m http.server 8080
+# then visit http://localhost:8080
+```
 
-## Mobile Optimized
+## Tech
+- Three.js (ES modules via CDN)
+- WebGL, Web Audio API (synthesized cues), pointer lock for first-person controls
 
-Fully responsive design optimized for phones and tablets with:
-- Touch-friendly navigation
-- Optimized animations for mobile performance
-- Responsive layouts for all screen sizes
-- Reduced motion support
+## Asset pipeline (important)
+This repo ships a **working real-time 3D framework with procedural/stylized models** so it runs without external copyrighted assets. For the “ultimate” photoreal version described in the brief, integrate **properly licensed/original GLB/GLTF** assets:
+- Character rigs/animations (skeletal + morph targets) via `GLTFLoader` + `AnimationMixer`
+- High-detail environments (PBR textures, baked/real-time lighting)
+- Licensed audio/spatial SFX
 
-## Technology
+The scene architecture (`js/experience.js`, `js/scenes3d/*`) is modular to support swapping procedural models for production GLB assets, LODs, and per-movie explorable levels.
 
-- Pure HTML5, CSS3, JavaScript
-- Gothic horror design aesthetic
-- CSS animations and transitions
-- Responsive design
-
-## Live Demo
-
-[View the Website](https://yourusername.github.io/TheConjuringUniverseWebsite/)
-
-## License
-
-This is an unofficial fan project. Not affiliated with Warner Bros. Entertainment Inc.
+## Notes
+Fan-made experience inspired by *The Conjuring Universe*. Not affiliated with Warner Bros. or New Line Cinema. Use only original or properly licensed assets for any public/production deployment.
