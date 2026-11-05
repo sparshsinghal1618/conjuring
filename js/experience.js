@@ -17,6 +17,8 @@ const message = document.getElementById('message');
 const messageTitle = document.getElementById('messageTitle');
 const messageBody = document.getElementById('messageBody');
 const messageClose = document.getElementById('messageClose');
+const skipScare = document.getElementById('skipScare');
+const skipScareBtn = document.getElementById('skipScareBtn');
 
 const state = {
   renderer: null, scene: null, camera: null, clock: new THREE.Clock(),
@@ -76,24 +78,36 @@ function playTone(freq = 80, dur = 0.2, type = 'sine', gain = 0.2, when = 0) {
   o.start(ctx.currentTime + when); o.stop(ctx.currentTime + when + dur + 0.02);
 }
 
-function noiseBurst(dur = 0.25, gain = 0.12) {
+function noiseBurst(dur = 0.25, gain = 0.12, freq = 900, type = 'bandpass') {
   if (!state.audio.enabled) return;
   const { ctx, master } = state.audio;
   const bufferSize = Math.floor(ctx.sampleRate * dur);
   const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
   const data = buffer.getChannelData(0);
-  for (let i = 0; i < bufferSize; i++) data[i] = (Math.random() * 2 - 1) * (1 - i / bufferSize);
+  for (let i = 0; i < bufferSize; i++) data[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / bufferSize, 0.7);
   const src = ctx.createBufferSource(); src.buffer = buffer;
-  const g = ctx.createGain(); g.gain.value = gain;
-  const bp = ctx.createBiquadFilter(); bp.type = 'bandpass'; bp.frequency.value = 900;
-  src.connect(bp); bp.connect(g); g.connect(master);
+  const g = ctx.createGain(); g.gain.setValueAtTime(gain, ctx.currentTime); g.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + dur);
+  const f = ctx.createBiquadFilter(); f.type = type; f.frequency.value = freq;
+  src.connect(f); f.connect(g); g.connect(master);
   src.start();
 }
 
-export function flashScreen(opacity = 0.9, ms = 90) {
+export function scareHit(intensity = 1) {
+  if (!state.audio.enabled) return;
+  const k = state.lowIntensity ? 0.35 : 1;
+  const i = intensity * k;
+  playTone(42, 0.5, 'sine', 0.12 * i);
+  playTone(78, 0.22, 'sawtooth', 0.07 * i);
+  playTone(120, 0.14, 'square', 0.035 * i);
+  noiseBurst(0.35, 0.16 * i, 700, 'bandpass');
+  noiseBurst(0.18, 0.09 * i, 2200, 'highpass');
+}
+
+export function flashScreen(opacity = 0.9, ms = 90, color = '#ffffff') {
   if (state.reducedMotion) return;
+  flash.style.background = color;
   flash.style.transition = 'none';
-  flash.style.opacity = String(opacity);
+  flash.style.opacity = String(Math.min(1, opacity));
   requestAnimationFrame(() => {
     flash.style.transition = `opacity ${ms}ms ease-out`;
     flash.style.opacity = '0';
@@ -114,9 +128,10 @@ function setScene(factory, opts = {}) {
   const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 200);
   camera.position.copy(opts.cameraPos || new THREE.Vector3(0, 1.7, 6));
   state.scene = scene; state.camera = camera;
-  state.active = factory({ THREE, state, playTone, noiseBurst, flashScreen, showMessage, setScene, goMuseum, goCharacters, goMovies });
+  state.active = factory({ THREE, state, playTone, noiseBurst, scareHit, flashScreen, showMessage, setScene, goMuseum, goCharacters, goMovies });
   hud.style.display = opts.hud ? 'flex' : 'none';
   crosshair.style.display = opts.crosshair ? 'block' : 'none';
+  skipScare.style.display = opts.skipScare ? 'block' : 'none';
 }
 
 function goMuseum() { setScene(createMuseumScene, { hud: true, crosshair: true, fog: 0.035, cameraPos: new THREE.Vector3(0,1.7,7) }); }
@@ -126,18 +141,20 @@ function goMovies() { setScene(createMovieHub, { hud: true, fog: 0.03, cameraPos
 function startExperience(skipIntro = false) {
   ensureAudio();
   gate.style.display = 'none';
+  message.style.display = 'none';
   if (skipIntro || sessionStorage.getItem('warren_intro_seen') === '1') {
     goMuseum();
-    showMessage('WELCOME TO THE WARREN FILES', 'You have entered a stylized real-time 3D experience inspired by The Conjuring Universe. Explore the museum, inspect characters, and visit movie worlds. Use WASD + mouse (desktop) or on-screen controls where available.');
+    showMessage('WELCOME TO THE WARREN FILES', 'Enter the Warren Occult Museum. Desktop: click the scene and use WASD + mouse. Mobile: use the HUD to navigate. Headphones recommended.');
   } else {
     sessionStorage.setItem('warren_intro_seen', '1');
-    setScene(createIntroScene, { hud: false, crosshair: false, fog: 0.06, cameraPos: new THREE.Vector3(0,1.6,3.2) });
+    setScene(createIntroScene, { hud: false, crosshair: false, skipScare: true, fog: 0.08, cameraPos: new THREE.Vector3(0,1.35,4.2) });
   }
 }
 
 enterBtn.addEventListener('click', () => startExperience(false));
 skipIntroBtn.addEventListener('click', () => startExperience(true));
-safeBtn.addEventListener('click', () => { state.lowIntensity = true; state.reducedMotion = true; reducedFx.checked = true; startExperience(true); });
+skipScareBtn.addEventListener('click', () => { message.style.display = 'none'; goMuseum(); });
+safeBtn.addEventListener('click', () => { state.lowIntensity = true; state.reducedMotion = true; reducedFx.checked = true; if (state.audio.master) state.audio.master.gain.value = 0.25; startExperience(true); });
 reducedFx.addEventListener('change', () => { state.reducedMotion = reducedFx.checked; });
 
 document.getElementById('hudMuseum').addEventListener('click', goMuseum);
