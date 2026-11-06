@@ -21,13 +21,15 @@ const skipScare = document.getElementById('skipScare');
 const skipScareBtn = document.getElementById('skipScareBtn');
 const topbar = document.getElementById('topbar');
 const sceneLabel = document.getElementById('sceneLabel');
+const hudInspect = document.getElementById('hudInspect');
 
 const state = {
   renderer: null, scene: null, camera: null, clock: new THREE.Clock(),
   active: null, quality: 'HIGH', lowIntensity: false, reducedMotion: false,
-  audio: { ctx: null, master: null, enabled: false },
+  audio: { ctx: null, master: null, enabled: false, ambience: null },
   input: { keys: {}, pointerLocked: false, yaw: 0, pitch: 0 },
-  player: { pos: new THREE.Vector3(0, 1.7, 6), vel: new THREE.Vector3(), onGround: true },
+  player: { pos: new THREE.Vector3(0, 1.7, 6), vel: new THREE.Vector3(), onGround: true, bob: 0 },
+  hotspot: null,
 };
 
 function detectQuality() {
@@ -80,6 +82,21 @@ function playTone(freq = 80, dur = 0.2, type = 'sine', gain = 0.2, when = 0) {
   o.start(ctx.currentTime + when); o.stop(ctx.currentTime + when + dur + 0.02);
 }
 
+export function startAmbience() {
+  if (!state.audio.enabled || state.audio.ambience || state.lowIntensity) return;
+  const { ctx, master } = state.audio;
+  const g = ctx.createGain(); g.gain.value = 0.018; g.connect(master);
+  const o1 = ctx.createOscillator(); o1.type = 'sine'; o1.frequency.value = 46; o1.connect(g); o1.start();
+  const o2 = ctx.createOscillator(); o2.type = 'triangle'; o2.frequency.value = 69.5; const g2 = ctx.createGain(); g2.gain.value = 0.35; o2.connect(g2); g2.connect(g); o2.start();
+  const lfo = ctx.createOscillator(); lfo.frequency.value = 0.08; const lg = ctx.createGain(); lg.gain.value = 8; lfo.connect(lg); lg.connect(o1.frequency); lfo.start();
+  state.audio.ambience = { nodes: [o1,o2,lfo,g,g2,lg] };
+}
+export function stopAmbience() {
+  const a = state.audio.ambience; if (!a) return;
+  a.nodes.forEach(n => { try { n.stop?.(); n.disconnect?.(); } catch {} });
+  state.audio.ambience = null;
+}
+
 function noiseBurst(dur = 0.25, gain = 0.12, freq = 900, type = 'bandpass') {
   if (!state.audio.enabled) return;
   const { ctx, master } = state.audio;
@@ -125,6 +142,8 @@ messageClose.addEventListener('click', () => message.style.display = 'none');
 
 function setScene(factory, opts = {}) {
   if (state.active?.dispose) state.active.dispose();
+  stopAmbience();
+  state.hotspot = null; hudInspect.style.display = 'none';
   const scene = new THREE.Scene();
   scene.background = new THREE.Color(opts.bg ?? 0x0a0705);
   scene.fog = new THREE.FogExp2(opts.fogColor ?? 0x120c09, opts.fog ?? 0.045);
@@ -132,7 +151,8 @@ function setScene(factory, opts = {}) {
   camera.position.copy(opts.cameraPos || new THREE.Vector3(0, 1.7, 6));
   state.scene = scene; state.camera = camera;
   if (state.renderer && opts.exposure != null) state.renderer.toneMappingExposure = opts.exposure;
-  state.active = factory({ THREE, state, playTone, noiseBurst, scareHit, flashScreen, showMessage, setScene, goMuseum, goCharacters, goMovies });
+  else if (state.renderer) state.renderer.toneMappingExposure = 1.25;
+  state.active = factory({ THREE, state, playTone, noiseBurst, scareHit, flashScreen, showMessage, setScene, goMuseum, goCharacters, goMovies, startAmbience, stopAmbience });
   hud.style.display = opts.hud ? 'flex' : 'none';
   crosshair.style.display = opts.crosshair ? 'block' : 'none';
   skipScare.style.display = opts.skipScare ? 'block' : 'none';
@@ -167,11 +187,16 @@ document.getElementById('hudMuseum').addEventListener('click', goMuseum);
 document.getElementById('hudCharacters').addEventListener('click', goCharacters);
 document.getElementById('hudMovies').addEventListener('click', goMovies);
 document.getElementById('hudReplay').addEventListener('click', () => { sessionStorage.removeItem('warren_intro_seen'); startExperience(false); });
+hudInspect.addEventListener('click', () => { if (state.active?.interact && state.hotspot) state.active.interact(state.hotspot); });
 document.getElementById('hudSettings').addEventListener('click', () => {
-  showMessage('SETTINGS', `Quality: ${state.quality}. Low-intensity: ${state.lowIntensity ? 'On' : 'Off'}. Reduced motion: ${state.reducedMotion ? 'On' : 'Off'}. For performance, reload and choose Low-Intensity Mode on slower devices.`);
+  showMessage('SETTINGS', `Quality: ${state.quality}. Low-intensity: ${state.lowIntensity ? 'On' : 'Off'}. Reduced motion: ${state.reducedMotion ? 'On' : 'Off'}. Controls: WASD + mouse look (click scene), E/Inspect for artifacts. Reload and choose Low-Intensity for slower devices.`);
 });
 
-window.addEventListener('keydown', (e) => { state.input.keys[e.code] = true; if (e.code === 'Escape') document.exitPointerLock?.(); });
+window.addEventListener('keydown', (e) => {
+  state.input.keys[e.code] = true;
+  if (e.code === 'Escape') document.exitPointerLock?.();
+  if (e.code === 'KeyE' && state.active?.interact && state.hotspot) state.active.interact(state.hotspot);
+});
 window.addEventListener('keyup', (e) => { state.input.keys[e.code] = false; });
 window.addEventListener('mousemove', (e) => {
   if (!state.input.pointerLocked || !state.active?.firstPerson) return;
@@ -198,16 +223,22 @@ function updateFirstPerson(dt) {
   if (state.input.keys['KeyS']) dir.z += 1;
   if (state.input.keys['KeyA']) dir.x -= 1;
   if (state.input.keys['KeyD']) dir.x += 1;
-  if (dir.lengthSq() > 0) dir.normalize();
+  const moving = dir.lengthSq() > 0;
+  if (moving) dir.normalize();
   const yaw = state.input.yaw;
   const forward = new THREE.Vector3(Math.sin(yaw), 0, Math.cos(yaw) * -1).normalize();
   const right = new THREE.Vector3().crossVectors(forward, new THREE.Vector3(0,1,0)).normalize().multiplyScalar(-1);
   state.player.pos.addScaledVector(forward, -dir.z * speed * dt);
   state.player.pos.addScaledVector(right, dir.x * speed * dt);
-  // bounds
-  state.player.pos.x = Math.max(-9, Math.min(9, state.player.pos.x));
-  state.player.pos.z = Math.max(-9, Math.min(9, state.player.pos.z));
-  state.camera.position.set(state.player.pos.x, 1.7, state.player.pos.z);
+  // bounds (scenes can override via state.bounds)
+  const b = state.bounds || { x: 9, z: 9 };
+  state.player.pos.x = Math.max(-b.x, Math.min(b.x, state.player.pos.x));
+  state.player.pos.z = Math.max(-b.z, Math.min(b.z, state.player.pos.z));
+  if (moving && !state.reducedMotion) state.player.bob += dt * (state.input.keys['ShiftLeft'] ? 10 : 7.5);
+  else state.player.bob *= Math.pow(0.001, dt);
+  const bobY = Math.sin(state.player.bob) * (moving ? 0.028 : 0);
+  const bobX = Math.cos(state.player.bob * 0.5) * (moving ? 0.012 : 0);
+  state.camera.position.set(state.player.pos.x + bobX, 1.7 + bobY, state.player.pos.z);
   state.camera.rotation.order = 'YXZ';
   state.camera.rotation.y = yaw;
   state.camera.rotation.x = state.input.pitch;
@@ -218,6 +249,18 @@ function animate() {
   const dt = Math.min(state.clock.getDelta(), 0.05);
   if (state.active?.update) state.active.update(dt);
   updateFirstPerson(dt);
+  // hotspot polling
+  if (state.active?.getHotspot) {
+    const hs = state.active.getHotspot();
+    state.hotspot = hs;
+    if (hs) { hudInspect.style.display = 'inline-block'; hudInspect.textContent = state.active.firstPerson ? `Inspect: ${hs.label || 'Object'}` : `View: ${hs.label || 'Details'}`; }
+    else { hudInspect.style.display = 'none'; }
+  } else if (state.active?.currentInfo) {
+    state.hotspot = state.active.currentInfo;
+    hudInspect.style.display = 'inline-block'; hudInspect.textContent = `View: ${state.hotspot.label || 'Details'}`;
+  } else {
+    state.hotspot = null; hudInspect.style.display = 'none';
+  }
   if (state.renderer && state.scene && state.camera) state.renderer.render(state.scene, state.camera);
 }
 
