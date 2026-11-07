@@ -1,108 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WARREN OCCULT MUSEUM | THE CONJURING UNIVERSE</title>
-    <meta name="description" content="Enter the Warren Occult Museum - Home of Annabelle and cursed artifacts">
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Cormorant+Garamond:wght@300;400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
-    
-    <link rel="stylesheet" href="../css/main.css">
-    <link rel="stylesheet" href="../css/pages.css">
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Warren Occult Museum | The Conjuring Archives</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/wiki.css" />
 </head>
 <body>
-    <div class="custom-cursor"></div>
-    <nav class="main-nav scrolled">
-        <div class="nav-container">
-            <div class="nav-logo"><a href="home.html">WARREN FILES</a></div>
-            <button class="nav-toggle" id="navToggle"><span></span><span></span><span></span></button>
-            <ul class="nav-menu" id="navMenu">
-                <li class="nav-item"><a href="home.html" class="nav-link">HOME</a></li>
-                <li class="nav-item"><a href="movies.html" class="nav-link">THE MOVIES</a></li>
-                <li class="nav-item"><a href="characters.html" class="nav-link">CHARACTERS</a></li>
-                <li class="nav-item"><a href="locations.html" class="nav-link">HAUNTED LOCATIONS</a></li>
-                <li class="nav-item"><a href="museum.html" class="nav-link active">OCCULT MUSEUM</a></li>
-                <li class="nav-item"><a href="annabelle.html" class="nav-link">ANNABELLE</a></li>
-                <li class="nav-item"><a href="nun.html" class="nav-link">THE NUN</a></li>
-                <li class="nav-item"><a href="warren-files.html" class="nav-link">THE WARREN FILES</a></li>
-                <li class="nav-item"><a href="timeline.html" class="nav-link">TIMELINE</a></li>
-                <li class="nav-item"><a href="investigations.html" class="nav-link">INVESTIGATIONS</a></li>
-                <li class="nav-item"><a href="archives.html" class="nav-link">SECRET ARCHIVES</a></li>
-            </ul>
+  <div data-shell-header></div>
+  <main id="main">
+    <section class="hero" style="padding:44px 0"><div class="container">
+      <div class="kicker">The Warren Occult Museum</div>
+      <h1>Objects Collected. Contained. Never to Be Touched.</h1>
+      <p class="lead">Within the Warrens’ artifact room, items connected to dark cases are stored and safeguarded. Each object carries a history—and a warning. Explore selected artifacts through cinematic descriptions and real-time 3D viewers.</p>
+      <div class="notice"><strong>Museum rule:</strong> “Do not touch.” In <em>Annabelle Comes Home</em>, disturbing the artifact room unleashes consequences.</div>
+    </div></section>
+    <section class="section"><div class="container">
+      <div class="grid" style="grid-template-columns:1.1fr .9fr;gap:16px;align-items:start">
+        <div class="panel">
+          <div class="kicker">Centerpiece</div>
+          <h2>Annabelle’s Case</h2>
+          <p>The Annabelle doll is depicted as a conduit for malevolent influence—a beacon that draws darkness. Secured in a consecrated glass case, it remains one of the most feared objects in the collection.</p>
+          <div class="viewer" data-viewer3d="annabelle-doll" aria-label="3D Annabelle viewer"></div>
+          <div class="hero-actions"><a class="btn primary" href="./article.html?type=artifact&id=annabelle-doll">Open Annabelle File</a><a class="btn" href="./article.html?type=location&id=warren-occult-museum">Museum Location</a></div>
         </div>
-    </nav>
-    
-    <header class="page-header">
-        <div class="page-header-bg"></div>
-        <div class="page-header-overlay"></div>
-        <div class="page-header-content">
-            <h1 class="page-title">WARREN OCCULT MUSEUM</h1>
-            <p class="page-subtitle">ENTER AT YOUR OWN RISK</p>
-            <div class="breadcrumb"><a href="home.html">HOME</a> / OCCULT MUSEUM</div>
+        <div class="panel">
+          <h3>Museum History & Context</h3>
+          <p class="meta">As depicted in The Conjuring Universe films.</p>
+          <p>Ed and Lorraine Warren collected objects tied to their investigations, storing them in a dedicated space to contain and study their dangers. The room appears across the franchise as a nexus of cursed artifacts.</p>
+          <h3>Associated Investigations</h3>
+          <ul class="list-links">
+            <li><a href="./article.html?type=movie&id=the-conjuring">The Conjuring</a> — early case connections</li>
+            <li><a href="./article.html?type=movie&id=annabelle-comes-home">Annabelle Comes Home</a> — a night when the room awakens</li>
+            <li><a href="./article.html?type=character&id=ed-warren">Ed Warren</a> & <a href="./article.html?type=character&id=lorraine-warren">Lorraine Warren</a></li>
+          </ul>
+          <h3>Safety & Atmosphere</h3>
+          <p class="meta">This digital exhibit uses optional sound and can be viewed with intense effects disabled in your preferences.</p>
         </div>
-    </header>
-    
-    <section class="content-section">
-        <div class="container">
-            <div class="section-intro">
-                <p class="intro-text">
-                    Located in Monroe, Connecticut, the Warren Occult Museum houses the most cursed and malevolent 
-                    objects collected by Ed and Lorraine Warren throughout their decades of paranormal investigation.
-                </p>
-                <div class="museum-warning">
-                    <p><strong>WARNING:</strong> These artifacts are believed to be cursed. Visitors are advised not to touch anything.</p>
-                    <p class="museum-quote">"I don't believe in ghosts, but I do believe in demons." - Ed Warren</p>
-                </div>
-            </div>
-            
-            <div class="museum-highlights">
-                <h2 class="subsection-title">NOTABLE ARTIFACTS</h2>
-                <div class="artifacts-grid">
-                    <div class="artifact-card">
-                        <div class="artifact-image annabelle-case"></div>
-                        <div class="artifact-info">
-                            <h3>ANNABELLE DOLL</h3>
-                            <p>The most infamous artifact in the collection. A Raggedy Ann doll possessed by a demonic entity.</p>
-                            <a href="annabelle.html" class="artifact-link">INSPECT ANNABELLE →</a>
-                        </div>
-                    </div>
-                    <div class="artifact-card">
-                        <div class="artifact-image shadow-box"></div>
-                        <div class="artifact-info">
-                            <h3>SHADOW BOX</h3>
-                            <p>Contains various cursed objects and religious artifacts used in investigations.</p>
-                        </div>
-                    </div>
-                    <div class="artifact-card">
-                        <div class="artifact-image cursed-painting"></div>
-                        <div class="artifact-info">
-                            <h3>CURSED PAINTINGS</h3>
-                            <p>Haunted artwork that has caused nightmares and paranormal activity.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="museum-experience">
-                <h2 class="subsection-title">VIRTUAL EXPERIENCE</h2>
-                <div class="experience-box">
-                    <p class="experience-text">First-Person 3D Exploration Coming Soon</p>
-                    <p class="experience-details">Walk through the museum halls, examine artifacts up close, and discover the dark history behind each cursed object.</p>
-                    <ul class="experience-features">
-                        <li>WASD Movement & Mouse Look</li>
-                        <li>Object Interaction</li>
-                        <li>Investigation Files</li>
-                        <li>Atmospheric Audio</li>
-                        <li>Paranormal Events</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <script src="../js/main.js"></script>
+      </div>
+    </div></section>
+    <section class="section"><div class="container">
+      <div class="section-head"><div><div class="kicker">Collection</div><h2>Interactive Artifacts</h2><p>Rotate, zoom, and inspect selected objects. Each links to its full history and film appearances.</p></div><a href="./artifacts.html">All artifacts →</a></div>
+      <div id="museumGrid" class="grid cards-3"></div>
+    </div></section>
+  </main>
+  <div data-shell-footer></div>
+  <script type="module">
+    import { mountShell, pageUrl, escapeHtml } from '../js/wiki-app.js';
+    import { WIKI } from '../js/wiki-data.js';
+    import { initViewers } from '../js/viewer3d.js';
+    mountShell({ active:'museum.html', inPages:true });
+    const items = WIKI.artifacts.filter(a=>a.has3d).concat(WIKI.artifacts.filter(a=>!a.has3d));
+    document.getElementById('museumGrid').innerHTML = items.map(a=>`<div class="card"><div class="card-body"><div class="tag">${a.has3d?'3D Artifact':'Case Object'}</div><h3>${escapeHtml(a.name)}</h3><p>${escapeHtml(a.summary)}</p>${a.has3d?`<div class="viewer" data-viewer3d="${escapeHtml(a.id)}" style="height:220px;margin:10px 0"></div>`:''}<a class="btn gold" href="${pageUrl('artifact',a.id)}">Read History</a></div></div>`).join('');
+    initViewers();
+  </script>
 </body>
 </html>

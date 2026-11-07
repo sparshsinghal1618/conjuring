@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Article | The Conjuring Archives</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/wiki.css" />
+</head>
+<body>
+  <div data-shell-header></div>
+  <main id="main" class="container">
+    <div id="articleRoot" class="article-layout">
+      <article class="article"><p class="meta">Loading archive entry…</p></article>
+      <aside class="toc panel"><h3>On this page</h3><div id="toc"></div></aside>
+    </div>
+  </main>
+  <div data-shell-footer></div>
+  <script type="module">
+    import { mountShell, getQuery, setDocTitle, escapeHtml, recordRecent, toggleBookmark, isBookmarked, pageUrl, WIKI } from '../js/wiki-app.js';
+    import { findById, movieById } from '../js/wiki-data.js';
+    import { initViewers } from '../js/viewer3d.js';
+    mountShell({ inPages: true });
+    const q = getQuery(); const type=(q.type||'movie').toLowerCase(); const id=q.id;
+    const lists = { movie:WIKI.movies, character:WIKI.characters, location:WIKI.locations, artifact:WIKI.artifacts };
+    const list = lists[type] || WIKI.movies;
+    const item = (type==='movie'?movieById(id):null) || findById(list,id);
+    const root = document.getElementById('articleRoot');
+    if(!item){ root.innerHTML = `<article class="article"><h1>Archive Entry Not Found</h1><p>The requested file does not exist in this archive.</p><p><a class="btn primary" href="./movies.html">Browse Movies</a> <a class="btn" href="../index.html">Home</a></p></article>`; }
+    else {
+      const title = item.title || item.name;
+      setDocTitle(title);
+      recordRecent({type,id:item.id,title,url:`../pages/article.html?type=${type}&id=${item.id}`});
+      const bms = isBookmarked(type,item.id);
+      const crumbs = `<div class="meta" style="margin-bottom:10px"><a href="../index.html">Home</a> / <a href="./${type}s.html">${escapeHtml(type.charAt(0).toUpperCase()+type.slice(1))}s</a> / ${escapeHtml(title)}</div>`;
+      const bmBtn = `<button class="btn" id="bmBtn" type="button">${bms?'★ Bookmarked':'☆ Bookmark'}</button>`;
+      let body='', info='', toc=[];
+      const sec=(id,label,html)=>{ toc.push({id,label}); return `<h2 id="${id}">${label}</h2>${html}`; };
+      const movieLinks = (ids=[])=>ids.map(mid=>{const m=movieById(mid)||findById(WIKI.movies,mid); return m?`<li><a href="${pageUrl('movie',m.id)}">${escapeHtml(m.title)} (${m.year})</a></li>`:`<li class="meta">${escapeHtml(mid)}</li>`;}).join('') || '<li class="meta">None listed.</li>';
+      const refLinks = (ids=[], t)=>ids.map(rid=>{const x=findById(lists[t]||[],rid); return x?`<li><a href="${pageUrl(t,x.id)}">${escapeHtml(x.name||x.title)}</a></li>`:`<li>${escapeHtml(rid)}</li>`;}).join('') || '<li class="meta">None listed.</li>';
+
+      if(type==='movie'){
+        info = `<dl class="infobox"><dt>Year</dt><dd>${item.year}</dd><dt>Series</dt><dd>${escapeHtml(item.series||'')}</dd><dt>Director</dt><dd>${escapeHtml(item.director||'See production')}</dd><dt>Release Order</dt><dd>${item.releaseOrder}</dd><dt>Chronological Order</dt><dd>${item.chronoOrder}</dd></dl>`;
+        body += `<p class="lead">${escapeHtml(item.overview)}</p>`;
+        body += sec('plot','Full Plot (Spoilers)', `<div class="notice"><strong>Spoiler warning:</strong> Major plot details follow, including beginning, middle, and ending.</div><p>${escapeHtml(item.plot).replace(/\n\n/g,'</p><p>').replace(/\n/g,'<br>')}</p>`);
+        body += sec('cast','Cast & Characters', `<ul class="list-links">${(item.cast||[]).map(c=>`<li>${escapeHtml(c)}</li>`).join('')}</ul>`);
+        body += sec('entities','Supernatural Entities', `<ul class="list-links">${(item.entities||[]).map(e=>`<li>${escapeHtml(e)}</li>`).join('')||'<li class="meta">None specified.</li>'}</ul>`);
+        body += sec('locations','Haunted Locations & Settings', `<ul class="list-links">${(item.locations||[]).map(l=>{const loc=findById(WIKI.locations,l); return loc?`<li><a href="${pageUrl('location',loc.id)}">${escapeHtml(loc.name)}</a> <span class="meta">— ${escapeHtml(loc.place)}</span></li>`:`<li>${escapeHtml(l)}</li>`;}).join('')}</ul>`);
+        body += sec('artifacts','Cursed Artifacts & Important Objects', `<ul class="list-links">${(item.artifacts||[]).map(a=>{const ar=findById(WIKI.artifacts,a); return ar?`<li><a href="${pageUrl('artifact',ar.id)}">${escapeHtml(ar.name)}</a></li>`:`<li>${escapeHtml(a)}</li>`;}).join('')}</ul>`);
+        body += sec('connections','Connections to Other Films', `<ul class="list-links">${(item.connections||[]).map(c=>`<li>${escapeHtml(c)}</li>`).join('')}</ul>`);
+        body += sec('chronology','Chronological Placement', `<p>${escapeHtml(item.chronology||'')}</p><p class="meta">This archive distinguishes fictional chronology from real-world release/history.</p>`);
+        body += sec('production','Production Information', `<p>${escapeHtml(item.production||'')}</p>`);
+        body += sec('behind','Behind-the-Scenes Facts', `<ul class="list-links">${(item.behind||[]).map(b=>`<li>${escapeHtml(b)}</li>`).join('')}</ul>`);
+        body += sec('trivia','Trivia', `<ul class="list-links">${(item.trivia||[]).map(t=>`<li>${escapeHtml(t)}</li>`).join('')}</ul>`);
+        body += sec('gallery','Gallery', `<p class="meta">${escapeHtml(item.galleryNote||'Official stills/posters are copyrighted; this archive uses descriptive summaries and original UI.')}</p>`);
+        body += sec('related','Related Articles', `<h3>Characters</h3><ul class="list-links">${WIKI.characters.filter(c=>c.movies?.includes(item.id)).map(c=>`<li><a href="${pageUrl('character',c.id)}">${escapeHtml(c.name)}</a></li>`).join('')||'<li class="meta">See character index.</li>'}</ul><h3>Timeline</h3><ul class="list-links">${WIKI.timeline.filter(t=>t.links?.includes(item.id)).map(t=>`<li>${escapeHtml(t.year)} — ${escapeHtml(t.title)}</li>`).join('')||'<li class="meta">See timeline.</li>'}</ul>`);
+      } else if(type==='character'){
+        info = `<dl class="infobox"><dt>Type</dt><dd>${escapeHtml(item.type||'')}</dd><dt>Appearances</dt><dd>${(item.movies||[]).length} film(s)</dd></dl>`;
+        body += `<p class="lead">${escapeHtml(item.bio)}</p>`;
+        body += sec('bio','Full Biography', `<p>${escapeHtml(item.bio)}</p><p><strong>Appearance:</strong> ${escapeHtml(item.appearance||'See film depictions.')}</p><p><strong>Personality:</strong> ${(item.traits||[]).map(escapeHtml).join(', ')||'—'}</p>`);
+        body += sec('powers','Powers & Abilities', `<ul class="list-links">${(item.abilities||[]).length?(item.abilities.map(a=>`<li>${escapeHtml(a)}</li>`).join('')):'<li class="meta">No supernatural abilities listed / not applicable.</li>'}</ul>`);
+        body += sec('movies','Movie Appearances', `<ul class="list-links">${movieLinks(item.movies||[])}</ul>`);
+        body += sec('relations','Relationships', `<ul class="list-links">${(item.relations||[]).map(r=>`<li>${escapeHtml(r)}</li>`).join('')||'<li class="meta">None listed.</li>'}</ul>`);
+        body += sec('fate','Fate & Status', `<p>${escapeHtml(item.fate||'See related films.')}</p>`);
+        body += sec('related','Related Articles', `<h3>Related Movies</h3><ul class="list-links">${movieLinks(item.movies||[])}</ul><h3>Connected Characters</h3><ul class="list-links">${WIKI.characters.filter(o=>o.id!==item.id && o.movies?.some(mid=>(item.movies||[]).includes(mid))).slice(0,10).map(c=>`<li><a href="${pageUrl('character',c.id)}">${escapeHtml(c.name)}</a></li>`).join('')||'<li class="meta">None listed.</li>'}</ul>`);
+      } else if(type==='location'){
+        info = `<dl class="infobox"><dt>Place</dt><dd>${escapeHtml(item.place||'')}</dd></dl>`;
+        body += `<p class="lead">${escapeHtml(item.summary)}</p>`;
+        body += sec('history','History & Description', `<p>${escapeHtml(item.details||item.summary)}</p>`);
+        body += sec('events','Paranormal Events in the Story', `<p>${escapeHtml(item.summary)} ${escapeHtml(item.details||'')}</p><p class="meta">Events are described as depicted in the films (fictionalized accounts).</p>`);
+        body += sec('movies','Movie Appearances', `<ul class="list-links">${movieLinks(item.movies||[])}</ul>`);
+        body += sec('related','Related Articles', `<h3>Investigations / Films</h3><ul class="list-links">${movieLinks(item.movies||[])}</ul><h3>Connected Characters</h3><ul class="list-links">${WIKI.characters.filter(c=>c.movies?.some(mid=>(item.movies||[]).includes(mid))).slice(0,12).map(c=>`<li><a href="${pageUrl('character',c.id)}">${escapeHtml(c.name)}</a></li>`).join('')||'<li class="meta">See character index.</li>'}</ul>`);
+      } else if(type==='artifact'){
+        info = `<dl class="infobox"><dt>Type</dt><dd>Cursed / Case Object</dd><dt>3D Viewer</dt><dd>${item.has3d?'Available':'Descriptive entry'}</dd></dl>`;
+        body += `<p class="lead">${escapeHtml(item.summary)}</p>`;
+        if(item.has3d) body += sec('viewer','Interactive 3D Viewer', `<div class="notice">Rotate by dragging and zoom with the mouse wheel (or use controls). This is a real-time WebGL 3D model (procedural/stylized). The viewer structure supports swapping in licensed GLB/GLTF assets.</div><div class="viewer" data-viewer3d="${escapeHtml(item.id)}"></div>`);
+        body += sec('history','History', `<p>${escapeHtml(item.details||item.summary)}</p>`);
+        body += sec('movies','Movie Appearances', `<ul class="list-links">${movieLinks(item.movies||[])}</ul>`);
+        body += sec('related','Related Articles', `<h3>Locations</h3><ul class="list-links"><li><a href="${pageUrl('location','warren-occult-museum')}">Warren Occult Museum / Artifact Room</a></li></ul><h3>Films</h3><ul class="list-links">${movieLinks(item.movies||[])}</ul>`);
+      }
+
+      root.innerHTML = `
+        <article class="article">
+          ${crumbs}
+          <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between"><h1 style="margin:0">${escapeHtml(title)}</h1><div style="display:flex;gap:8px;flex-wrap:wrap">${bmBtn}<a class="btn" href="../index.html" id="homeLink">Home</a></div></div>
+          ${info}
+          ${body}
+          <p class="meta" style="margin-top:18px">Sources & references: This fan archive synthesizes publicly available film information (official synopses/credits) and presents in-universe summaries with spoiler warnings. It is unofficial and not affiliated with rights holders.</p>
+        </article>
+        <aside class="toc panel"><h3>Table of Contents</h3><ul id="toc"></ul><div class="notice" style="margin-top:12px">Use global search, breadcrumbs, and related links to navigate the archive.</div></aside>`;
+      document.getElementById('toc').innerHTML = toc.map(t=>`<li><a href="#${t.id}">${escapeHtml(t.label)}</a></li>`).join('');
+      document.getElementById('bmBtn').addEventListener('click', (e)=>{ const on=toggleBookmark({type,id:item.id,title}); e.target.textContent = on?'★ Bookmarked':'☆ Bookmark'; });
+      initViewers();
+    }
+  </script>
+</body>
+</html>

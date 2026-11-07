@@ -2,103 +2,136 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>THE WARREN FILES — The Conjuring Universe 3D Experience</title>
-  <meta name="description" content="An immersive 3D horror experience exploring The Conjuring Universe." />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>THE CONJURING ARCHIVES — The Complete Supernatural Encyclopedia</title>
+  <meta name="description" content="A premium fan encyclopedia of The Conjuring Universe: every movie, character, cursed object, haunted location, and investigation." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Text:wght@400;600&display=swap" rel="stylesheet">
-  <style>
-    :root { --gold: #d4af37; --blood: #6b0000; --bg: #000; }
-    * { box-sizing: border-box; }
-    html, body { margin: 0; height: 100%; background: var(--bg); color: #e8dcc8; font-family: 'Crimson Text', serif; overflow: hidden; touch-action: manipulation; }
-    #app { position: fixed; inset: 0; }
-    canvas { display: block; width: 100%; height: 100%; }
-    .overlay { position: fixed; inset: 0; pointer-events: none; z-index: 10; }
-    .overlay > * { pointer-events: auto; }
-    .center { display: flex; align-items: center; justify-content: center; text-align: center; }
-    .title { font-family: 'Cinzel', serif; letter-spacing: 0.18em; color: var(--gold); text-shadow: 0 0 24px rgba(212,175,55,.25); }
-    .btn {
-      font-family: 'Cinzel', serif; letter-spacing: .1em; color: var(--gold); background: rgba(0,0,0,.62);
-      border: 1px solid rgba(212,175,55,.45); padding: .85rem 1.1rem; cursor: pointer; text-transform: uppercase;
-      backdrop-filter: blur(4px); min-height: 44px; font-size: .82rem;
-    }
-    .btn:hover, .btn:active { border-color: var(--gold); box-shadow: 0 0 18px rgba(212,175,55,.18); }
-    .btn.secondary { color: #d8c9b0; border-color: rgba(216,201,176,.35); }
-    #gate { position: fixed; inset: 0; background: radial-gradient(ellipse at center, #120606 0%, #000 70%); z-index: 30; padding: 16px; overflow-y: auto; }
-    #gate .panel { width: min(760px, 100%); margin: auto; border: 1px solid rgba(212,175,55,.22); padding: clamp(16px, 4vw, 30px); background: linear-gradient(180deg, rgba(30,8,8,.55), rgba(0,0,0,.92)); box-shadow: 0 0 60px rgba(80,0,0,.18); }
-    #gate h1 { margin: 0 0 .35rem; font-size: clamp(1.45rem, 5.5vw, 2.5rem); }
-    #gate p { margin: .45rem 0; color: #cbb89a; line-height: 1.55; font-size: clamp(.98rem, 2.6vw, 1.08rem); }
-    .row { display: flex; flex-wrap: wrap; gap: .65rem; margin-top: 1rem; justify-content: center; }
-    .row .btn { flex: 1 1 180px; }
-    .warn { color: #ff9a9a; font-size: .92rem; margin-top: .65rem; }
-    #hud { position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; display: none; gap: 8px; padding: 10px 10px calc(10px + env(safe-area-inset-bottom)); background: linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,.72)); align-items: center; justify-content: center; flex-wrap: wrap; }
-    #hud .btn { padding: .55rem .7rem; font-size: .68rem; flex: 0 1 auto; min-height: 40px; }
-    #hudHint { width: 100%; text-align: center; font-family: Cinzel, serif; font-size: .62rem; color: rgba(212,175,55,.75); letter-spacing: .08em; margin-top: 2px; }
-    #message { position: fixed; inset: 0; z-index: 25; display: none; background: rgba(0,0,0,.9); padding: 16px; }
-    #message .inner { width: min(900px, 100%); padding: clamp(14px, 3vw, 26px); border: 1px solid rgba(212,175,55,.18); background: rgba(10,4,4,.75); }
-    #message h2 { font-family: 'Cinzel', serif; color: var(--gold); font-size: clamp(1.1rem, 4.5vw, 2.2rem); margin: 0 0 .65rem; letter-spacing: .12em; }
-    #crosshair { position: fixed; left: 50%; top: 50%; width: 12px; height: 12px; margin: -6px 0 0 -6px; border: 1px solid rgba(212,175,55,.6); border-radius: 50%; z-index: 15; display: none; opacity: .75; box-shadow: 0 0 8px rgba(212,175,55,.15); }
-    #crosshair::after { content:''; position:absolute; left:50%; top:50%; width:2px; height:2px; margin:-1px; background: rgba(212,175,55,.8); border-radius:50%; }
-    #vignette { position: fixed; inset: 0; pointer-events: none; z-index: 12; background: radial-gradient(ellipse at center, rgba(0,0,0,0) 42%, rgba(0,0,0,.28) 100%); }
-    #flash { position: fixed; inset: 0; pointer-events: none; z-index: 26; background: #fff; opacity: 0; }
-    #skipScare { position: fixed; top: 12px; right: 12px; z-index: 27; display: none; }
-    #skipScare .btn { font-size: .68rem; padding: .5rem .65rem; min-height: 38px; }
-    #topbar { position: fixed; top: 0; left: 0; right: 0; z-index: 18; display: none; padding: 10px 14px calc(10px); background: linear-gradient(180deg, rgba(0,0,0,.72), rgba(0,0,0,0)); align-items: center; justify-content: space-between; gap: 10px; }
-    #topbar .brand { font-family: Cinzel, serif; color: var(--gold); font-size: .78rem; letter-spacing: .14em; }
-    #topbar .sub { font-size: .72rem; color: #cbb89a; }
-    @media (max-width: 520px) { .row .btn { flex-basis: 100%; } #hud .btn { font-size: .62rem; padding: .5rem .55rem; } }
-    @media (prefers-reduced-motion: reduce) { .btn { transition: none; } }
-  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/wiki.css" />
 </head>
 <body>
-  <div id="app"></div>
-  <div id="vignette"></div>
-  <div id="flash"></div>
-  <div id="crosshair"></div>
+  <!-- Auto Annabelle jump scare (first homepage visit). Visual runs automatically; audio follows browser permissions. -->
+  <div id="scareOverlay" class="active" aria-hidden="false">
+    <canvas id="scareCanvas" aria-label="Annabelle introduction"></canvas>
+    <div id="scareFlash"></div>
+    <div id="scareText">SHE WAS WAITING FOR YOU.</div>
+    <div id="scareSkip"><button class="btn" id="scareSkipBtn" type="button">Skip Intro</button></div>
+  </div>
 
-  <div id="gate" class="overlay center">
-    <div class="panel">
-      <h1 class="title">THE WARREN FILES</h1>
-      <p>An interactive 3D horror experience set in The Conjuring Universe. Best experienced with headphones. Desktop recommended for first-person exploration.</p>
-      <p class="warn">Content warning: sudden visual/audio horror effects. You can skip the intro jump scare or disable intense effects.</p>
-      <div class="row">
-        <button class="btn" id="enterBtn">Enter Experience</button>
-        <button class="btn secondary" id="skipIntroBtn">Skip Intro</button>
-        <button class="btn secondary" id="safeBtn">Low-Intensity Mode</button>
-      </div>
-      <div class="row">
-        <label style="font-family:Cinzel,serif;font-size:.75rem;letter-spacing:.08em;color:#cbb89a;display:flex;gap:.5rem;align-items:center;">
-          <input type="checkbox" id="reducedFx"> Reduce motion & flashes
-        </label>
-      </div>
+  <div data-shell-header></div>
+
+  <main id="main">
+    <div id="homeContent" hidden>
+      <section class="hero">
+        <div class="container hero-grid">
+          <div>
+            <div class="kicker">A Premium Horror Encyclopedia</div>
+            <h1>THE CONJURING ARCHIVES</h1>
+            <p class="lead" style="font-family:Cinzel,serif;color:#e8dcc8;letter-spacing:.06em;margin:.2rem 0 .8rem;font-size:clamp(1rem,2.4vw,1.35rem);">THE COMPLETE SUPERNATURAL ENCYCLOPEDIA</p>
+            <p class="lead">A universe of haunted places, cursed objects, investigations and things that should never have been disturbed. Explore every film, character, entity, artifact, and case file—carefully documented, deeply interconnected, and presented with cinematic reverence.</p>
+            <div class="hero-actions">
+              <a class="btn primary" href="./pages/movies.html">Explore the Universe</a>
+              <a class="btn gold" href="./pages/museum.html">Discover the Warren Files</a>
+              <button class="btn" id="replayScareBtn" type="button">Replay Intro</button>
+            </div>
+          </div>
+          <aside class="panel">
+            <h3>Archive Controls</h3>
+            <p class="meta">The Annabelle introduction plays automatically on your first visit. Audio depends on browser permissions.</p>
+            <div class="hero-actions" style="margin-top:10px">
+              <button class="btn" id="enableSoundBtn" type="button">Enable Sound</button>
+              <button class="btn" id="toggleIntenseBtn" type="button">Disable Intense Effects</button>
+            </div>
+            <div class="notice" style="margin-top:12px"><strong>Content note:</strong> Sudden visual/audio horror effects. Use Skip Intro, Replay, or Disable Intense Effects at any time. Preferences are remembered on this device.</div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="section"><div class="container">
+        <div class="section-head"><div><div class="kicker">1. Featured</div><h2>Featured Movie</h2></div><a href="./pages/movies.html">View all movies →</a></div>
+        <div class="banner grid" style="grid-template-columns:1.2fr .8fr;gap:14px;align-items:start">
+          <div>
+            <div class="tag kicker">Case File</div>
+            <h3 style="font-size:1.5rem;margin:.2rem 0">The Conjuring (2013)</h3>
+            <p class="meta">1971 · Harrisville, Rhode Island · Directed by James Wan</p>
+            <p>When the Perron family experiences terrifying disturbances in a secluded farmhouse, Ed and Lorraine Warren uncover a dark history and confront a malevolent force. The film that opened the case files of The Conjuring Universe.</p>
+            <div class="hero-actions"><a class="btn primary" href="./pages/article.html?type=movie&id=the-conjuring">Read Full Dossier</a><a class="btn" href="./pages/timeline.html">View Timeline</a></div>
+          </div>
+          <div class="panel"><h3>Featured Connections</h3><ul class="list-links"><li><a href="./pages/article.html?type=character&id=ed-warren">Ed Warren</a> · <a href="./pages/article.html?type=character&id=lorraine-warren">Lorraine Warren</a></li><li><a href="./pages/article.html?type=character&id=bathsheba-sherman">Bathsheba Sherman</a></li><li><a href="./pages/article.html?type=location&id=perron-farmhouse">Perron Farmhouse</a></li><li><a href="./pages/article.html?type=artifact&id=annabelle-doll">Annabelle Doll</a></li></ul><p class="notice">Spoiler warnings appear before major plot details in every article.</p></div>
+        </div>
+      </div></section>
+
+      <section class="section"><div class="container">
+        <div class="section-head"><div><div class="kicker">2. Universe</div><h2>Explore the Complete Movie Universe</h2><p>All nine theatrical Conjuring Universe films, interconnected by cases, entities, and artifacts.</p></div></div>
+        <div class="grid cards-3" id="homeMovies"></div>
+      </div></section>
+
+      <section class="section"><div class="container">
+        <div class="grid" style="grid-template-columns:1fr 1fr;gap:14px">
+          <div class="panel"><div class="kicker">3. Character of the Month</div><h2 style="font-size:1.4rem">Lorraine Warren</h2><p>Clairvoyant, investigator, and the spiritual heart of the Warrens’ cases. Her visions reveal hidden truths—from the Perron farmhouse to the shadow of Valak.</p><p class="meta">Connected to: The Conjuring series, Annabelle Comes Home, Last Rites</p><a class="btn gold" href="./pages/article.html?type=character&id=lorraine-warren">Open Character File</a></div>
+          <div class="panel"><div class="kicker">4. Supernatural Entities</div><h2 style="font-size:1.4rem">Forces in the Dark</h2><p>Meet the entities that haunt the universe: <a href="./pages/article.html?type=character&id=valak">Valak</a>, <a href="./pages/article.html?type=character&id=annabelle">Annabelle</a> (demonic conduit), <a href="./pages/article.html?type=character&id=bathsheba-sherman">Bathsheba</a>, <a href="./pages/article.html?type=character&id=malthus">Malthus</a>, and more.</p><a class="btn" href="./pages/characters.html">Browse Entities & Characters</a></div>
+        </div>
+      </div></section>
+
+      <section class="section"><div class="container">
+        <div class="section-head"><div><div class="kicker">5–6. The Museum</div><h2>The Occult Museum & Cursed Artifacts</h2><p>Objects collected, contained, and never to be touched. Explore the Warren artifact room and inspect key items in 3D.</p></div><a href="./pages/museum.html">Enter museum →</a></div>
+        <div class="grid cards-4" id="homeArtifacts"></div>
+      </div></section>
+
+      <section class="section"><div class="container">
+        <div class="section-head"><div><div class="kicker">7. Locations</div><h2>Haunted Locations</h2><p>From the Perron farmhouse to the Abbey of St. Carta—every place where the veil grew thin.</p></div><a href="./pages/locations.html">All locations →</a></div>
+        <div class="grid cards-3" id="homeLocations"></div>
+      </div></section>
+
+      <section class="section"><div class="container">
+        <div class="section-head"><div><div class="kicker">8. Timeline</div><h2>Complete Chronological Timeline</h2><p>Follow the universe in story order and release order, with connections across cases. Fictional chronology is labeled.</p></div><a href="./pages/timeline.html">Open interactive timeline →</a></div>
+        <div class="panel"><ol class="list-links" id="homeTimeline"></ol></div>
+      </div></section>
+
+      <section class="section"><div class="container">
+        <div class="grid" style="grid-template-columns:1fr 1fr;gap:14px">
+          <div class="panel"><div class="kicker">9. Latest Discoveries</div><h2 style="font-size:1.3rem">Newly Cross-Referenced Files</h2><ul class="list-links">
+            <li><a href="./pages/article.html?type=character&id=valak">Valak dossier updated</a> — Nun films, Enfield, and timeline links.</li>
+            <li><a href="./pages/article.html?type=artifact&id=annabelle-doll">Annabelle artifact file</a> — 3D viewer and case appearances.</li>
+            <li><a href="./pages/timeline.html">Timeline</a> — chronological vs. release order views.</li>
+            <li><a href="./pages/museum.html">Warren Occult Museum</a> — interactive artifact collection.</li>
+          </ul></div>
+          <div class="panel"><div class="kicker">10. Random Investigation File</div><h2 style="font-size:1.3rem">Open a Random Case</h2><p>Not sure where to begin? Let the archives choose a movie, character, artifact, or location.</p><button class="btn primary" id="homeRandom" type="button">Open Random Investigation File</button></div>
+        </div>
+      </div></section>
     </div>
-  </div>
+  </main>
 
-  <div id="message" class="overlay center">
-    <div class="inner">
-      <h2 id="messageTitle"></h2>
-      <p id="messageBody" style="color:#d8c9b0;font-size:1.15rem;line-height:1.7;"></p>
-      <div class="row"><button class="btn" id="messageClose">Continue</button></div>
-    </div>
-  </div>
+  <div data-shell-footer></div>
 
-  <div id="skipScare" class="overlay"><button class="btn secondary" id="skipScareBtn">Skip Intro</button></div>
-
-  <div id="topbar" class="overlay">
-    <div><div class="brand">THE WARREN FILES</div><div class="sub" id="sceneLabel">3D Experience</div></div>
-  </div>
-
-  <div id="hud" class="overlay">
-    <button class="btn" id="hudMuseum">Museum</button>
-    <button class="btn" id="hudCharacters">Characters</button>
-    <button class="btn" id="hudMovies">Movie Worlds</button>
-    <button class="btn" id="hudInspect" style="display:none;border-color:rgba(255,180,120,.6);color:#ffd7b0;">Inspect</button>
-    <button class="btn" id="hudReplay">Replay Intro</button>
-    <button class="btn" id="hudSettings">Settings</button>
-    <div id="hudHint">Desktop: click to look, WASD move, E inspect. Mobile: use HUD buttons.</div>
-  </div>
-
-  <script type="module" src="./js/experience.js"></script>
+  <script type="module">
+    import { mountShell, prefs } from './js/wiki-app.js';
+    import { initHomeScare } from './js/home-scare.js';
+    import { WIKI } from './js/wiki-data.js';
+    import { initViewers } from './js/viewer3d.js';
+    mountShell({ active: 'index.html', inPages: false });
+    initHomeScare();
+    // Render homepage sections (content is present; overlay sits on top for first visit)
+    const movies = [...WIKI.movies].sort((a,b)=>a.releaseOrder-b.releaseOrder);
+    document.getElementById('homeMovies').innerHTML = movies.map(m=>`
+      <a class="card" href="./pages/article.html?type=movie&id=${m.id}" style="text-decoration:none;color:inherit">
+        <div class="thumb">${m.year} · ${m.series}</div>
+        <div class="card-body"><div class="tag">Movie</div><h3>${m.title}</h3><p>${m.overview.slice(0,120)}…</p></div>
+      </a>`).join('');
+    document.getElementById('homeArtifacts').innerHTML = WIKI.artifacts.slice(0,4).map(a=>`
+      <a class="card" href="./pages/article.html?type=artifact&id=${a.id}" style="text-decoration:none;color:inherit">
+        <div class="thumb">${a.has3d?'3D ARTIFACT':'CASE OBJECT'}</div>
+        <div class="card-body"><div class="tag">Artifact</div><h3>${a.name}</h3><p>${a.summary.slice(0,110)}…</p></div>
+      </a>`).join('');
+    document.getElementById('homeLocations').innerHTML = WIKI.locations.slice(0,3).map(l=>`
+      <a class="card" href="./pages/article.html?type=location&id=${l.id}" style="text-decoration:none;color:inherit">
+        <div class="thumb">LOCATION</div>
+        <div class="card-body"><div class="tag">${l.place}</div><h3>${l.name}</h3><p>${l.summary}</p></div>
+      </a>`).join('');
+    document.getElementById('homeTimeline').innerHTML = WIKI.timeline.slice(0,6).map(t=>`<li><strong>${t.year}</strong> — <a href="./pages/timeline.html">${t.title}</a> <span class="meta">(${t.type})</span></li>`).join('');
+    document.getElementById('homeRandom').addEventListener('click', ()=>document.getElementById('randomBtn')?.click());
+    initViewers();
+  </script>
 </body>
 </html>
