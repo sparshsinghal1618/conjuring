@@ -1,1 +1,27 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>Investigations | The Conjuring Archives</title><meta http-equiv="refresh" content="0; url=./movies.html"/><link rel="stylesheet" href="../css/wiki.css"/></head><body><div class="container section"><div class="panel"><h1>Investigations</h1><p>Redirecting to case files (movies)… <a href="./movies.html">All Cases</a> · <a href="./characters.html?type=Investigator">Investigators</a></p></div></div></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Investigations | The Conjuring Archives</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/wiki.css" />
+</head>
+<body>
+  <div data-shell-header></div>
+  <main id="main" class="container section">
+    <div class="section-head"><div><div class="kicker">Case File Archive</div><h1>Investigations</h1><p>Case files and investigations as framed in The Conjuring Universe films, with historical-context separation and citations where available.</p></div></div>
+    <div class="notice">Editorial note: Film depictions are dramatized. Entries distinguish in-universe/film-framed accounts from independently documented historical context and cite reliable references.</div>
+    <div id="list" class="grid cards-3"></div>
+  </main>
+  <div data-shell-footer></div>
+  <script type="module">
+    import { mountShell, pageUrl, escapeHtml } from '../js/wiki-app.js';
+    import { WIKI } from '../js/wiki-data.js';
+    mountShell({ active:'investigations.html', inPages:true });
+    const list=document.getElementById('list');
+    const arr=[...(WIKI.investigations||[])].sort((a,b)=>String(a.year).localeCompare(String(b.year)));
+    list.innerHTML = arr.map(i=>`<a class="card" href="${pageUrl('investigation',i.id)}" style="text-decoration:none;color:inherit"><div class="thumb">${escapeHtml(i.year)} · Case File</div><div class="card-body"><div class="tag">Investigation</div><h3>${escapeHtml(i.name)}</h3><p>${escapeHtml((i.background||'').slice(0,160))}…</p><p class="meta">Films: ${(i.movies||[]).length} · References: ${(i.references||[]).length}</p></div></a>`).join('') || '<div class="panel"><p class="meta">No investigation entries found.</p></div>';
+  </script>
+</body>
+</html>

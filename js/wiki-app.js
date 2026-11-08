@@ -1,4 +1,4 @@
-import { WIKI, searchAll, movieById, findById } from './wiki-data.js';
+import { WIKI, searchAll, movieById, findById, investigationById } from './wiki-data.js';
 
 const PREF = {
   scareSeen: 'ca_scare_seen_v1',
@@ -20,12 +20,13 @@ export function sectionUrl(name){ return `./${name}.html`; }
 function linkForRef(ref){
   // ref can be id or object; try resolve
   const byMovie = movieById(ref); if(byMovie) return pageUrl('movie', byMovie.id);
-  for (const [t,list] of [['character',WIKI.characters],['location',WIKI.locations],['artifact',WIKI.artifacts]]){ const f=findById(list,ref); if(f) return pageUrl(t,f.id); }
+  const inv = investigationById(ref); if(inv) return pageUrl('investigation', inv.id);
+  for (const [t,list] of [['character',WIKI.characters],['location',WIKI.locations],['artifact',WIKI.artifacts],['investigation',WIKI.investigations||[]]]){ const f=findById(list,ref); if(f) return pageUrl(t,f.id); }
   return null;
 }
 export function refLink(ref, label){
   const href = linkForRef(ref);
-  const text = label || (movieById(ref)?.title) || findById(WIKI.characters,ref)?.name || findById(WIKI.locations,ref)?.name || findById(WIKI.artifacts,ref)?.name || ref;
+  const text = label || (movieById(ref)?.title) || investigationById(ref)?.name || findById(WIKI.characters,ref)?.name || findById(WIKI.locations,ref)?.name || findById(WIKI.artifacts,ref)?.name || ref;
   return href ? `<a href="${href}">${escapeHtml(text)}</a>` : `<span>${escapeHtml(text)}</span>`;
 }
 
@@ -50,6 +51,7 @@ function navLinks(root='.', inPages=false){
   <a href="${h}">Home</a>
   <a href="${p}/movies.html">Movies</a>
   <a href="${p}/characters.html">Characters</a>
+  <a href="${p}/investigations.html">Investigations</a>
   <a href="${p}/locations.html">Locations</a>
   <a href="${p}/artifacts.html">Artifacts</a>
   <a href="${p}/museum.html">Occult Museum</a>
@@ -117,7 +119,7 @@ function initRandom(inPages){
   const btn = document.getElementById('randomBtn'); if(!btn) return;
   const base = inPages ? './article.html' : './pages/article.html';
   btn.addEventListener('click', ()=>{
-    const pools = [['movie',WIKI.movies],['character',WIKI.characters],['location',WIKI.locations],['artifact',WIKI.artifacts]];
+    const pools = [['movie',WIKI.movies],['character',WIKI.characters],['location',WIKI.locations],['artifact',WIKI.artifacts],['investigation',WIKI.investigations||[]]].filter(([,l])=>l.length);
     const [type,list] = pools[Math.floor(Math.random()*pools.length)];
     const item = list[Math.floor(Math.random()*list.length)];
     location.href = `${base}?type=${type}&id=${encodeURIComponent(item.id)}`;
@@ -159,6 +161,6 @@ export function relatedForCharacter(c){
 export function resolveRef(idOrName){
   if(!idOrName) return null;
   const id=String(idOrName);
-  return movieById(id)||findById(WIKI.characters,id)||findById(WIKI.locations,id)||findById(WIKI.artifacts,id)||null;
+  return movieById(id)||findById(WIKI.characters,id)||findById(WIKI.locations,id)||findById(WIKI.artifacts,id)||investigationById(id)||null;
 }
 export { WIKI };

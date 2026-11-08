@@ -11,7 +11,8 @@ export const WIKI = {
       production:'A New Line Cinema/Warner Bros. release directed by James Wan. The film helped launch The Conjuring Universe and is known for its atmospheric, suspense-driven approach to supernatural horror.',
       behind:['Directed by James Wan, emphasizing practical tension and sound design.','Inspired in broad strokes by accounts associated with the Perron family case and Ed and Lorraine Warren.','Framed as a case file, a structure echoed across the series.'],
       trivia:['The film’s success led to multiple spin-offs and sequels within a shared universe.','The Annabelle doll appears as part of the Warrens’ world, foreshadowing its own films.'],
-      galleryNote:'Archival stills, posters, and production images are subject to copyright; this fan archive uses descriptive summaries and original UI elements.' },
+      galleryNote:'Archival stills, posters, and production images are subject to copyright; this fan archive uses descriptive summaries and original UI elements.',
+      references:[{label:'The Conjuring (2013) – Wikipedia', url:'https://en.wikipedia.org/wiki/The_Conjuring', note:'Film details, plot, cast, and production.'},{label:'The Conjuring – IMDb', url:'https://www.imdb.com/title/tt1457767/', note:'Credits and release information.'}] },
     { id:'annabelle', title:'Annabelle', year:2014, series:'Annabelle', releaseOrder:2, chronoOrder:3, director:'John R. Leonetti',
       overview:'Annabelle (2014) explores the terror surrounding the infamous doll before it reaches the Warrens’ custody. A young couple is targeted by violence and a sinister presence that latches onto the doll as a conduit.',
       plot:`Spoiler warning.\n\nBeginning: Mia and John Form are preparing for their child’s arrival. John gives Mia a vintage doll for her collection. Their lives are shattered when members of a violent cult attack their home, leaving behind a lingering evil tied to the doll.\n\nMiddle: The Forms attempt to rebuild, but disturbing phenomena follow them. The presence grows bolder, threatening Mia and her baby. Seeking answers, Mia turns to those who understand the spiritual danger.\n\nEnding: The entity reveals its predatory intent. A selfless act disrupts its plan, sparing Mia’s child. The doll passes onward—its path eventually intersecting with the Warrens’ artifact room, where it is secured as a dangerous object.`,
@@ -22,7 +23,8 @@ export const WIKI = {
       production:'A spin-off of The Conjuring, expanding the universe by focusing on a single cursed artifact’s origin story.',
       behind:['Directed by John R. Leonetti.','Builds the “cursed object as conduit” theme central to the franchise.'],
       trivia:['The doll’s design in the films differs from the real-world case inspiration, heightening its cinematic menace.'],
-      galleryNote:'Descriptive archive entry; official imagery is copyrighted.' },
+      galleryNote:'Descriptive archive entry; official imagery is copyrighted.',
+      references:[{label:'Annabelle (2014) – Wikipedia', url:'https://en.wikipedia.org/wiki/Annabelle_(film)', note:'Film details and franchise context.'},{label:'Annabelle – IMDb', url:'https://www.imdb.com/title/tt3322940/', note:'Credits and release information.'}] },
     { id:'the-conjuring-2', title:'The Conjuring 2', year:2016, series:'The Conjuring', releaseOrder:3, chronoOrder:5, director:'James Wan',
       overview:'The Conjuring 2 (2016) sends Ed and Lorraine Warren to Enfield, London, where the Hodgson family reports violent poltergeist activity. Lorraine is haunted by visions of a demonic nun—Valak—whose influence reaches far beyond one house.',
       plot:`Spoiler warning.\n\nBeginning: In 1977 Enfield, Peggy Hodgson struggles to protect her children as frightening disturbances erupt. Janet Hodgson becomes the apparent focus of the activity, drawing media attention and skepticism.\n\nMiddle: The Church asks the Warrens to assess the case. While Ed investigates the phenomena, Lorraine battles terrifying visions that foreshadow Ed’s danger and reveal the presence of Valak. The haunting grows more aggressive, blurring lines between spirit activity and demonic manipulation.\n\nEnding: The Warrens realize the true threat is not merely a ghost but a demon using the haunting as cover. Lorraine confronts Valak, using knowledge gained through her visions to challenge the entity. The Hodgson family is spared, but Valak’s shadow remains part of the universe’s larger conflict.`,
@@ -33,7 +35,8 @@ export const WIKI = {
       production:'Sequel to The Conjuring, expanding the universe’s mythology by introducing Valak as a recurring demonic entity.',
       behind:['Directed by James Wan.','Inspired in broad strokes by accounts of the Enfield poltergeist.','Known for its blend of family drama, investigation, and supernatural set pieces.'],
       trivia:['Valak’s nun form became one of the franchise’s most recognizable images.'],
-      galleryNote:'Descriptive archive entry; official imagery is copyrighted.' },
+      galleryNote:'Descriptive archive entry; official imagery is copyrighted.',
+      references:[{label:'The Conjuring 2 – Wikipedia', url:'https://en.wikipedia.org/wiki/The_Conjuring_2', note:'Film details and case inspiration.'},{label:'Enfield poltergeist – Wikipedia', url:'https://en.wikipedia.org/wiki/Enfield_poltergeist', note:'Historical context (separate from film dramatization).'}] },
     { id:'annabelle-creation', title:'Annabelle: Creation', year:2017, series:'Annabelle', releaseOrder:4, chronoOrder:2, director:'David F. Sandberg',
       overview:'Annabelle: Creation (2017) is an origin story that traces how grief and a desperate hope open the door to evil, turning a doll into a vessel for a malevolent presence.',
       plot:`Spoiler warning.\n\nBeginning: Years after the tragic loss of their daughter Bee, dollmaker Samuel Mullins and his wife Esther welcome Sister Charlotte and several orphaned girls into their home.\n\nMiddle: Curious and vulnerable, Janice discovers a locked room and the doll within. What begins as subtle unease becomes violent haunting as a demonic presence targets the household, exploiting fear and sorrow.\n\nEnding: The evil attached to the doll escapes containment in devastating ways. The aftermath links directly to the chain of events that leads into Annabelle (2014), establishing the doll’s dark trajectory through the universe.`,
@@ -44,7 +47,8 @@ export const WIKI = {
       production:'A period-set prequel that reframed the Annabelle subseries with a gothic, tragedy-driven origin.',
       behind:['Directed by David F. Sandberg.','Emphasizes atmosphere, grief, and the corruption of innocence.'],
       trivia:['Often regarded by fans as a strong character-driven entry in the Annabelle films.'],
-      galleryNote:'Descriptive archive entry; official imagery is copyrighted.' },
+      galleryNote:'Descriptive archive entry; official imagery is copyrighted.',
+      references:[{label:'Annabelle: Creation – Wikipedia', url:'https://en.wikipedia.org/wiki/Annabelle:_Creation', note:'Film details and plot context.'},{label:'Annabelle: Creation – IMDb', url:'https://www.imdb.com/title/tt5140878/', note:'Credits and release information.'}] },
     { id:'the-nun', title:'The Nun', year:2018, series:'The Nun', releaseOrder:5, chronoOrder:1, director:'Corin Hardy',
       overview:'The Nun (2018) explores the early terror of Valak at a remote Romanian abbey. The Vatican sends Father Burke and novitiate Sister Irene to investigate a death that hints at an unholy presence.',
       plot:`Spoiler warning.\n\nBeginning: In 1952, a shocking event at the Abbey of St. Carta prompts the Church to act. Father Burke, a priest with experience in the miraculous and the dark, is paired with Sister Irene, a young novitiate with unusual sensitivity.\n\nMiddle: At the abbey, they encounter secrecy, fear, and manifestations of a demonic force. They learn of a rift that allowed Valak to take hold and of the abbey’s role in holding the evil at bay.\n\nEnding: Faith and sacrifice become weapons in a desperate attempt to seal the demon’s influence. The confrontation appears to push Valak back, but the film’s connective tissue makes clear that the demon’s menace endures—echoing into later events in the Conjuring timeline.`,
@@ -55,7 +59,8 @@ export const WIKI = {
       production:'A gothic horror spin-off centered on Valak, expanding the universe’s demonic mythology.',
       behind:['Directed by Corin Hardy.','Uses cloistered, medieval atmosphere to frame Valak’s menace.'],
       trivia:['The nun imagery connects visually and thematically to Lorraine’s visions in The Conjuring 2.'],
-      galleryNote:'Descriptive archive entry; official imagery is copyrighted.' },
+      galleryNote:'Descriptive archive entry; official imagery is copyrighted.',
+      references:[{label:'The Nun (2018) – Wikipedia', url:'https://en.wikipedia.org/wiki/The_Nun_(2018_film)', note:'Film details and franchise connections.'},{label:'The Nun – IMDb', url:'https://www.imdb.com/title/tt5814060/', note:'Credits and release information.'}] },
     { id:'annabelle-comes-home', title:'Annabelle Comes Home', year:2019, series:'Annabelle', releaseOrder:6, chronoOrder:6, director:'Gary Dauberman',
       overview:'Annabelle Comes Home (2019) turns the Warrens’ artifact room into a pressure cooker of terror. With Ed and Lorraine away, Annabelle’s presence acts as a beacon, awakening dangers tied to the contained objects.',
       plot:`Spoiler warning.\n\nBeginning: Ed and Lorraine Warren bring Annabelle home and lock the doll in a sacred glass case within their artifact room, believing it safely contained.\n\nMiddle: When Judy Warren is babysat by Mary Ellen and visited by Daniela Rios, grief and curiosity lead Daniela into the artifact room. Ignoring warnings, she unleashes a chain reaction: Annabelle amplifies the room’s evil, and other spirits/manifestations emerge.\n\nEnding: Judy, Mary Ellen, and Daniela must survive the night by facing their fears and respecting the rules that keep the artifacts in check. They manage to restore order and reseal the danger—an ordeal that underscores why the Warrens’ collection must never be disturbed.`,
@@ -66,18 +71,20 @@ export const WIKI = {
       production:'A contained, night-in-the-museum style horror entry within the Annabelle series.',
       behind:['Directed by Gary Dauberman.','Highlights multiple artifacts as manifestations of contained evil.'],
       trivia:['The “do not touch” warning embodies the franchise’s recurring rule: curiosity has consequences.'],
-      galleryNote:'Descriptive archive entry; official imagery is copyrighted.' },
+      galleryNote:'Descriptive archive entry; official imagery is copyrighted.',
+      references:[{label:'Annabelle Comes Home – Wikipedia', url:'https://en.wikipedia.org/wiki/Annabelle_Comes_Home', note:'Film details and plot context.'},{label:'Annabelle Comes Home – IMDb', url:'https://www.imdb.com/title/tt8350360/', note:'Credits and release information.'}] },
     { id:'the-conjuring-3', title:'The Conjuring: The Devil Made Me Do It', year:2021, series:'The Conjuring', releaseOrder:7, chronoOrder:7, director:'Michael Chaves',
       overview:'The Conjuring: The Devil Made Me Do It (2021) follows Ed and Lorraine Warren into a case that moves from a harrowing exorcism to a murder investigation, where a claim of demonic possession collides with an occult mystery.',
       plot:`Spoiler warning.\n\nBeginning: The Warrens witness an intense struggle involving David Glatzel. The ordeal leaves lasting consequences, and Arne Cheyenne Johnson becomes entangled in a violent incident that shocks everyone involved.\n\nMiddle: Arne’s claim of demonic influence frames a rare legal defense. Convinced there is more than a simple haunting, the Warrens investigate signs of an occult curse—suggesting a human hand directing dark forces.\n\nEnding: Racing against time, Ed and Lorraine pursue the source of the curse to save those marked by it. Their investigation culminates in a confrontation that aims to break the occult chain and end the immediate threat, reaffirming their commitment to each other and to the truth behind the terror.`,
       cast:['Patrick Wilson (Ed Warren)','Vera Farmiga (Lorraine Warren)','Ruairi O’Connor (Arne Cheyenne Johnson)','Sarah Catherine Hook (Debbie Glatzel)','Julian Hilliard (David Glatzel)','John Noble (Kastner)'],
-      entities:['Demonic/curse elements (as depicted)'], locations:['Glatzel/Johnson case settings (depicted)','Investigation sites (depicted)'], artifacts:['Occult totems/evidence (as depicted)','warren-case-files'],
+      entities:['demonic-curse','isla-occultist'], locations:['glatzel-home'], artifacts:['Occult totems/evidence (as depicted)','warren-case-files'],
       connections:['Mainline Warren case with an investigative/occult-thriller angle.','Draws on elements associated with the Arne Johnson case in the film’s framing.'],
       chronology:'Fictional setting: early 1980s (1981 case framing). Later in the Warrens’ mainline timeline.',
       production:'The third main Conjuring film, shifting toward a detective-like pursuit of an occult cause while retaining supernatural horror.',
       behind:['Directed by Michael Chaves.','Balances courtroom/case stakes with supernatural investigation.'],
       trivia:['Notable in the series for emphasizing a curse/occult mechanism alongside possession themes.'],
-      galleryNote:'Descriptive archive entry; official imagery is copyrighted.' },
+      galleryNote:'Descriptive archive entry; official imagery is copyrighted.',
+      references:[{label:'The Conjuring: The Devil Made Me Do It – Wikipedia', url:'https://en.wikipedia.org/wiki/The_Conjuring:_The_Devil_Made_Me_Do_It', note:'Film details and background.'},{label:'Trial of Arne Cheyenne Johnson – Wikipedia', url:'https://en.wikipedia.org/wiki/Trial_of_Arne_Cheyenne_Johnson', note:'Historical case context.'}] },
     { id:'the-nun-2', title:'The Nun II', year:2023, series:'The Nun', releaseOrder:8, chronoOrder:8, director:'Michael Chaves',
       overview:'The Nun II (2023) continues Sister Irene’s battle against Valak as the demon resurfaces across Europe, spreading fear and death in its search for power.',
       plot:`Spoiler warning.\n\nBeginning: A trail of violent, unexplained deaths suggests Valak has returned. Sister Irene, still marked by her previous encounter, is called to confront the threat once more.\n\nMiddle: Irene investigates with new allies, uncovering connections between the demon’s movements and sacred history. The search leads to institutions and communities living under a shadow they cannot yet name.\n\nEnding: Irene faces Valak in a climactic struggle that tests her faith and resolve. The confrontation pushes back the demon’s immediate designs, while reinforcing Valak’s enduring role in the Conjuring Universe’s web of terror.`,
@@ -88,18 +95,20 @@ export const WIKI = {
       production:'A sequel expanding the Valak/Sister Irene narrative with new settings and allies.',
       behind:['Directed by Michael Chaves.','Continues the franchise’s exploration of faith confronting demonic evil.'],
       trivia:['Deepens the through-line between the Nun subseries and the main Conjuring cases.'],
-      galleryNote:'Descriptive archive entry; official imagery is copyrighted.' },
+      galleryNote:'Descriptive archive entry; official imagery is copyrighted.',
+      references:[{label:'The Nun II – Wikipedia', url:'https://en.wikipedia.org/wiki/The_Nun_II', note:'Film details and plot context.'},{label:'The Nun II – IMDb', url:'https://www.imdb.com/title/tt10160976/', note:'Credits and release information.'}] },
     { id:'last-rites', title:'The Conjuring: Last Rites', year:2025, series:'The Conjuring', releaseOrder:9, chronoOrder:9, director:'Michael Chaves',
       overview:'The Conjuring: Last Rites (2025) is a mainline entry featuring Ed and Lorraine Warren in a case presented with high personal and supernatural stakes. This archive entry is spoiler-aware and focuses on verified high-level context.',
       plot:`Spoiler warning: avoid major specifics if you have not seen the film.\n\nHigh-level summary: The Warrens are drawn into a chilling investigation that tests their experience, faith, and bond. As the case unfolds, the boundary between the earthly and the unholy is challenged once again. For full plot details, consult the film and official synopses.`,
       cast:['Patrick Wilson (Ed Warren)','Vera Farmiga (Lorraine Warren)','(Consult official credits for the complete cast list)'],
-      entities:['Supernatural forces (see film/official materials)'], locations:['Case locations (see film/official materials)'], artifacts:['Case-related evidence (see film/official materials)'],
-      connections:['Mainline Conjuring series entry centered on the Warrens.','Part of the ongoing case-file legacy.'],
+      entities:['smurl-entity'], locations:['smurl-home'], artifacts:['Case-related evidence (see film/official materials)'],
+      connections:['Mainline Conjuring series entry centered on the Warrens.','Part of the ongoing case-file legacy.','Framed around the Smurl haunting investigation in the film’s high-level premise.'],
       chronology:'A later Warren case in the franchise’s mainline continuity (consult official timeline materials for precise placement details).',
       production:'Released as part of The Conjuring series. Refer to official studio/production notes for complete details.',
       behind:['Directed by Michael Chaves (series filmmaker).','Marketed as a significant chapter in the Warrens’ cinematic investigations.'],
       trivia:['As a recent release, some details may evolve in public summaries; this archive avoids unverified specifics.'],
-      galleryNote:'Descriptive archive entry; official imagery is copyrighted.' },
+      galleryNote:'Descriptive archive entry; official imagery is copyrighted.',
+      references:[{label:'The Conjuring: Last Rites – Wikipedia', url:'https://en.wikipedia.org/wiki/The_Conjuring:_Last_Rites', note:'Release, cast, and high-level background.'},{label:'The Conjuring: Last Rites – IMDb', url:'https://www.imdb.com/title/tt22898462/', note:'Credits and release information.'}] },
   ],
   characters: [
     { id:'ed-warren', name:'Ed Warren', type:'Investigator', movies:['the-conjuring','the-conjuring-2','annabelle-comes-home','the-conjuring-3','last-rites'], bio:'Ed Warren is portrayed as a dedicated demonologist and paranormal investigator who, with Lorraine Warren, documents and confronts supernatural cases. In the films, he is driven by faith, duty, and a fierce commitment to protecting families.', appearance:'Often depicted in 1970s–80s attire, calm but resolute in the face of danger.', traits:['Determined','Protective','Methodical','Faith-driven'], abilities:['Demonology knowledge','Case investigation','Ritual/research support (as depicted)'], relations:['Lorraine Warren (wife)','Judy Warren (daughter)'], fate:'Continues investigating cases throughout the main series timeline.' },
@@ -126,7 +135,23 @@ export const WIKI = {
     { id:'debbie-glatzel', name:'Debbie Glatzel', type:'Family', movies:['the-conjuring-3'], bio:'Debbie Glatzel is connected to both David and Arne, supporting them as the case escalates from a family crisis to a wider investigation.', appearance:'Early 1980s setting.', traits:['Loyal','Protective'], abilities:[], relations:['David Glatzel (brother)','Arne Johnson (partner)'], fate:'Stands by Arne as the Warrens investigate.' },
     { id:'crooked-man', name:'The Crooked Man', type:'Entity', movies:['the-conjuring-2'], bio:'The Crooked Man appears as a disturbing manifestation in The Conjuring 2, associated with the demonic influence surrounding the Enfield case.', appearance:'A twisted, storybook-like humanoid form (as depicted).', traits:['Unnerving','Predatory'], abilities:['Manifestation/illusion (as depicted)'], relations:['Linked to Valak’s influence in the case'], fate:'Manifests during the Enfield haunting.' },
     { id:'ferryman', name:'The Ferryman', type:'Entity', movies:['annabelle-comes-home'], bio:'The Ferryman is one of the malevolent manifestations associated with artifacts/spirits unleashed in Annabelle Comes Home.', appearance:'A grim, toll-taking figure from folklore-like horror imagery (as depicted).', traits:['Ominous'], abilities:['Spirit manifestation (as depicted)'], relations:['Connected to the artifact room’s unleashed forces'], fate:'Confronted during the night of chaos in the Warren home.' },
-    { id:'malthus', name:'Malthus', type:'Demon', movies:['annabelle','annabelle-creation'], bio:'Malthus is depicted in Annabelle-series lore as a demonic presence that seeks a human host and uses the Annabelle doll as a conduit.', appearance:'Often perceived through influence/manifestation rather than a single constant form.', traits:['Deceitful','Predatory'], abilities:['Demonic influence, oppression, manipulation (as depicted)'], relations:['Associated with the Annabelle doll'], fate:'Its influence persists through the doll’s history (as depicted).' },
+    { id:'malthus', name:'Malthus', type:'Demon', movies:['annabelle','annabelle-creation'], bio:'Malthus is depicted in Annabelle-series lore as a demonic presence that seeks a human host and uses the Annabelle doll as a conduit.', appearance:'Often perceived through influence/manifestation rather than a single constant form.', traits:['Deceitful','Predatory'], abilities:['Demonic influence, oppression, manipulation (as depicted)'], relations:['Associated with the Annabelle doll'], fate:'Its influence persists through the doll’s history (as depicted).', references:[{label:'Annabelle (2014 film) – Wikipedia', url:'https://en.wikipedia.org/wiki/Annabelle_(film)', note:'Film plot and entity context.'},{label:'Annabelle: Creation – Wikipedia', url:'https://en.wikipedia.org/wiki/Annabelle:_Creation', note:'Origin-story context.'}] },
+    { id:'andrea-perron', name:'Andrea Perron', type:'Family', movies:['the-conjuring'], bio:'Andrea Perron is the eldest Perron daughter in The Conjuring (2013). She experiences the family’s fear as the farmhouse’s disturbances intensify and the investigation unfolds.', appearance:'Teenage daughter in the 1971 Rhode Island setting.', traits:['Protective of siblings','Observant','Frightened but resilient'], abilities:[], relations:['Carolyn Perron (mother)','Roger Perron (father)','Nancy, Christine, Cindy, April Perron (sisters)'], fate:'Survives the Perron case as depicted in the film.' },
+    { id:'nancy-perron', name:'Nancy Perron', type:'Family', movies:['the-conjuring'], bio:'Nancy Perron is one of the Perron daughters affected by the haunting of the Harrisville farmhouse. Her experiences contribute to the family’s growing alarm.', appearance:'Perron daughter in 1971 setting.', traits:['Sensitive','Protective'], abilities:[], relations:['Carolyn and Roger Perron (parents)','Perron sisters'], fate:'Survives the events depicted in The Conjuring.' },
+    { id:'christine-perron', name:'Christine Perron', type:'Family', movies:['the-conjuring'], bio:'Christine Perron is among the Perron children who witness and endure frightening phenomena during the family’s time in the farmhouse.', appearance:'Young Perron daughter in 1971.', traits:['Vulnerable','Brave'], abilities:[], relations:['Carolyn and Roger Perron (parents)','Perron sisters'], fate:'Survives the haunting depicted in the film.' },
+    { id:'cindy-perron', name:'Cindy Perron', type:'Family', movies:['the-conjuring'], bio:'Cindy Perron is a Perron daughter whose encounters with the home’s disturbances underscore the danger facing the family.', appearance:'Young child in the Perron household.', traits:['Impressionable','Frightened'], abilities:[], relations:['Carolyn and Roger Perron (parents)','Perron sisters'], fate:'Survives the Perron case as depicted.' },
+    { id:'april-perron', name:'April Perron', type:'Family', movies:['the-conjuring'], bio:'April Perron is the youngest Perron daughter in The Conjuring. Her innocence contrasts with the escalating supernatural threat surrounding the family.', appearance:'Youngest Perron child in 1971.', traits:['Innocent','Sensitive'], abilities:[], relations:['Carolyn and Roger Perron (parents)','Perron sisters'], fate:'Survives the events of the case in the film’s resolution.' },
+    { id:'johnny-hodgson', name:'Johnny Hodgson', type:'Family', movies:['the-conjuring-2'], bio:'Johnny Hodgson is one of Peggy Hodgson’s children in The Conjuring 2, living through the fear and disruption caused by the Enfield haunting.', appearance:'Hodgson child in 1977 London.', traits:['Affected by fear','Family-oriented'], abilities:[], relations:['Peggy Hodgson (mother)','Hodgson siblings'], fate:'Survives the Enfield case as depicted.' },
+    { id:'billy-hodgson', name:'Billy Hodgson', type:'Family', movies:['the-conjuring-2'], bio:'Billy Hodgson is a Hodgson child who experiences the strain of the reported poltergeist activity and the scrutiny surrounding the family.', appearance:'Young Hodgson child in 1977.', traits:['Vulnerable','Resilient'], abilities:[], relations:['Peggy Hodgson (mother)','Hodgson siblings'], fate:'Survives the events depicted in The Conjuring 2.' },
+    { id:'samuel-mullins', name:'Samuel Mullins', type:'Family', movies:['annabelle-creation'], bio:'Samuel Mullins is a dollmaker in Annabelle: Creation whose grief after the loss of his daughter leads to choices that open the door to a demonic presence connected to the Annabelle doll.', appearance:'A craftsman and father in a 1950s period setting.', traits:['Grieving','Devoted father','Haunted by loss'], abilities:[], relations:['Esther Mullins (wife)','Bee Mullins (deceased daughter)'], fate:'His story forms part of the doll’s tragic origin as depicted in the film.' },
+    { id:'esther-mullins', name:'Esther Mullins', type:'Family', movies:['annabelle-creation'], bio:'Esther Mullins is Samuel’s wife, living with the consequences of the family’s tragedy and the evil that takes hold in their home.', appearance:'Reclusive, physically scarred figure in the farmhouse (as depicted).', traits:['Mourning','Protective in intent'], abilities:[], relations:['Samuel Mullins (husband)','Bee Mullins (deceased daughter)'], fate:'Her fate is tied to the containment and spread of the evil in the Mullins farmhouse (as depicted).' },
+    { id:'sister-charlotte', name:'Sister Charlotte', type:'Ally', movies:['annabelle-creation'], bio:'Sister Charlotte accompanies a group of orphaned girls to the Mullins farmhouse, acting as a guardian figure as supernatural terror escalates.', appearance:'Nun in a mid-20th-century setting.', traits:['Compassionate','Protective','Courageous'], abilities:[], relations:['Guardian to the orphans, including Linda and Janice'], fate:'Faces the demonic threat while trying to protect the children.' },
+    { id:'linda', name:'Linda', type:'Witness', movies:['annabelle-creation'], bio:'Linda is one of the orphans who comes to the Mullins farmhouse. Her friendship and loyalty become important as Janice is targeted by the presence tied to the doll.', appearance:'Young orphan girl in the 1950s setting.', traits:['Loyal','Brave','Caring'], abilities:[], relations:['Close friend of Janice','Cared for by Sister Charlotte'], fate:'Survives the ordeal and is marked by the trauma of the farmhouse events.' },
+    { id:'janice', name:'Janice', type:'Subject', movies:['annabelle-creation'], bio:'Janice is an orphan with a physical impairment who becomes vulnerable to the demonic presence awakened in the Mullins home. Her experience is central to the doll’s origin narrative.', appearance:'Young orphan, initially using mobility support (as depicted).', traits:['Vulnerable','Curious','Targeted'], abilities:[], relations:['Friend of Linda','Cared for by Sister Charlotte'], fate:'Her storyline directly connects Annabelle: Creation to the later Annabelle events (as depicted).' },
+    { id:'isla-occultist', name:'The Occultist (Isla Kastner)', type:'Human Antagonist', movies:['the-conjuring-3'], bio:'In The Conjuring: The Devil Made Me Do It, the Occultist is revealed as a human antagonist who uses occult practices to direct a curse. The character embodies the film’s theme that deliberate human malice can intersect with supernatural danger.', appearance:'A reserved, unsettling figure connected to occult study (as depicted).', traits:['Calculating','Secretive','Ruthless'], abilities:['Occult ritual knowledge, cursecraft (as depicted in the film)'], relations:['Connected to Father Kastner in the film’s backstory; opposed by Ed and Lorraine Warren'], fate:'Confronted during the Warrens’ effort to break the curse.', references:[{label:'The Conjuring: The Devil Made Me Do It – Wikipedia', url:'https://en.wikipedia.org/wiki/The_Conjuring:_The_Devil_Made_Me_Do_It', note:'Plot and antagonist context.'}] },
+    { id:'demonic-curse', name:'The Curse / Totem Mechanism', type:'Entity', movies:['the-conjuring-3'], bio:'In The Conjuring: The Devil Made Me Do It, the threat is framed around an occult curse supported by totems. This entry represents the film’s supernatural mechanism: a directed, escalating force that targets victims through ritual linkage rather than a single haunted location alone.', appearance:'Manifested through oppressive phenomena and curse effects rather than one fixed form.', traits:['Directed','Escalating','Insidious'], abilities:['Targeted curse effects, oppression, possession-adjacent influence (as depicted)'], relations:['Directed by the Occultist (as depicted)','Opposed by the Warrens'], fate:'Broken through the Warrens’ investigation and confrontation in the film’s climax.' },
+    { id:'smurl-family', name:'The Smurl Family', type:'Family', movies:['last-rites'], bio:'The Smurl family is depicted as the household affected by the haunting framed in The Conjuring: Last Rites. This archive keeps the entry spoiler-aware and focuses on high-level case framing.', appearance:'Family members in a 1980s setting (as depicted).', traits:['Under duress','Seeking help'], abilities:[], relations:['Assisted by Ed and Lorraine Warren in the film’s framing'], fate:'See the film and official materials for full, spoiler-specific outcomes.', references:[{label:'The Conjuring: Last Rites – Wikipedia', url:'https://en.wikipedia.org/wiki/The_Conjuring:_Last_Rites', note:'High-level background.'},{label:'Smurl haunting – Wikipedia', url:'https://en.wikipedia.org/wiki/Smurl_haunting', note:'Historical context separate from film dramatization.'}] },
+    { id:'smurl-entity', name:'Smurl Haunting Entity', type:'Entity', movies:['last-rites'], bio:'A hostile supernatural presence associated with the Smurl case as framed in The Conjuring: Last Rites. Details are presented at a high level to avoid unverified spoilers.', appearance:'Manifested through disturbances and threatening phenomena (as depicted).', traits:['Hostile','Oppressive'], abilities:['Haunting manifestations and intimidation (as depicted)'], relations:['Targets the Smurl household (film framing)','Opposed by Ed and Lorraine Warren'], fate:'Consult the film and official materials for complete resolution details.', references:[{label:'The Conjuring: Last Rites – Wikipedia', url:'https://en.wikipedia.org/wiki/The_Conjuring:_Last_Rites', note:'Film background.'}] }
   ],
   locations: [
     { id:'perron-farmhouse', name:'Perron Farmhouse', place:'Harrisville, Rhode Island', movies:['the-conjuring'], summary:'The farmhouse where the Perron family experiences escalating paranormal events in 1971.', details:'Key setting of The Conjuring. The film depicts hidden spaces, a heavy history, and intensifying phenomena that draw Ed and Lorraine Warren into a dangerous investigation. Important rooms/spaces include family bedrooms, the cellar, and areas where manifestations concentrate.' },
@@ -136,6 +161,7 @@ export const WIKI = {
     { id:'abbey-st-carta', name:'Abbey of St. Carta', place:'Romania', movies:['the-nun'], summary:'A secluded abbey where Valak’s presence is confronted in 1952.', details:'A gothic, isolated monastery depicted as a spiritual battleground. Its history and defenses are central to the attempt to contain the demonic force.' },
     { id:'mullins-farmhouse', name:'Mullins Farmhouse', place:'United States (depicted)', movies:['annabelle-creation'], summary:'The dollmaker’s home where Annabelle’s origin story unfolds.', details:'A remote farmhouse that becomes a refuge for orphans—and then a site of escalating terror when the doll’s evil is awakened.' },
     { id:'glatzel-home', name:'Glatzel Family Home', place:'Connecticut (depicted)', movies:['the-conjuring-3'], summary:'The family setting connected to David Glatzel’s affliction in The Devil Made Me Do It.', details:'The events surrounding the family draw the Warrens into a case that expands from possession concerns to an occult investigation.' },
+    { id:'smurl-home', name:'Smurl Family Home', place:'West Pittston, Pennsylvania (case framing; film depicted)', movies:['last-rites'], summary:'The household associated with the Smurl haunting as framed in The Conjuring: Last Rites.', details:'Presented as the site of persistent, hostile supernatural disturbances that prompt a Warren investigation. This archive keeps specifics spoiler-aware and distinguishes cinematic framing from historical accounts.', references:[{label:'The Conjuring: Last Rites – Wikipedia', url:'https://en.wikipedia.org/wiki/The_Conjuring:_Last_Rites', note:'Film setting/background.'},{label:'Smurl haunting – Wikipedia', url:'https://en.wikipedia.org/wiki/Smurl_haunting', note:'Historical context.'}] }
   ],
   artifacts: [
     { id:'annabelle-doll', name:'Annabelle Doll', movies:['annabelle','annabelle-creation','annabelle-comes-home','the-conjuring'], summary:'A doll depicted as a conduit for malevolent influence, later secured in the Warrens’ artifact room.', details:'One of the most iconic objects in The Conjuring Universe. In the films, the doll functions as a beacon for demonic activity. The Warrens keep it locked in a consecrated case with warnings—most famously, “positively do not open.”', has3d:true },
@@ -146,34 +172,116 @@ export const WIKI = {
     { id:'bride-dress', name:'Haunted Wedding Dress (Artifact)', movies:['annabelle-comes-home'], summary:'A cursed object associated with violent legend in the artifact room (as depicted).', details:'An example of the museum’s many contained dangers, each with its own story and risk if disturbed.', has3d:true },
   ],
   timeline: [
-    { year:'1952', chrono:1, type:'fiction', title:'Abbey of St. Carta', text:'The Vatican investigates a death at a remote Romanian abbey. Father Burke and Sister Irene confront Valak. (The Nun)', links:['the-nun','valak','abbey-st-carta','sister-irene','father-burke','maurice-theriault'] },
+    { year:'1952', chrono:1, type:'fiction', title:'Abbey of St. Carta', text:'The Vatican investigates a death at a remote Romanian abbey. Father Burke and Sister Irene confront Valak. (The Nun)', links:['the-nun','valak','abbey-st-carta','sister-irene','father-burke','maurice-theriault'], investigation:'st-carta-investigation' },
     { year:'1955', chrono:2, type:'fiction', title:'The Mullins Farmhouse', text:'A dollmaker’s grief opens the door to evil, giving rise to Annabelle’s dark origin. (Annabelle: Creation)', links:['annabelle-creation','annabelle-doll','mullins-farmhouse','malthus'] },
     { year:'1956', chrono:3, type:'fiction', title:'Valak Resurfaces in Europe', text:'Sister Irene faces Valak again as the demon spreads terror. (The Nun II)', links:['the-nun-2','valak','sister-irene','maurice-theriault'] },
     { year:'1967', chrono:4, type:'fiction', title:'Annabelle and the Forms', text:'Mia and John Form are targeted by a malevolent presence linked to the doll. (Annabelle)', links:['annabelle','annabelle-doll','mia-form','john-form','evelyn'] },
-    { year:'1971', chrono:5, type:'fiction', title:'Perron Family Haunting', text:'Ed and Lorraine Warren investigate the Perron farmhouse in Harrisville, Rhode Island. (The Conjuring)', links:['the-conjuring','perron-farmhouse','bathsheba-sherman','ed-warren','lorraine-warren','carolyn-perron','roger-perron'] },
+    { year:'1971', chrono:5, type:'fiction', title:'Perron Family Haunting', text:'Ed and Lorraine Warren investigate the Perron farmhouse in Harrisville, Rhode Island. (The Conjuring)', links:['the-conjuring','perron-farmhouse','bathsheba-sherman','ed-warren','lorraine-warren','carolyn-perron','roger-perron'], investigation:'perron-case' },
     { year:'1972*', chrono:6, type:'fiction', title:'A Night in the Artifact Room', text:'Annabelle’s presence helps unleash terror among the Warrens’ contained artifacts. *Exact in-universe placement is depicted by the film’s framing. (Annabelle Comes Home)', links:['annabelle-comes-home','annabelle-doll','warren-occult-museum','judy-warren','mary-ellen','daniela-rios'] },
     { year:'1976', chrono:7, type:'fiction', title:'Amityville (Case Reference)', text:'The Warrens are associated with the Amityville case in franchise framing, which informs their later investigations (referenced in the films).', links:['ed-warren','lorraine-warren'] },
-    { year:'1977', chrono:8, type:'fiction', title:'Enfield Poltergeist', text:'The Warrens travel to Enfield, London to assist the Hodgson family; Valak’s influence is revealed. (The Conjuring 2)', links:['the-conjuring-2','enfield-house','valak','janet-hodgson','peggy-hodgson','ed-warren','lorraine-warren'] },
-    { year:'1981', chrono:9, type:'fiction', title:'The Devil Made Me Do It', text:'A case involving David Glatzel and Arne Johnson leads the Warrens into an occult curse investigation. (The Conjuring: The Devil Made Me Do It)', links:['the-conjuring-3','arne-johnson','david-glatzel','debbie-glatzel','ed-warren','lorraine-warren'] },
-    { year:'2025', chrono:10, type:'fiction', title:'Last Rites (Mainline Case)', text:'A later Warren case in the main Conjuring series. Consult the film/official materials for full details. (The Conjuring: Last Rites)', links:['last-rites','ed-warren','lorraine-warren'] },
+    { year:'1977', chrono:8, type:'fiction', title:'Enfield Poltergeist', text:'The Warrens travel to Enfield, London to assist the Hodgson family; Valak’s influence is revealed. (The Conjuring 2)', links:['the-conjuring-2','enfield-house','valak','janet-hodgson','peggy-hodgson','ed-warren','lorraine-warren'], investigation:'enfield-case' },
+    { year:'1981', chrono:9, type:'fiction', title:'The Devil Made Me Do It', text:'A case involving David Glatzel and Arne Johnson leads the Warrens into an occult curse investigation. (The Conjuring: The Devil Made Me Do It)', links:['the-conjuring-3','arne-johnson','david-glatzel','debbie-glatzel','ed-warren','lorraine-warren'], investigation:'arne-johnson-case' },
+    { year:'1986', chrono:10, type:'fiction', title:'The Smurl Case (Last Rites Framing)', text:'A later Warren case in the main Conjuring series, framed around the Smurl haunting. Consult the film and official materials for complete, spoiler-specific details. (The Conjuring: Last Rites)', links:['last-rites','ed-warren','lorraine-warren'], investigation:'smurl-case' },
+  ],
+  investigations: [
+    {
+      id:'perron-case', name:'Perron Family Case', year:'1971', location:'perron-farmhouse', movies:['the-conjuring'],
+      investigators:['ed-warren','lorraine-warren'], subjects:['carolyn-perron','roger-perron','andrea-perron','nancy-perron','christine-perron','cindy-perron','april-perron'],
+      entities:['bathsheba-sherman'],
+      background:'In the film’s framing, the Perron family relocates to a Rhode Island farmhouse and encounters disturbances that escalate from unexplained noises and physical marks to intense psychological and spiritual oppression.',
+      events:'Reported events in the story include clocks stopping, doors moving, apparitions, foul odors, and targeted attacks that increasingly focus on Carolyn Perron. The investigation explores the property’s dark history and the presence believed to drive the haunting.',
+      investigation:'Ed and Lorraine Warren document phenomena, interview the family, gather evidence, and seek ecclesiastical support as the danger intensifies. The case builds toward a confrontation intended to break the entity’s hold.',
+      resolution:'The film depicts Carolyn being freed from possession and the family surviving the immediate threat. The case is preserved in the Warrens’ files and connected to artifacts kept under containment.',
+      historicalContext:'The Conjuring is inspired in broad strokes by accounts associated with the Perron family and the Warrens. Film narratives are dramatized and should be distinguished from independently documented historical claims.',
+      references:[
+        {label:'The Conjuring (2013) – Warner Bros.', url:'https://www.warnerbros.com/movies/conjuring', note:'Official film page (availability may vary).'},
+        {label:'The Conjuring – Wikipedia', url:'https://en.wikipedia.org/wiki/The_Conjuring', note:'Plot, production, and background overview with citations.'},
+        {label:'Perron family haunting – Wikipedia', url:'https://en.wikipedia.org/wiki/The_Conjuring#Historical_accuracy_and_legal_issues', note:'Context and discussion of historical claims/accuracy.'}
+      ]
+    },
+    {
+      id:'enfield-case', name:'Enfield Poltergeist Case', year:'1977', location:'enfield-house', movies:['the-conjuring-2'],
+      investigators:['ed-warren','lorraine-warren'], subjects:['peggy-hodgson','janet-hodgson','margaret-hodgson','johnny-hodgson','billy-hodgson'],
+      entities:['valak','crooked-man'],
+      background:'The Hodgson family in Enfield, London, reports violent disturbances in their home. Janet Hodgson becomes a focal point, and the case draws public and institutional attention.',
+      events:'Within the film, events include furniture movement, knocking, levitation-like phenomena, and threatening manifestations. Lorraine experiences visions that point to a demonic force manipulating the haunting.',
+      investigation:'The Warrens are asked to assess whether the case is a hoax or genuine. They observe the family, weigh skepticism, and uncover evidence that the activity masks Valak’s influence.',
+      resolution:'Lorraine confronts Valak and the immediate demonic threat is driven back, allowing the Hodgson family to survive the ordeal. The case reinforces Valak’s role as a recurring antagonist.',
+      historicalContext:'The film draws inspiration from reports known as the Enfield poltergeist. As with other entries, cinematic depictions condense and dramatize events; viewers should separate film storytelling from documented historical records.',
+      references:[
+        {label:'The Conjuring 2 – Wikipedia', url:'https://en.wikipedia.org/wiki/The_Conjuring_2', note:'Film overview and production/case inspiration.'},
+        {label:'Enfield poltergeist – Wikipedia', url:'https://en.wikipedia.org/wiki/Enfield_poltergeist', note:'Historical reports and context (independent of film dramatization).'}
+      ]
+    },
+    {
+      id:'st-carta-investigation', name:'Abbey of St. Carta Investigation', year:'1952', location:'abbey-st-carta', movies:['the-nun'],
+      investigators:['father-burke','sister-irene'], subjects:['maurice-theriault'],
+      entities:['valak'],
+      background:'After a death at the Abbey of St. Carta in Romania, the Church dispatches Father Burke and novice Sister Irene to investigate signs of an unholy presence.',
+      events:'The investigation reveals manifestations tied to Valak and a spiritual breach connected to the abbey’s history. The setting becomes a battleground of faith, secrecy, and demonic deception.',
+      investigation:'Burke and Irene search the abbey, interpret clues, and rely on prayer, relics, and courage to understand and counter the entity’s influence.',
+      resolution:'The protagonists confront Valak and attempt to seal the threat. The resolution contains the immediate danger but leaves threads that connect to later events in the shared timeline.',
+      historicalContext:'This case is a fictional narrative within The Conjuring Universe, created to explore Valak’s origins and early manifestations.',
+      references:[
+        {label:'The Nun (2018) – Wikipedia', url:'https://en.wikipedia.org/wiki/The_Nun_(2018_film)', note:'Film plot and franchise connections.'}
+      ]
+    },
+    {
+      id:'arne-johnson-case', name:'Arne Johnson / Glatzel Investigation', year:'1981', location:'glatzel-home', movies:['the-conjuring-3'],
+      investigators:['ed-warren','lorraine-warren'], subjects:['arne-johnson','david-glatzel','debbie-glatzel'],
+      entities:['isla-occultist','demonic-curse'],
+      background:'The film depicts a crisis involving David Glatzel and a subsequent violent incident connected to Arne Cheyenne Johnson. The case is framed around a claim of demonic influence and an unfolding occult mystery.',
+      events:'Events move from an intense spiritual struggle to a homicide investigation and the discovery of evidence suggesting a curse rather than a conventional haunting alone.',
+      investigation:'Ed and Lorraine investigate across locations, seeking the origin of the curse and the person responsible for directing it, while supporting the legal and human stakes surrounding Arne.',
+      resolution:'The Warrens confront the source of the curse and work to break its chain, preventing further deaths and bringing clarity to the supernatural mechanism driving the case.',
+      historicalContext:'The film is inspired by aspects of the real-world case associated with Arne Cheyenne Johnson; the occult-curse elements and specific events are dramatized for the narrative. Distinguish film plot from historical reporting.',
+      references:[
+        {label:'The Conjuring: The Devil Made Me Do It – Wikipedia', url:'https://en.wikipedia.org/wiki/The_Conjuring:_The_Devil_Made_Me_Do_It', note:'Film overview, cast, and background.'},
+        {label:'Trial of Arne Cheyenne Johnson – Wikipedia', url:'https://en.wikipedia.org/wiki/Trial_of_Arne_Cheyenne_Johnson', note:'Historical case context (separate from film dramatization).'}
+      ]
+    },
+    {
+      id:'smurl-case', name:'Smurl Haunting Case (Last Rites)', year:'1986', location:'smurl-home', movies:['last-rites'],
+      investigators:['ed-warren','lorraine-warren'], subjects:['smurl-family'],
+      entities:['smurl-entity'],
+      background:'The Conjuring: Last Rites frames a Warren investigation connected to the Smurl haunting. This archive provides a high-level, spoiler-aware overview; consult the film and official materials for complete plot specifics.',
+      events:'The case is presented as a severe and personal confrontation with hostile supernatural activity affecting a family home and those within it.',
+      investigation:'Ed and Lorraine respond as experienced investigators, applying their case-file methods, faith, and partnership to assess and confront the threat.',
+      resolution:'As a recent mainline entry, resolution details are best experienced through the film. This archive avoids unverified spoiler specifics.',
+      historicalContext:'The film draws inspiration from accounts associated with the Smurl haunting. Cinematic storytelling involves dramatization; distinguish the movie narrative from independently documented claims.',
+      references:[
+        {label:'The Conjuring: Last Rites – Wikipedia', url:'https://en.wikipedia.org/wiki/The_Conjuring:_Last_Rites', note:'Release, cast, and high-level background.'},
+        {label:'Smurl haunting – Wikipedia', url:'https://en.wikipedia.org/wiki/Smurl_haunting', note:'Historical accounts and context (separate from film dramatization).'}
+      ]
+    }
   ]
 };
 
-export function findById(list, id){ return list.find(x=>x.id===id); }
+export function findById(list, id){ return (list||[]).find(x=>x.id===id); }
 export function movieById(id){ return findById(WIKI.movies,id); }
-export function byId(id){ return movieById(id)||findById(WIKI.characters,id)||findById(WIKI.locations,id)||findById(WIKI.artifacts,id); }
+export function investigationById(id){ return findById(WIKI.investigations||[],id); }
+export function byId(id){
+  return movieById(id)
+    || findById(WIKI.characters,id)
+    || findById(WIKI.locations,id)
+    || findById(WIKI.artifacts,id)
+    || investigationById(id);
+}
+function refsText(item){ return (item.references||[]).map(r=>`${r.label||''} ${r.note||''}`).join(' '); }
 export function searchAll(q){
   q=(q||'').toLowerCase().trim(); if(!q) return [];
   const res=[]; const add=(type,item,text)=>{ if((item.name||item.title||'').toLowerCase().includes(q) || (text||'').toLowerCase().includes(q)) res.push({type,id:item.id,title:item.name||item.title,subtitle:type}); };
-  WIKI.movies.forEach(m=>add('movie',m,m.overview+' '+(m.cast||[]).join(' ')));
-  WIKI.characters.forEach(c=>add('character',c,c.bio+' '+(c.traits||[]).join(' ')));
-  WIKI.locations.forEach(l=>add('location',l,l.summary+' '+l.place));
-  WIKI.artifacts.forEach(a=>add('artifact',a,a.summary));
-  return res.slice(0,15);
+  WIKI.movies.forEach(m=>add('movie',m,[m.overview,m.plot,m.production,(m.cast||[]).join(' '),refsText(m)].join(' ')));
+  WIKI.characters.forEach(c=>add('character',c,[c.bio,c.appearance,(c.traits||[]).join(' '),(c.abilities||[]).join(' '),refsText(c)].join(' ')));
+  WIKI.locations.forEach(l=>add('location',l,[l.summary,l.details,l.place,refsText(l)].join(' ')));
+  WIKI.artifacts.forEach(a=>add('artifact',a,[a.summary,a.details,refsText(a)].join(' ')));
+  (WIKI.investigations||[]).forEach(i=>add('investigation',i,[i.background,i.events,i.investigation,i.resolution,i.historicalContext,refsText(i)].join(' ')));
+  return res.slice(0,20);
 }
 export function allIndexItems(){ return [
   ...WIKI.movies.map(x=>({type:'movie',id:x.id,title:x.title,meta:x.year})),
   ...WIKI.characters.map(x=>({type:'character',id:x.id,title:x.name,meta:x.type})),
   ...WIKI.locations.map(x=>({type:'location',id:x.id,title:x.name,meta:x.place})),
   ...WIKI.artifacts.map(x=>({type:'artifact',id:x.id,title:x.name,meta:'Artifact'})),
+  ...(WIKI.investigations||[]).map(x=>({type:'investigation',id:x.id,title:x.name,meta:x.year})),
 ]; }
