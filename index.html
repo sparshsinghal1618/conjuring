@@ -114,11 +114,10 @@
     initHomeScare();
     // Render homepage sections (content is present; overlay sits on top for first visit)
     const movies = [...WIKI.movies].sort((a,b)=>a.releaseOrder-b.releaseOrder);
-    document.getElementById('homeMovies').innerHTML = movies.map(m=>`
-      <a class="card" href="./pages/article.html?type=movie&id=${m.id}" style="text-decoration:none;color:inherit">
-        <div class="thumb"><span class="thumb-label">${m.year} · ${m.series}</span></div>
-        <div class="card-body"><div class="tag">Movie</div><h3>${m.title}</h3><p>${m.overview.slice(0,120)}…</p></div>
-      </a>`).join('');
+    document.getElementById('homeMovies').innerHTML = movies.map(m=>{
+      const thumb = m.thumbUrl ? `<div class="thumb has-photo"><img src="${m.thumbUrl}" alt="${m.title}" loading="lazy" /></div>` : `<div class="thumb"><span class="thumb-label">${m.year} · ${m.series}</span></div>`;
+      return `<div class="card">${thumb}<div class="card-body"><div class="tag">Movie</div><h3><a href="./pages/article.html?type=movie&id=${m.id}" style="color:inherit;text-decoration:none">${m.title}</a></h3><p>${m.overview.slice(0,120)}…</p></div></div>`;
+    }).join('');
     document.getElementById('homeArtifacts').innerHTML = WIKI.artifacts.slice(0,4).map(a=>`
       <a class="card" href="./pages/article.html?type=artifact&id=${a.id}" style="text-decoration:none;color:inherit">
         <div class="thumb"><span class="thumb-label">${a.has3d?'3D ARTIFACT':'CASE OBJECT'}</span></div>

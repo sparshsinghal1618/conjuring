@@ -33,7 +33,13 @@
       let arr=[...WIKI.movies];
       if(sort.value==='chrono') arr.sort((a,b)=>a.chronoOrder-b.chronoOrder); else arr.sort((a,b)=>a.releaseOrder-b.releaseOrder);
       if(series.value) arr=arr.filter(m=>m.series===series.value);
-      list.innerHTML = arr.map(m=>`<a class="card" href="${pageUrl('movie',m.id)}" style="text-decoration:none;color:inherit"><div class="thumb"><span class="thumb-label">${escapeHtml(m.series)} · ${m.year}</span></div><div class="card-body"><div class="tag">Release #${m.releaseOrder} · Story #${m.chronoOrder}</div><h3>${escapeHtml(m.title)}</h3><p>${escapeHtml(m.overview.slice(0,150))}…</p><p class="meta">Director: ${escapeHtml(m.director||'—')}</p></div></a>`).join('');
+      list.innerHTML = arr.map(m=>{
+        const thumb = m.thumbUrl
+          ? `<div class="thumb has-photo"><img src="${escapeHtml(m.thumbUrl)}" alt="${escapeHtml(m.thumbAlt||m.title+' poster/image')}" loading="lazy" referrerpolicy="no-referrer" />${m.thumbCredit?`<span class="thumb-credit">${escapeHtml(m.thumbCredit)}</span>`:''}</div>`
+          : `<div class="thumb"><span class="thumb-label">${escapeHtml(m.series)} · ${m.year}</span>${m.officialUrl?`<span class="thumb-credit">Official imagery via source</span>`:''}</div>`;
+        const src = m.officialUrl ? `<a class="source-pill" href="${escapeHtml(m.officialUrl)}" target="_blank" rel="noopener noreferrer">View official imagery/source ↗</a>` : '';
+        return `<div class="card">${thumb}<div class="card-body"><div class="tag">Release #${m.releaseOrder} · Story #${m.chronoOrder}</div><h3><a href="${pageUrl('movie',m.id)}" style="color:inherit;text-decoration:none">${escapeHtml(m.title)}</a></h3><p>${escapeHtml(m.overview.slice(0,150))}…</p><p class="meta">Director: ${escapeHtml(m.director||'—')}</p>${src}</div></div>`;
+      }).join('');
     }
     sort.addEventListener('change',render); series.addEventListener('change',render); render();
   </script>
