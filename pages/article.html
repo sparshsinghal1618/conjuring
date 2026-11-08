@@ -76,6 +76,8 @@
       } else if(type==='character'){
         info = `<dl class="infobox"><dt>Type</dt><dd>${escapeHtml(item.type||'')}</dd><dt>Appearances</dt><dd>${(item.movies||[]).length} film(s)</dd></dl>`;
         body += `<p class="lead">${escapeHtml(item.bio)}</p>`;
+        const showcase3d = ({'annabelle':'annabelle-doll','valak':'valak-manifest','bathsheba-sherman':'bathsheba-manifest','crooked-man':'crooked-manifest','malthus':'malthus-manifest','ferryman':'ferryman-manifest','the-bride':'bride-manifest'})[item.id];
+        if(showcase3d) body += sec('showcase3d','Interactive 3D Showcase', `<div class="notice">Real-time WebGL 3D showcase (stylized/atmospheric). This is an original visualization inspired by the film depiction — not an official model or movie still. Rotate/zoom using controls or drag/wheel.</div><div class="viewer" data-viewer3d="${escapeHtml(showcase3d)}"></div>`);
         body += sec('bio','Full Biography', `<p>${escapeHtml(item.bio)}</p><p><strong>Appearance:</strong> ${escapeHtml(item.appearance||'See film depictions.')}</p><p><strong>Personality:</strong> ${(item.traits||[]).map(escapeHtml).join(', ')||'—'}</p>`);
         body += sec('powers','Powers & Abilities', `<ul class="list-links">${(item.abilities||[]).length?(item.abilities.map(a=>`<li>${escapeHtml(a)}</li>`).join('')):'<li class="meta">No supernatural abilities listed / not applicable.</li>'}</ul>`);
         body += sec('movies','Movie Appearances', `<ul class="list-links">${movieLinks(item.movies||[])}</ul>`);

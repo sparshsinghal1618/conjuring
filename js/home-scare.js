@@ -1,5 +1,5 @@
-import * as THREE from 'https://unpkg.com/three@0.160.0/build/three.module.js';
 import { prefs } from './wiki-app.js';
+import { loadThree } from './viewer3d.js';
 
 function allowIntense(){
   if (prefs.get('intenseOff', false)) return false;
@@ -58,10 +58,12 @@ export function initHomeScare(){
   function ensureAudio(){
     if(audio.ctx) { if(audio.ctx.state==='suspended') audio.ctx.resume().catch(()=>{}); return; }
     const AC = window.AudioContext||window.webkitAudioContext; if(!AC) return;
-    audio.ctx = new AC(); audio.master = audio.ctx.createGain();
-    audio.master.gain.value = allowIntense()?0.55:0.25; audio.master.connect(audio.ctx.destination);
-    audio.enabled = prefs.get('soundOn', false);
-    if(audio.enabled && audio.ctx.state==='suspended') audio.ctx.resume().catch(()=>{});
+    try {
+      audio.ctx = new AC(); audio.master = audio.ctx.createGain();
+      audio.master.gain.value = allowIntense()?0.55:0.25; audio.master.connect(audio.ctx.destination);
+      audio.enabled = prefs.get('soundOn', false);
+      if(audio.enabled && audio.ctx.state==='suspended') audio.ctx.resume().catch(()=>{});
+    } catch(e){}
     syncSoundUI();
   }
   function noise(dur=0.2,gain=0.12,freq=900,type='bandpass'){
@@ -71,20 +73,35 @@ export function initHomeScare(){
   function hit(k=1){ if(!audio.ctx||!audio.enabled) return; const x=allowIntense()?1:0.35; const tone=(fr,du,tp,ga)=>{const o=audio.ctx.createOscillator(),g=audio.ctx.createGain(); o.type=tp;o.frequency.value=fr; g.gain.setValueAtTime(0.0001,audio.ctx.currentTime); g.gain.exponentialRampToValueAtTime(ga,audio.ctx.currentTime+0.01); g.gain.exponentialRampToValueAtTime(0.0001,audio.ctx.currentTime+du); o.connect(g); g.connect(audio.master); o.start(); o.stop(audio.ctx.currentTime+du+0.02);}; tone(42,0.45,'sine',0.12*k*x); tone(78,0.2,'sawtooth',0.07*k*x); noise(0.3,0.15*k*x,700,'bandpass'); noise(0.16,0.08*k*x,2200,'highpass'); }
 
   let running=false, raf=0, renderer, scene, camera, parts;
-  function cleanup(){ if(raf) cancelAnimationFrame(raf); running=false; overlay.classList.remove('active'); overlay.setAttribute('aria-hidden','true'); document.body.style.overflow=''; if(renderer){ renderer.dispose(); renderer.forceContextLoss?.(); renderer.domElement?.remove(); renderer=null; } scene=null; camera=null; parts=null; }
-  function finish(){ prefs.set('scareSeen', true); cleanup(); const home=document.getElementById('homeContent'); if(home) home.removeAttribute('hidden'); }
+  function revealHome(){
+    const home=document.getElementById('homeContent'); if(home) home.removeAttribute('hidden');
+  }
+  function cleanup(){ if(raf) cancelAnimationFrame(raf); running=false; overlay.classList.remove('active'); overlay.setAttribute('aria-hidden','true'); document.body.style.overflow=''; try{ renderer?.dispose?.(); renderer?.forceContextLoss?.(); renderer?.domElement?.remove(); }catch(e){} renderer=null; scene=null; camera=null; parts=null; }
+  function finish(){ prefs.set('scareSeen', true); cleanup(); revealHome(); }
   if(skipBtn) skipBtn.addEventListener('click', finish);
   if(replayBtn) replayBtn.addEventListener('click', ()=>{ prefs.set('scareSeen', false); runScare(); });
   if(intenseBtn) intenseBtn.addEventListener('click', ()=>{ const v=!prefs.get('intenseOff', false); prefs.set('intenseOff', v); intenseBtn.textContent = v ? 'Enable Intense Effects' : 'Disable Intense Effects'; if(audio.master) audio.master.gain.value = allowIntense()?0.55:0.25; });
   if(enableSoundBtn) enableSoundBtn.addEventListener('click', ()=>{ ensureAudio(); audio.enabled=true; prefs.set('soundOn', true); if(audio.ctx?.state==='suspended') audio.ctx.resume(); syncSoundUI(); });
 
-  function runScare(){
+  async function runScare(){
     if(!allowIntense()){ finish(); return; }
     if(running) return; running=true;
     overlay.classList.add('active'); overlay.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden';
     if(text) text.style.opacity='0'; if(flash) flash.style.opacity='0';
-    ensureAudio(); // may be suspended until gesture; visual still runs
-    renderer = new THREE.WebGLRenderer({ canvas, antialias:true, alpha:false, powerPreference:'high-performance' });
+    ensureAudio();
+    const THREE = await loadThree();
+    if(!THREE || !window.WebGLRenderingContext){
+      // graceful fallback: show text reveal without 3D
+      try {
+        if(text){ text.style.opacity='1'; text.textContent='SHE WAS WAITING FOR YOU.'; }
+        await new Promise(r=>setTimeout(r, 1400));
+        if(text){ text.style.transition='opacity .6s'; text.style.opacity='0'; await new Promise(r=>setTimeout(r, 650)); }
+      } catch(e){}
+      finish(); return;
+    }
+    try {
+      renderer = new THREE.WebGLRenderer({ canvas, antialias:true, alpha:false, powerPreference:'high-performance' });
+    } catch(e){ finish(); return; }
     renderer.setSize(window.innerWidth, window.innerHeight); renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,1.75));
     scene = new THREE.Scene(); scene.background = new THREE.Color(0x000000); scene.fog = new THREE.FogExp2(0x000000,0.09);
     camera = new THREE.PerspectiveCamera(55, window.innerWidth/window.innerHeight, 0.1, 50); camera.position.set(0,1.35,4.2);
@@ -101,33 +118,31 @@ export function initHomeScare(){
     window.addEventListener('resize', onResize);
     function step(){
       if(!running) return; raf=requestAnimationFrame(step);
-      const dt=Math.min(clock.getDelta(),0.05); t+=dt;
-      if(phase===0){ if(t>0.5+hb*0.7 && hb<4){ hit(0.7); hb++; } if(t>3.0){ phase=1; t=0; parts.doll.visible=true; } }
-      else if(phase===1){ const p=Math.min(t/1.0,1); key.intensity=p*0.55; rim.intensity=p*0.35; parts.doll.position.z=1.2-p*0.15; parts.headGroup.rotation.y=Math.sin(t*1.3)*0.08; if(p>=1){phase=2;t=0;} }
-      else if(phase===2){ const p=Math.min(t/0.22,1); const e=1-Math.pow(1-p,4); parts.doll.position.z=THREE.MathUtils.lerp(1.05,3.55,e); parts.headGroup.rotation.x=THREE.MathUtils.lerp(0,-0.12,e); camera.fov=THREE.MathUtils.lerp(55,42,e); camera.updateProjectionMatrix(); key.intensity=3.8; red.intensity=2.2; rim.intensity=1.4; if(t<dt*2){ hit(1.25); if(flash && intense){ flash.style.transition='none'; flash.style.opacity='0.75'; requestAnimationFrame(()=>{flash.style.transition='opacity 80ms ease-out'; flash.style.opacity='0';}); } shake=intense?0.13:0.03; } if(p>=1){phase=3;t=0; setEyeOpen(1); setMouth(1);} }
-      else if(phase===3){ const jit=intense?1:0; parts.headGroup.rotation.z=(Math.random()-0.5)*0.24*jit; parts.headGroup.rotation.y=(Math.random()-0.5)*0.3*jit; parts.headGroup.rotation.x=-0.12+(Math.random()-0.5)*0.1*jit; parts.doll.position.z=3.62+Math.sin(t*55)*0.018*jit; parts.eyeWhiteMat.emissive.setHex(t%0.1<0.05?0x330808:0x110404); if(t<0.05) hit(0.85); if(t>0.62){phase=4;t=0;} }
-      else if(phase===4){ if(t<0.22){ parts.doll.visible=(t%0.055)<0.028; if(t<dt*2) noise(0.18,intense?0.09:0.03,1200,'highpass'); } else { parts.doll.visible=false; key.intensity=0; red.intensity=0; rim.intensity=0; phase=5; t=0; if(text) text.style.opacity='1'; } }
-      else if(phase===5){ if(t>2.1){ phase=6; t=0; } }
-      else if(phase===6){ const p=Math.min(t/0.9,1); if(text) text.style.opacity=String(1-p); if(p>=1){ window.removeEventListener('resize',onResize); finish(); return; } }
-      if(shake>0){ camera.position.x=(Math.random()-0.5)*shake; camera.position.y=1.35+(Math.random()-0.5)*shake*0.8; shake*=0.84; if(shake<0.001){shake=0; camera.position.set(0,1.35,4.2);} }
-      camera.lookAt(0,1.25,0); renderer.render(scene,camera);
+      try {
+        const dt=Math.min(clock.getDelta(),0.05); t+=dt;
+        if(phase===0){ if(t>0.5+hb*0.7 && hb<4){ hit(0.7); hb++; } if(t>3.0){ phase=1; t=0; parts.doll.visible=true; } }
+        else if(phase===1){ const p=Math.min(t/1.0,1); key.intensity=p*0.55; rim.intensity=p*0.35; parts.doll.position.z=1.2-p*0.15; parts.headGroup.rotation.y=Math.sin(t*1.3)*0.08; if(p>=1){phase=2;t=0;} }
+        else if(phase===2){ const p=Math.min(t/0.22,1); const e=1-Math.pow(1-p,4); parts.doll.position.z=THREE.MathUtils.lerp(1.05,3.55,e); parts.headGroup.rotation.x=THREE.MathUtils.lerp(0,-0.12,e); camera.fov=THREE.MathUtils.lerp(55,42,e); camera.updateProjectionMatrix(); key.intensity=3.8; red.intensity=2.2; rim.intensity=1.4; if(t<dt*2){ hit(1.25); if(flash && intense){ flash.style.transition='none'; flash.style.opacity='0.75'; requestAnimationFrame(()=>{flash.style.transition='opacity 80ms ease-out'; flash.style.opacity='0';}); } shake=intense?0.13:0.03; } if(p>=1){phase=3;t=0; setEyeOpen(1); setMouth(1);} }
+        else if(phase===3){ const jit=intense?1:0; parts.headGroup.rotation.z=(Math.random()-0.5)*0.24*jit; parts.headGroup.rotation.y=(Math.random()-0.5)*0.3*jit; parts.headGroup.rotation.x=-0.12+(Math.random()-0.5)*0.1*jit; parts.doll.position.z=3.62+Math.sin(t*55)*0.018*jit; parts.eyeWhiteMat.emissive.setHex(t%0.1<0.05?0x330808:0x110404); if(t<0.05) hit(0.85); if(t>0.62){phase=4;t=0;} }
+        else if(phase===4){ if(t<0.22){ parts.doll.visible=(t%0.055)<0.028; if(t<dt*2) noise(0.18,intense?0.09:0.03,1200,'highpass'); } else { parts.doll.visible=false; key.intensity=0; red.intensity=0; rim.intensity=0; phase=5; t=0; if(text) text.style.opacity='1'; } }
+        else if(phase===5){ if(t>2.1){ phase=6; t=0; } }
+        else if(phase===6){ const p=Math.min(t/0.9,1); if(text) text.style.opacity=String(1-p); if(p>=1){ window.removeEventListener('resize',onResize); finish(); return; } }
+        if(shake>0){ camera.position.x=(Math.random()-0.5)*shake; camera.position.y=1.35+(Math.random()-0.5)*shake*0.8; shake*=0.84; if(shake<0.001){shake=0; camera.position.set(0,1.35,4.2);} }
+        camera.lookAt(0,1.25,0); renderer.render(scene,camera);
+      } catch(e){ window.removeEventListener('resize',onResize); finish(); }
     }
     step();
   }
 
-  // Expose replay hook
   window.__caReplayScare = ()=>{ prefs.set('scareSeen', false); runScare(); };
-  // Enable audio on first gesture anywhere (policy)
-  const gesture = ()=>{ ensureAudio(); if(audio.enabled && audio.ctx?.state==='suspended') audio.ctx.resume(); window.removeEventListener('pointerdown',gesture); window.removeEventListener('keydown',gesture); };
+  const gesture = ()=>{ ensureAudio(); if(audio.enabled && audio.ctx?.state==='suspended') audio.ctx.resume().catch(()=>{}); window.removeEventListener('pointerdown',gesture); window.removeEventListener('keydown',gesture); };
   window.addEventListener('pointerdown', gesture, {once:true}); window.addEventListener('keydown', gesture, {once:true});
 
-  // Auto-run only on first homepage visit
   if(!prefs.get('scareSeen', false)) {
-    // short preload frame so it's immediate
-    requestAnimationFrame(()=>requestAnimationFrame(runScare));
+    requestAnimationFrame(()=>requestAnimationFrame(()=>{ runScare().catch(()=>{ if(window.__caRevealHome) window.__caRevealHome(); else { cleanup(); revealHome(); } }); }));
   } else {
     overlay.classList.remove('active');
-    const home=document.getElementById('homeContent'); if(home) home.removeAttribute('hidden');
+    revealHome();
   }
   if(intenseBtn) intenseBtn.textContent = prefs.get('intenseOff', false) ? 'Enable Intense Effects' : 'Disable Intense Effects';
   syncSoundUI();

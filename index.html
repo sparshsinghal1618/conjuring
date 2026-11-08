@@ -18,6 +18,20 @@
     <div id="scareText">SHE WAS WAITING FOR YOU.</div>
     <div id="scareSkip"><button class="btn" id="scareSkipBtn" type="button">Skip Intro</button></div>
   </div>
+  <script>
+    // Safety fallback: if module/3D fails to load (e.g., file://, blocked CDN), reveal the site.
+    (function(){
+      function revealHome(){
+        var o=document.getElementById('scareOverlay'); if(o){o.classList.remove('active');o.setAttribute('aria-hidden','true');}
+        var h=document.getElementById('homeContent'); if(h) h.removeAttribute('hidden');
+        document.body.style.overflow='';
+      }
+      var skip=document.getElementById('scareSkipBtn');
+      if(skip) skip.addEventListener('click', function(){ try{ localStorage.setItem('ca_scare_seen_v1','true'); }catch(e){} revealHome(); });
+      window.__caRevealHome = revealHome;
+      setTimeout(function(){ if(!window.__caModuleReady) revealHome(); }, 4500);
+    })();
+  </script>
 
   <div data-shell-header></div>
 
@@ -106,12 +120,13 @@
   <div data-shell-footer></div>
 
   <script type="module">
+    window.__caModuleReady = true;
     import { mountShell, prefs } from './js/wiki-app.js';
     import { initHomeScare } from './js/home-scare.js';
     import { WIKI } from './js/wiki-data.js';
     import { initViewers } from './js/viewer3d.js';
     mountShell({ active: 'index.html', inPages: false });
-    initHomeScare();
+    try { initHomeScare(); } catch(e){ console.warn('Scare init failed', e); window.__caRevealHome?.(); }
     // Render homepage sections (content is present; overlay sits on top for first visit)
     const movies = [...WIKI.movies].sort((a,b)=>a.releaseOrder-b.releaseOrder);
     document.getElementById('homeMovies').innerHTML = movies.map(m=>{
@@ -130,7 +145,7 @@
       </a>`).join('');
     document.getElementById('homeTimeline').innerHTML = WIKI.timeline.slice(0,6).map(t=>`<li><strong>${t.year}</strong> — <a href="./pages/timeline.html">${t.title}</a> <span class="meta">(${t.type})</span></li>`).join('');
     document.getElementById('homeRandom').addEventListener('click', ()=>document.getElementById('randomBtn')?.click());
-    initViewers();
+    try { initViewers(); } catch(e){ console.warn('Viewers init failed', e); }
   </script>
 </body>
 </html>
