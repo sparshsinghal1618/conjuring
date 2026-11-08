@@ -33,7 +33,7 @@
       let arr=[...WIKI.movies];
       if(sort.value==='chrono') arr.sort((a,b)=>a.chronoOrder-b.chronoOrder); else arr.sort((a,b)=>a.releaseOrder-b.releaseOrder);
       if(series.value) arr=arr.filter(m=>m.series===series.value);
-      list.innerHTML = arr.map(m=>`<a class="card" href="${pageUrl('movie',m.id)}" style="text-decoration:none;color:inherit"><div class="thumb">${escapeHtml(m.series)} · ${m.year}</div><div class="card-body"><div class="tag">Release #${m.releaseOrder} · Story #${m.chronoOrder}</div><h3>${escapeHtml(m.title)}</h3><p>${escapeHtml(m.overview.slice(0,150))}…</p><p class="meta">Director: ${escapeHtml(m.director||'—')}</p></div></a>`).join('');
+      list.innerHTML = arr.map(m=>`<a class="card" href="${pageUrl('movie',m.id)}" style="text-decoration:none;color:inherit"><div class="thumb"><span class="thumb-label">${escapeHtml(m.series)} · ${m.year}</span></div><div class="card-body"><div class="tag">Release #${m.releaseOrder} · Story #${m.chronoOrder}</div><h3>${escapeHtml(m.title)}</h3><p>${escapeHtml(m.overview.slice(0,150))}…</p><p class="meta">Director: ${escapeHtml(m.director||'—')}</p></div></a>`).join('');
     }
     sort.addEventListener('change',render); series.addEventListener('change',render); render();
   </script>

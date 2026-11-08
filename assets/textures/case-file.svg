@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="220" viewBox="0 0 360 220">
+  <defs>
+    <linearGradient id="p" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#1c1713"/><stop offset="1" stop-color="#100d0b"/></linearGradient>
+  </defs>
+  <rect width="360" height="220" fill="url(#p)"/>
+  <g stroke="#c4a467" stroke-opacity="0.16" fill="none">
+    <rect x="22" y="20" width="316" height="180" rx="4"/>
+    <path d="M42 58h180M42 82h276M42 106h276M42 130h236M42 154h196"/>
+  </g>
+  <rect x="250" y="34" width="74" height="18" rx="3" fill="#722736" fill-opacity="0.35" stroke="#c4a467" stroke-opacity="0.2"/>
+  <text x="287" y="47" text-anchor="middle" font-family="Georgia,serif" font-size="9" fill="#e6cc91" fill-opacity="0.75" letter-spacing="1.5">CASE FILE</text>
+</svg>

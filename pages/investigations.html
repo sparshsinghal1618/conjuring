@@ -21,7 +21,7 @@
     mountShell({ active:'investigations.html', inPages:true });
     const list=document.getElementById('list');
     const arr=[...(WIKI.investigations||[])].sort((a,b)=>String(a.year).localeCompare(String(b.year)));
-    list.innerHTML = arr.map(i=>`<a class="card" href="${pageUrl('investigation',i.id)}" style="text-decoration:none;color:inherit"><div class="thumb">${escapeHtml(i.year)} · Case File</div><div class="card-body"><div class="tag">Investigation</div><h3>${escapeHtml(i.name)}</h3><p>${escapeHtml((i.background||'').slice(0,160))}…</p><p class="meta">Films: ${(i.movies||[]).length} · References: ${(i.references||[]).length}</p></div></a>`).join('') || '<div class="panel"><p class="meta">No investigation entries found.</p></div>';
+    list.innerHTML = arr.map(i=>`<a class="card" href="${pageUrl('investigation',i.id)}" style="text-decoration:none;color:inherit"><div class="thumb"><span class="thumb-label">${escapeHtml(i.year)} · Case File</span></div><div class="card-body"><div class="tag">Investigation</div><h3>${escapeHtml(i.name)}</h3><p>${escapeHtml((i.background||'').slice(0,160))}…</p><p class="meta">Films: ${(i.movies||[]).length} · References: ${(i.references||[]).length}</p></div></a>`).join('') || '<div class="panel"><p class="meta">No investigation entries found.</p></div>';
   </script>
 </body>
 </html>

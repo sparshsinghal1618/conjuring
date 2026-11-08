@@ -18,7 +18,7 @@
     import { mountShell, pageUrl, escapeHtml } from '../js/wiki-app.js';
     import { WIKI } from '../js/wiki-data.js';
     mountShell({ active:'locations.html', inPages:true });
-    document.getElementById('list').innerHTML = WIKI.locations.map(l=>`<a class="card" href="${pageUrl('location',l.id)}" style="text-decoration:none;color:inherit"><div class="thumb">${escapeHtml(l.place)}</div><div class="card-body"><div class="tag">Location</div><h3>${escapeHtml(l.name)}</h3><p>${escapeHtml(l.summary)}</p><p class="meta">${(l.movies||[]).length} connected film(s)</p></div></a>`).join('');
+    document.getElementById('list').innerHTML = WIKI.locations.map(l=>`<a class="card" href="${pageUrl('location',l.id)}" style="text-decoration:none;color:inherit"><div class="thumb"><span class="thumb-label">${escapeHtml(l.place)}</span></div><div class="card-body"><div class="tag">Location</div><h3>${escapeHtml(l.name)}</h3><p>${escapeHtml(l.summary)}</p><p class="meta">${(l.movies||[]).length} connected film(s)</p></div></a>`).join('');
   </script>
 </body>
 </html>

@@ -27,7 +27,7 @@
       const term=q.value.toLowerCase().trim();
       let arr=WIKI.characters.filter(c=>!term || c.name.toLowerCase().includes(term) || (c.traits||[]).join(' ').toLowerCase().includes(term) || c.bio.toLowerCase().includes(term));
       if(type.value) arr=arr.filter(c=>c.type===type.value);
-      list.innerHTML = arr.map(c=>`<a class="card" href="${pageUrl('character',c.id)}" style="text-decoration:none;color:inherit"><div class="thumb">${escapeHtml(c.type)}</div><div class="card-body"><div class="tag">${(c.movies||[]).length} appearance(s)</div><h3>${escapeHtml(c.name)}</h3><p>${escapeHtml(c.bio.slice(0,140))}…</p></div></a>`).join('') || `<p class="meta">No results.</p>`;
+      list.innerHTML = arr.map(c=>`<a class="card" href="${pageUrl('character',c.id)}" style="text-decoration:none;color:inherit"><div class="thumb"><span class="thumb-label">${escapeHtml(c.type)}</span></div><div class="card-body"><div class="tag">${(c.movies||[]).length} appearance(s)</div><h3>${escapeHtml(c.name)}</h3><p>${escapeHtml(c.bio.slice(0,140))}…</p></div></a>`).join('') || `<p class="meta">No results.</p>`;
     }
     q.addEventListener('input',render); type.addEventListener('change',render); render();
   </script>

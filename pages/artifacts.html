@@ -20,7 +20,7 @@
     import { WIKI } from '../js/wiki-data.js';
     import { initViewers } from '../js/viewer3d.js';
     mountShell({ active:'artifacts.html', inPages:true });
-    document.getElementById('list').innerHTML = WIKI.artifacts.map(a=>`<div class="card"><div class="thumb">${a.has3d?'3D VIEWER':'OBJECT'}</div><div class="card-body"><div class="tag">Artifact</div><h3>${escapeHtml(a.name)}</h3><p>${escapeHtml(a.summary)}</p>${a.has3d?`<div class="viewer" data-viewer3d="${escapeHtml(a.id)}" style="height:220px;margin:10px 0"></div>`:''}<a class="btn gold" href="${pageUrl('artifact',a.id)}">Open Article</a></div></div>`).join('');
+    document.getElementById('list').innerHTML = WIKI.artifacts.map(a=>`<div class="card"><div class="thumb"><span class="thumb-label">${a.has3d?'3D VIEWER':'OBJECT'}</span></div><div class="card-body"><div class="tag">Artifact</div><h3>${escapeHtml(a.name)}</h3><p>${escapeHtml(a.summary)}</p>${a.has3d?`<div class="viewer" data-viewer3d="${escapeHtml(a.id)}" style="height:220px;margin:10px 0"></div>`:''}<a class="btn gold" href="${pageUrl('artifact',a.id)}">Open Article</a></div></div>`).join('');
     initViewers();
   </script>
 </body>
