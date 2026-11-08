@@ -82,7 +82,7 @@
       </div></section>
 
       <section class="section"><div class="container">
-        <div class="grid" style="grid-template-columns:1fr 1fr;gap:14px">
+        <div class="grid feature-exhibit" style="gap:14px">
           <div class="panel"><div class="kicker">3. Character of the Month</div><h2 style="font-size:1.4rem">Lorraine Warren</h2><p>Clairvoyant, investigator, and the spiritual heart of the Warrens’ cases. Her visions reveal hidden truths—from the Perron farmhouse to the shadow of Valak.</p><p class="meta">Connected to: The Conjuring series, Annabelle Comes Home, Last Rites</p><a class="btn gold" href="./pages/article.html?type=character&id=lorraine-warren">Open Character File</a></div>
           <div class="panel"><div class="kicker">4. Supernatural Entities</div><h2 style="font-size:1.4rem">Forces in the Dark</h2><p>Meet the entities that haunt the universe: <a href="./pages/article.html?type=character&id=valak">Valak</a>, <a href="./pages/article.html?type=character&id=annabelle">Annabelle</a> (demonic conduit), <a href="./pages/article.html?type=character&id=bathsheba-sherman">Bathsheba</a>, <a href="./pages/article.html?type=character&id=malthus">Malthus</a>, and more.</p><a class="btn" href="./pages/characters.html">Browse Entities & Characters</a></div>
         </div>
@@ -90,6 +90,24 @@
 
       <section class="section"><div class="container">
         <div class="section-head"><div><div class="kicker">5–6. The Museum</div><h2>The Occult Museum & Cursed Artifacts</h2><p>Objects collected, contained, and never to be touched. Explore the Warren artifact room and inspect key items in 3D.</p></div><a href="./pages/museum.html">Enter museum →</a></div>
+        <div class="grid feature-exhibit" style="margin-bottom:14px">
+          <div class="panel">
+            <div class="kicker">Featured Exhibit</div>
+            <h3>Annabelle in Containment</h3>
+            <p class="meta">Interactive 3D exhibit. Drag to rotate, scroll to zoom. Real-time WebGL with graceful fallback.</p>
+            <div class="viewer" data-viewer3d="annabelle-doll" style="height:260px"></div>
+            <div class="hero-actions" style="margin-top:10px"><a class="btn primary" href="./pages/article.html?type=artifact&id=annabelle-doll">Open Exhibit & Gallery</a><a class="btn" href="./pages/museum.html">Full Museum</a></div>
+          </div>
+          <div class="panel">
+            <h3>Museum Experience</h3>
+            <ul class="list-links">
+              <li>Inspect cursed artifacts in real-time 3D where available.</li>
+              <li>Read case histories, appearances, and cross-referenced investigations.</li>
+              <li>View licensed exhibit photos when credited image URLs are added to the archive data.</li>
+            </ul>
+            <div class="notice">No 3D? Serve via HTTP (not <code>file://</code>) with WebGL enabled and network access for the 3D library.</div>
+          </div>
+        </div>
         <div class="grid cards-4" id="homeArtifacts"></div>
       </div></section>
 
@@ -104,7 +122,7 @@
       </div></section>
 
       <section class="section"><div class="container">
-        <div class="grid" style="grid-template-columns:1fr 1fr;gap:14px">
+        <div class="grid feature-exhibit" style="gap:14px">
           <div class="panel"><div class="kicker">9. Latest Discoveries</div><h2 style="font-size:1.3rem">Newly Cross-Referenced Files</h2><ul class="list-links">
             <li><a href="./pages/article.html?type=character&id=valak">Valak dossier updated</a> — Nun films, Enfield, and timeline links.</li>
             <li><a href="./pages/article.html?type=artifact&id=annabelle-doll">Annabelle artifact file</a> — 3D viewer and case appearances.</li>

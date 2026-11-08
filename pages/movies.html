@@ -11,6 +11,24 @@
   <div data-shell-header></div>
   <main id="main" class="container section">
     <div class="section-head"><div><div class="kicker">Complete Movie Database</div><h1>Every Conjuring Universe Film</h1><p>Detailed dossiers for all nine theatrical films: The Conjuring, Annabelle, and The Nun series.</p></div></div>
+    <div class="grid feature-exhibit" style="gap:14px;margin-bottom:14px;align-items:start">
+      <div class="panel">
+        <div class="kicker">Featured 3D Exhibit</div>
+        <h2 style="font-size:1.25rem">Annabelle — Cursed Artifact (3D)</h2>
+        <p class="meta">Real-time WebGL 3D viewer. Drag to rotate, scroll/pinch to zoom. If 3D is unavailable, serve the site over HTTP with WebGL enabled.</p>
+        <div class="viewer" data-viewer3d="annabelle-doll" style="height:280px"></div>
+        <div class="hero-actions" style="margin-top:10px"><a class="btn primary" href="./article.html?type=artifact&id=annabelle-doll">Open Annabelle Dossier</a><a class="btn" href="./museum.html">Warren Occult Museum</a></div>
+      </div>
+      <div class="panel">
+        <h3>Archive Features</h3>
+        <ul class="list-links">
+          <li>9 interconnected film dossiers with spoilers, citations, and related links.</li>
+          <li>Investigations, entities, locations, artifacts, and timeline cross-references.</li>
+          <li>Licensed media slots: add credited, authorized image URLs in <code>js/wiki-data.js</code> (<code>thumbUrl</code>/<code>gallery</code>) to display real thumbnails.</li>
+        </ul>
+        <div class="notice">Copyright note: official movie posters/stills are not embedded without proper licensing. Use “official imagery/source” links or add licensed assets.</div>
+      </div>
+    </div>
     <div class="panel" style="margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap;align-items:center">
       <label class="meta">View:
         <select id="sort" class="btn"><option value="release">Release order</option><option value="chrono">Chronological story order</option></select>
@@ -27,6 +45,7 @@
   <script type="module">
     import { mountShell, pageUrl, escapeHtml } from '../js/wiki-app.js';
     import { WIKI } from '../js/wiki-data.js';
+    import { initViewers } from '../js/viewer3d.js';
     mountShell({ active:'movies.html', inPages:true });
     const list=document.getElementById('list'), sort=document.getElementById('sort'), series=document.getElementById('series');
     function render(){
@@ -42,6 +61,7 @@
       }).join('');
     }
     sort.addEventListener('change',render); series.addEventListener('change',render); render();
+    initViewers();
   </script>
 </body>
 </html>
